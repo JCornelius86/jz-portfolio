@@ -25,6 +25,12 @@ export default function Footer() {
             >
               GitHub
             </Link>
+            <Link
+              href="mailto:jc.zabel@gmail.com"
+              className="text-text-secondary hover:text-accent-cyan transition-colors text-sm"
+            >
+              jc.zabel@gmail.com
+            </Link>
           </div>
         </div>
       </div>
