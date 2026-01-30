@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 
 const timeline = [
   {
-    period: "Now",
+    period: "2022 – Present",
     role: "Senior UX Designer",
     company: "Microsoft",
     description: "Designing enterprise experiences at scale.",
   },
   {
-    period: "2013 – 2023",
-    role: "UX Lead → Design Manager",
+    period: "2013 – 2022",
+    role: "UX Lead → Design Manager → Data Science Lead",
     company: "SnapAV / SnapOne",
     description:
       "Built OvrC from scratch. Grew the UX team. Platform scaled to 20MM+ devices.",
@@ -76,7 +76,7 @@ export default function AboutPage() {
             </PixelHeading>
             <div className="space-y-4 text-text-body text-base leading-relaxed">
               <p>
-                Hey there! I&apos;m <GlowText>James Zabel</GlowText> — a UX
+                Hey there! I&apos;m <GlowText>James (JC) Zabel</GlowText> — a UX
                 professional based in Charlotte, NC. I hold a BS in Industrial
                 Engineering and an MS in Human Factors Psychology, both from
                 Clemson University <GlowText color="amber">(Go Tigers!)</GlowText>.
@@ -100,7 +100,7 @@ export default function AboutPage() {
             <div className="pixel-border rounded-sm overflow-hidden">
               <Image
                 src="/images/james-zabel-photo.jpg"
-                alt="James Zabel looking out over an alpine lake"
+                alt="JC Zabel looking out over an alpine lake"
                 width={300}
                 height={200}
                 className="object-cover"
@@ -173,12 +173,12 @@ export default function AboutPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <RetroButton
-            href="https://www.linkedin.com/in/jameszabel"
+            href="https://www.linkedin.com/in/james-zabel-31860816/"
             variant="cyan"
           >
             LinkedIn
           </RetroButton>
-          <RetroButton href="https://github.com/jczabel" variant="green">
+          <RetroButton href="https://github.com/JCornelius86" variant="green">
             GitHub
           </RetroButton>
         </div>

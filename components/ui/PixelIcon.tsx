@@ -1,15 +1,28 @@
-// Pixel art company icons — 16x16 grids rendered as inline SVGs
+// Pixel art company icons — 32x32 grids rendered as 64x64 inline SVGs
 
-const PX = 2; // Each pixel = 2 SVG units, total viewBox = 32x32
+const PX = 2; // Each grid cell = 2 SVG units → 64x64 viewBox for 32x32 grid
 
 type PixelData = { x: number; y: number; color: string }[];
 
-function PixelGrid({ pixels, label }: { pixels: PixelData; label: string }) {
+function fill(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  color: string
+): PixelData {
+  const pixels: PixelData = [];
+  for (let y = y1; y <= y2; y++)
+    for (let x = x1; x <= x2; x++) pixels.push({ x, y, color });
+  return pixels;
+}
+
+function StaticIcon({ pixels, label }: { pixels: PixelData; label: string }) {
   return (
     <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
       role="img"
       aria-label={label}
       className="flex-shrink-0"
@@ -28,157 +41,479 @@ function PixelGrid({ pixels, label }: { pixels: PixelData; label: string }) {
   );
 }
 
-// Colors from the neon palette
-const C = "#00fff5"; // cyan
-const M = "#ff00ff"; // magenta
-const G = "#39ff14"; // green
-const A = "#ffbf00"; // amber
+const C = "#00fff5";
+const M = "#ff00ff";
+const G = "#39ff14";
+const A = "#ffbf00";
+const W = "#ffffff";
+const GRAY = "#8888a0";
+const BG = "#0a0a0f";
 
-// Microsoft — 4-pane window
+// ─── Microsoft ─── 4-pane window
 function microsoftPixels(): PixelData {
-  const pixels: PixelData = [];
-  // Top-left pane (cyan)
-  for (let y = 3; y < 8; y++)
-    for (let x = 3; x < 8; x++) pixels.push({ x, y, color: C });
-  // Top-right pane (magenta)
-  for (let y = 3; y < 8; y++)
-    for (let x = 9; x < 14; x++) pixels.push({ x, y, color: M });
-  // Bottom-left pane (green)
-  for (let y = 9; y < 14; y++)
-    for (let x = 3; x < 8; x++) pixels.push({ x, y, color: G });
-  // Bottom-right pane (amber)
-  for (let y = 9; y < 14; y++)
-    for (let x = 9; x < 14; x++) pixels.push({ x, y, color: A });
-  return pixels;
+  return [
+    ...fill(4, 4, 14, 14, C),
+    ...fill(17, 4, 27, 14, M),
+    ...fill(4, 17, 14, 27, G),
+    ...fill(17, 17, 27, 27, A),
+  ];
 }
 
-// SnapAV / SnapOne — cloud with signal waves
-function snapPixels(): PixelData {
-  const pixels: PixelData = [];
-  // Cloud body
-  const cloudRows: [number, number, number][] = [
-    [6, 6, 10],
-    [5, 5, 11],
-    [4, 4, 12],
-    [3, 3, 13],
-    [2, 3, 13],
-    [1, 4, 12],
+// ─── SnapAV / SnapOne ─── cloud raining IoT devices
+function SnapIcon() {
+  const cloud: PixelData = [
+    // Cloud body (shifted up)
+    ...fill(7, 17, 24, 17, C),
+    ...fill(5, 16, 26, 16, C),
+    ...fill(4, 15, 27, 15, C),
+    ...fill(4, 14, 27, 14, C),
+    ...fill(4, 13, 27, 13, C),
+    ...fill(5, 12, 26, 12, C),
+    ...fill(7, 11, 24, 11, C),
+    // Left bump
+    ...fill(7, 10, 14, 10, C),
+    ...fill(8, 9, 13, 9, C),
+    ...fill(9, 8, 12, 8, C),
+    // Right bump (taller)
+    ...fill(16, 10, 24, 10, C),
+    ...fill(17, 9, 23, 9, C),
+    ...fill(18, 8, 22, 8, C),
+    ...fill(19, 7, 21, 7, C),
   ];
-  cloudRows.forEach(([y, xStart, xEnd]) => {
-    for (let x = xStart; x <= xEnd; x++) pixels.push({ x, y: y + 4, color: C });
-  });
-  // Signal arcs above cloud
-  pixels.push({ x: 8, y: 2, color: C });
-  pixels.push({ x: 7, y: 3, color: C });
-  pixels.push({ x: 9, y: 3, color: C });
-  pixels.push({ x: 6, y: 1, color: C });
-  pixels.push({ x: 10, y: 1, color: C });
-  return pixels;
+
+  // Camera — 3x3 box with lens pixel
+  const camera: PixelData = [
+    ...fill(7, 0, 9, 2, C),
+    { x: 8, y: 1, color: BG },
+  ];
+
+  // Router — 3x2 box with 2 antenna pixels
+  const router: PixelData = [
+    ...fill(15, 0, 17, 1, C),
+    { x: 15, y: -1, color: C },
+    { x: 17, y: -1, color: C },
+  ];
+
+  // Outlet — 2x3 box with 2 slot pixels
+  const outlet: PixelData = [
+    ...fill(23, 0, 24, 2, C),
+    { x: 23, y: 1, color: BG },
+    { x: 24, y: 1, color: BG },
+  ];
+
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      role="img"
+      aria-label="SnapOne — cloud raining IoT devices"
+      className="flex-shrink-0"
+    >
+      {cloud.map((p, i) => (
+        <rect
+          key={`c${i}`}
+          x={p.x * PX}
+          y={p.y * PX}
+          width={PX}
+          height={PX}
+          fill={p.color}
+        />
+      ))}
+      <g className="snap-device" style={{ animationDelay: "0s" }}>
+        {camera.map((p, i) => (
+          <rect
+            key={`cam${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+      <g className="snap-device" style={{ animationDelay: "-1s" }}>
+        {router.map((p, i) => (
+          <rect
+            key={`rtr${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+      <g className="snap-device" style={{ animationDelay: "-2s" }}>
+        {outlet.map((p, i) => (
+          <rect
+            key={`out${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+    </svg>
+  );
 }
 
-// Lockheed Martin — star shape
-function lockheedPixels(): PixelData {
-  const pixels: PixelData = [];
-  // 5-pointed star centered at (8,8)
-  const starCoords = [
-    // Top point
-    [8, 2], [7, 3], [8, 3], [9, 3],
-    // Upper body
-    [6, 4], [7, 4], [8, 4], [9, 4], [10, 4],
-    // Left arm + center
-    [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5], [10, 5], [11, 5], [12, 5], [13, 5],
-    [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6],
-    // Mid body
-    [5, 7], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7], [11, 7],
-    [5, 8], [6, 8], [7, 8], [8, 8], [9, 8], [10, 8], [11, 8],
-    // Lower spread
-    [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 9], [10, 9], [11, 9], [12, 9],
-    // Legs
-    [4, 10], [5, 10], [6, 10], [10, 10], [11, 10], [12, 10],
-    [3, 11], [4, 11], [5, 11], [11, 11], [12, 11], [13, 11],
-    [3, 12], [4, 12], [12, 12], [13, 12],
+// ─── General Electric ─── spinning windmill
+function GEIcon() {
+  // Tower / base (centered trapezoid)
+  const tower: PixelData = [
+    // Narrow top
+    ...fill(15, 16, 16, 16, GRAY),
+    ...fill(15, 17, 16, 17, GRAY),
+    ...fill(14, 18, 17, 18, GRAY),
+    ...fill(14, 19, 17, 19, GRAY),
+    ...fill(14, 20, 17, 20, GRAY),
+    ...fill(13, 21, 18, 21, GRAY),
+    ...fill(13, 22, 18, 22, GRAY),
+    ...fill(13, 23, 18, 23, GRAY),
+    ...fill(12, 24, 19, 24, GRAY),
+    ...fill(12, 25, 19, 25, GRAY),
+    ...fill(11, 26, 20, 26, GRAY),
+    ...fill(11, 27, 20, 27, GRAY),
+    ...fill(10, 28, 21, 28, GRAY),
+    // Nacelle at top
+    ...fill(13, 14, 18, 15, GRAY),
   ];
-  starCoords.forEach(([x, y]) => pixels.push({ x, y, color: M }));
-  return pixels;
+
+  // Hub
+  const hub: PixelData = [
+    { x: 15, y: 12, color: W },
+    { x: 16, y: 12, color: W },
+    { x: 15, y: 13, color: W },
+    { x: 16, y: 13, color: W },
+  ];
+
+  // Blades (drawn relative to hub at 16,12 in grid coords → 32,24 in SVG)
+  // Blade 1: straight up
+  const blade1: PixelData = [
+    ...fill(15, 3, 16, 11, A),
+  ];
+  // Blade 2: down-right (~120°)
+  const blade2: PixelData = [
+    { x: 17, y: 14, color: A },
+    { x: 18, y: 14, color: A },
+    { x: 18, y: 15, color: A },
+    { x: 19, y: 15, color: A },
+    { x: 19, y: 16, color: A },
+    { x: 20, y: 16, color: A },
+    { x: 20, y: 17, color: A },
+    { x: 21, y: 17, color: A },
+    { x: 21, y: 18, color: A },
+    { x: 22, y: 18, color: A },
+    { x: 22, y: 19, color: A },
+    { x: 23, y: 19, color: A },
+    { x: 23, y: 20, color: A },
+    { x: 24, y: 20, color: A },
+    { x: 24, y: 21, color: A },
+    { x: 25, y: 21, color: A },
+  ];
+  // Blade 3: down-left (~240°)
+  const blade3: PixelData = [
+    { x: 14, y: 14, color: A },
+    { x: 13, y: 14, color: A },
+    { x: 13, y: 15, color: A },
+    { x: 12, y: 15, color: A },
+    { x: 12, y: 16, color: A },
+    { x: 11, y: 16, color: A },
+    { x: 11, y: 17, color: A },
+    { x: 10, y: 17, color: A },
+    { x: 10, y: 18, color: A },
+    { x: 9, y: 18, color: A },
+    { x: 9, y: 19, color: A },
+    { x: 8, y: 19, color: A },
+    { x: 8, y: 20, color: A },
+    { x: 7, y: 20, color: A },
+    { x: 7, y: 21, color: A },
+    { x: 6, y: 21, color: A },
+  ];
+
+  const blades = [...blade1, ...blade2, ...blade3];
+
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      role="img"
+      aria-label="General Electric — spinning windmill"
+      className="flex-shrink-0"
+    >
+      {tower.map((p, i) => (
+        <rect
+          key={`t${i}`}
+          x={p.x * PX}
+          y={p.y * PX}
+          width={PX}
+          height={PX}
+          fill={p.color}
+        />
+      ))}
+      <g className="ge-blades">
+        {blades.map((p, i) => (
+          <rect
+            key={`b${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+        {hub.map((p, i) => (
+          <rect
+            key={`h${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+    </svg>
+  );
 }
 
-// General Electric — lightbulb
-function gePixels(): PixelData {
-  const pixels: PixelData = [];
-  // Bulb top (rounded)
-  const bulbRows: [number, number, number][] = [
-    [2, 6, 10],
-    [3, 5, 11],
-    [4, 4, 12],
-    [5, 4, 12],
-    [6, 4, 12],
-    [7, 5, 11],
-    [8, 5, 11],
-    [9, 6, 10],
+// ─── SSI Schaefer ─── conveyor belt with moving boxes
+function SSIIcon() {
+  // Conveyor surface (rail)
+  const conveyor: PixelData = [
+    ...fill(0, 18, 31, 18, GRAY),
+    ...fill(0, 19, 31, 19, GRAY),
+    // Support legs
+    ...fill(4, 20, 5, 27, GRAY),
+    ...fill(15, 20, 16, 27, GRAY),
+    ...fill(26, 20, 27, 27, GRAY),
+    // Roller dots underneath
+    { x: 2, y: 21, color: W },
+    { x: 8, y: 21, color: W },
+    { x: 13, y: 21, color: W },
+    { x: 19, y: 21, color: W },
+    { x: 24, y: 21, color: W },
+    { x: 30, y: 21, color: W },
   ];
-  bulbRows.forEach(([y, xStart, xEnd]) => {
-    for (let x = xStart; x <= xEnd; x++) pixels.push({ x, y, color: A });
-  });
-  // Filament glow center
-  pixels.push({ x: 7, y: 5, color: "#fff" });
-  pixels.push({ x: 8, y: 5, color: "#fff" });
-  pixels.push({ x: 8, y: 6, color: "#fff" });
-  pixels.push({ x: 7, y: 6, color: "#fff" });
-  // Base/screw
-  for (let x = 7; x <= 9; x++) {
-    pixels.push({ x, y: 10, color: "#8888a0" });
-    pixels.push({ x, y: 11, color: A });
-    pixels.push({ x, y: 12, color: "#8888a0" });
-    pixels.push({ x, y: 13, color: A });
-  }
-  return pixels;
+
+  // 4 boxes on the belt, spaced 10 grid units apart, moving left-to-right
+  // Box 1 starts off-screen left at x:-8, others visible at x:2, x:12, x:22
+  // Translates right by 20px (10 grid units) so box 1 enters, box 4 exits → seamless loop
+  const boxes: { x: number; y: number; w: number; h: number; color: string }[] = [
+    { x: -8, y: 15, w: 4, h: 3, color: G },
+    { x: 2, y: 14, w: 5, h: 4, color: C },
+    { x: 12, y: 15, w: 4, h: 3, color: M },
+    { x: 22, y: 14, w: 5, h: 4, color: A },
+  ];
+
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      role="img"
+      aria-label="SSI Schaefer — conveyor belt with moving boxes"
+      className="flex-shrink-0"
+    >
+      {conveyor.map((p, i) => (
+        <rect
+          key={`cv${i}`}
+          x={p.x * PX}
+          y={p.y * PX}
+          width={PX}
+          height={PX}
+          fill={p.color}
+        />
+      ))}
+      <g className="ssi-boxes">
+        {boxes.map((box, bi) => {
+          const rects: PixelData = fill(box.x, box.y, box.x + box.w - 1, box.y + box.h - 1, box.color);
+          return rects.map((p, pi) => (
+            <rect
+              key={`bx${bi}-${pi}`}
+              x={p.x * PX}
+              y={p.y * PX}
+              width={PX}
+              height={PX}
+              fill={p.color}
+            />
+          ));
+        })}
+      </g>
+    </svg>
+  );
 }
 
-// SSI Schaefer — gear/cog
-function ssiPixels(): PixelData {
-  const pixels: PixelData = [];
-  // Gear teeth (outer notches)
-  const teethCoords = [
-    [7, 2], [8, 2], // top tooth
-    [7, 13], [8, 13], // bottom tooth
-    [2, 7], [2, 8], // left tooth
-    [13, 7], [13, 8], // right tooth
-    [4, 3], [3, 4], // top-left tooth
-    [12, 3], [13, 4], // top-right tooth (adjusted so it doesn't overlap)
-    [3, 12], [4, 13], // bottom-left tooth (adjusted)
-    [12, 13], [13, 12], // bottom-right tooth (adjusted)
+// ─── Lockheed Martin ─── animated navy destroyer with missile intercept
+function LockheedIcon() {
+  // Static ship (side profile facing right)
+  const ship: PixelData = [
+    // Hull
+    ...fill(3, 25, 29, 25, M),
+    ...fill(2, 24, 28, 24, M),
+    ...fill(4, 26, 27, 26, M),
+    ...fill(6, 27, 25, 27, M),
+    // Bow
+    { x: 29, y: 24, color: M },
+    { x: 30, y: 24, color: M },
+    { x: 30, y: 23, color: M },
+    // Stern
+    { x: 2, y: 23, color: M },
+    { x: 3, y: 23, color: M },
+    // Deck
+    ...fill(4, 23, 28, 23, M),
+    // Superstructure
+    ...fill(15, 20, 23, 22, M),
+    // Bridge
+    ...fill(17, 18, 21, 19, M),
+    // Mast
+    { x: 19, y: 15, color: M },
+    { x: 19, y: 16, color: M },
+    { x: 19, y: 17, color: M },
+    // Radar
+    { x: 18, y: 15, color: M },
+    { x: 20, y: 15, color: M },
+    // Forward gun turret
+    ...fill(7, 21, 10, 22, M),
+    // Gun barrel
+    { x: 6, y: 20, color: M },
+    { x: 5, y: 19, color: M },
+    // Water line
+    ...fill(1, 28, 30, 28, "#1a1a4e"),
   ];
-  teethCoords.forEach(([x, y]) => pixels.push({ x, y, color: G }));
-  // Gear body (circle)
-  const bodyRows: [number, number, number][] = [
-    [4, 6, 10],
-    [5, 5, 11],
-    [6, 4, 12],
-    [7, 4, 12],
-    [8, 4, 12],
-    [9, 4, 12],
-    [10, 5, 11],
-    [11, 6, 10],
+
+  // Missile at starting position (top-right, falling down-left)
+  const missile: PixelData = [
+    { x: 26, y: 1, color: "#ff4444" },
+    { x: 27, y: 1, color: "#ff4444" },
+    { x: 28, y: 1, color: "#ff4444" },
+    { x: 27, y: 2, color: "#ff4444" },
+    { x: 27, y: 3, color: "#ff4444" },
+    { x: 27, y: 4, color: "#ff4444" },
+    { x: 27, y: 0, color: "#ff6600" },
   ];
-  bodyRows.forEach(([y, xStart, xEnd]) => {
-    for (let x = xStart; x <= xEnd; x++) pixels.push({ x, y, color: G });
-  });
-  // Center hole
-  for (let y = 7; y <= 9; y++)
-    for (let x = 7; x <= 9; x++) pixels.push({ x, y, color: "#0a0a0f" });
-  return pixels;
+
+  // Tracer projectile at gun barrel tip
+  const projectile: PixelData = [
+    { x: 4, y: 18, color: A },
+    { x: 4, y: 17, color: A },
+  ];
+
+  // Explosion at intercept point (~16, 12)
+  const explosion: PixelData = [
+    // White center
+    { x: 16, y: 12, color: W },
+    { x: 17, y: 12, color: W },
+    { x: 16, y: 13, color: W },
+    { x: 17, y: 13, color: W },
+    // Amber inner ring
+    { x: 15, y: 11, color: A },
+    { x: 16, y: 11, color: A },
+    { x: 17, y: 11, color: A },
+    { x: 18, y: 11, color: A },
+    { x: 15, y: 14, color: A },
+    { x: 16, y: 14, color: A },
+    { x: 17, y: 14, color: A },
+    { x: 18, y: 14, color: A },
+    { x: 14, y: 12, color: A },
+    { x: 14, y: 13, color: A },
+    { x: 19, y: 12, color: A },
+    { x: 19, y: 13, color: A },
+    // Magenta outer sparks
+    { x: 14, y: 10, color: M },
+    { x: 19, y: 10, color: M },
+    { x: 13, y: 12, color: M },
+    { x: 20, y: 13, color: M },
+    { x: 14, y: 15, color: M },
+    { x: 19, y: 15, color: M },
+    { x: 16, y: 9, color: M },
+    { x: 17, y: 16, color: M },
+  ];
+
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      role="img"
+      aria-label="Lockheed Martin — navy destroyer intercepting missile"
+      className="flex-shrink-0"
+    >
+      {ship.map((p, i) => (
+        <rect
+          key={`s${i}`}
+          x={p.x * PX}
+          y={p.y * PX}
+          width={PX}
+          height={PX}
+          fill={p.color}
+        />
+      ))}
+      <g className="lm-missile">
+        {missile.map((p, i) => (
+          <rect
+            key={`m${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+      <g className="lm-projectile">
+        {projectile.map((p, i) => (
+          <rect
+            key={`p${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+      <g className="lm-explosion">
+        {explosion.map((p, i) => (
+          <rect
+            key={`e${i}`}
+            x={p.x * PX}
+            y={p.y * PX}
+            width={PX}
+            height={PX}
+            fill={p.color}
+          />
+        ))}
+      </g>
+    </svg>
+  );
 }
 
 const ICONS: Record<string, { pixels: PixelData; label: string }> = {
-  Microsoft: { pixels: microsoftPixels(), label: "Microsoft logo — four colored panes" },
-  "SnapAV / SnapOne": { pixels: snapPixels(), label: "SnapOne logo — cloud with signal waves" },
-  "Lockheed Martin": { pixels: lockheedPixels(), label: "Lockheed Martin logo — star shape" },
-  "General Electric": { pixels: gePixels(), label: "General Electric logo — lightbulb" },
-  "SSI Schaefer": { pixels: ssiPixels(), label: "SSI Schaefer logo — gear" },
+  Microsoft: {
+    pixels: microsoftPixels(),
+    label: "Microsoft logo — four colored panes",
+  },
 };
 
 export default function PixelIcon({ company }: { company: string }) {
-  const icon = ICONS[company];
-  if (!icon) return null;
-  return <PixelGrid pixels={icon.pixels} label={icon.label} />;
+  switch (company) {
+    case "Lockheed Martin":
+      return <LockheedIcon />;
+    case "SnapAV / SnapOne":
+      return <SnapIcon />;
+    case "General Electric":
+      return <GEIcon />;
+    case "SSI Schaefer":
+      return <SSIIcon />;
+    default: {
+      const icon = ICONS[company];
+      if (!icon) return null;
+      return <StaticIcon pixels={icon.pixels} label={icon.label} />;
+    }
+  }
 }

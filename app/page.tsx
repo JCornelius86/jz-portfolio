@@ -20,7 +20,7 @@ export default function Home() {
             &gt; HELLO WORLD_
           </p>
           <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-3xl text-text-heading leading-relaxed mb-6">
-            I&apos;m <GlowText>James Zabel</GlowText>
+            I&apos;m <GlowText>JC Zabel</GlowText>
             <span className="cursor-blink text-accent-cyan">_</span>
           </h1>
           <p className="text-text-body text-lg sm:text-xl leading-relaxed mb-4">

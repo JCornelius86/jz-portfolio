@@ -25,7 +25,10 @@ export function getCaseStudies(): CaseStudy[] {
         ...data,
       } as CaseStudy;
     })
-    .sort((a, b) => (a.featured === b.featured ? 0 : a.featured ? -1 : 1));
+    .sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
 }
 
 export function getCaseStudy(slug: string) {

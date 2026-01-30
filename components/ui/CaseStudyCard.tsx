@@ -12,12 +12,12 @@ export default function CaseStudyCard({ study }: CaseStudyCardProps) {
     <Link href={`/work/${study.slug}`} className="block group">
       <article className="bg-bg-card pixel-border rounded-sm overflow-hidden transition-colors group-hover:bg-bg-elevated">
         {study.coverImage && (
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <div className="relative w-full aspect-[16/9] overflow-hidden bg-bg-card flex items-center justify-center">
             <Image
               src={study.coverImage}
               alt={`${study.title} preview`}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-contain transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
             />
           </div>

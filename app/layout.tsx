@@ -9,13 +9,13 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://jczabel.com"),
   title: {
-    default: "James Zabel | UX Leader & Designer",
-    template: "%s | James Zabel",
+    default: "JC Zabel | UX Leader & Designer",
+    template: "%s | JC Zabel",
   },
   description:
     "UX leader and designer with 10+ years of experience building IoT platforms, cloud apps, and consumer products. Currently at Microsoft.",
   openGraph: {
-    title: "James Zabel | UX Leader & Designer",
+    title: "JC Zabel | UX Leader & Designer",
     description:
       "UX leader and designer with 10+ years of experience building IoT platforms, cloud apps, and consumer products.",
     type: "website",
@@ -35,7 +35,7 @@ export default function RootLayout({
         <StarField />
         <CrtOverlay />
         <Header />
-        <div className="flex-1 pt-16">{children}</div>
+        <div className="relative z-10 flex-1 pt-16">{children}</div>
         <Footer />
       </body>
     </html>

@@ -22,7 +22,7 @@ export default function Header() {
           href="/"
           className="font-[family-name:var(--font-pixel)] text-accent-cyan text-xs sm:text-sm neon-glow hover:text-white transition-colors"
         >
-          JAMES ZABEL
+          JC ZABEL
         </Link>
 
         {/* Desktop nav */}
