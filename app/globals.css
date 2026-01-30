@@ -156,3 +156,31 @@ html {
     scroll-behavior: auto;
   }
 }
+
+/* Floating particle animation for StarField */
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: var(--particle-opacity);
+  }
+  25% {
+    transform: translateY(-25vh) translateX(8px);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(-5px);
+    opacity: calc(var(--particle-opacity) * 0.6);
+  }
+  75% {
+    transform: translateY(-75vh) translateX(10px);
+  }
+  100% {
+    transform: translateY(-105vh) translateX(0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-field {
+    display: none;
+  }
+}

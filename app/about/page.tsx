@@ -6,6 +6,7 @@ import PixelDivider from "@/components/ui/PixelDivider";
 import GlowText from "@/components/ui/GlowText";
 import Tag from "@/components/ui/Tag";
 import RetroButton from "@/components/ui/RetroButton";
+import PixelIcon from "@/components/ui/PixelIcon";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -120,8 +121,11 @@ export default function AboutPage() {
           {timeline.map((item, i) => (
             <RetroCard key={i}>
               <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                <div className="font-[family-name:var(--font-mono)] text-accent-green text-sm whitespace-nowrap min-w-[120px]">
-                  {item.period}
+                <div className="flex items-center gap-3 sm:flex-col sm:items-start">
+                  <PixelIcon company={item.company} />
+                  <div className="font-[family-name:var(--font-mono)] text-accent-green text-sm whitespace-nowrap min-w-[120px]">
+                    {item.period}
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-text-heading font-semibold mb-1">
