@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# source content
+Squarespace scrub.docx
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
