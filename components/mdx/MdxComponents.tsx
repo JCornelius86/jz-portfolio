@@ -1,5 +1,16 @@
 import type { MDXComponents } from "mdx/types";
+import { Children, isValidElement, type ReactNode } from "react";
 import ImageLightbox from "@/components/ui/ImageLightbox";
+
+function hasImage(children: ReactNode): boolean {
+  return Children.toArray(children).some(
+    (child) =>
+      isValidElement(child) &&
+      (child.type === "img" ||
+        (typeof child.type === "function" && child.type.name === "img") ||
+        (child.props as Record<string, unknown>)?.src)
+  );
+}
 
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
@@ -20,9 +31,12 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  p: (props) => (
-    <p className="text-text-body leading-relaxed mb-4" {...props} />
-  ),
+  p: (props) => {
+    if (hasImage(props.children)) {
+      return <div className="text-text-body leading-relaxed mb-4" {...props} />;
+    }
+    return <p className="text-text-body leading-relaxed mb-4" {...props} />;
+  },
   a: (props) => (
     <a
       className="text-accent-cyan hover:text-white underline underline-offset-2 transition-colors"
