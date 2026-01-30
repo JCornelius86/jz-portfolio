@@ -4,8 +4,44 @@ import CaseStudyCard from "@/components/ui/CaseStudyCard";
 import RetroButton from "@/components/ui/RetroButton";
 import PixelDivider from "@/components/ui/PixelDivider";
 import GlowText from "@/components/ui/GlowText";
+import RetroCard from "@/components/ui/RetroCard";
+import PixelIcon from "@/components/ui/PixelIcon";
 import { getCaseStudies, getProjects } from "@/lib/content";
 import ProjectCard from "@/components/ui/ProjectCard";
+
+const timeline = [
+  {
+    period: "2022 – Present",
+    role: "Senior UX Designer → Senior UX Manager",
+    company: "Microsoft",
+    description: "Designing enterprise experiences at scale.",
+  },
+  {
+    period: "2013 – 2022",
+    role: "UX Lead → Design Manager → Data Science Lead",
+    company: "SnapAV / SnapOne",
+    description:
+      "Built OvrC from scratch. Grew the UX team. Platform scaled to 20MM+ devices.",
+  },
+  {
+    period: "2012 – 2013",
+    role: "Human Factors Engineer",
+    company: "Lockheed Martin",
+    description: "Defense contracting — human factors for complex systems.",
+  },
+  {
+    period: "2010 – 2012",
+    role: "UX Engineer",
+    company: "General Electric",
+    description: "Green energy and industrial automation.",
+  },
+  {
+    period: "2008 – 2010",
+    role: "Engineering Co-op",
+    company: "SSI Schaefer",
+    description: "Factory automation and warehouse systems.",
+  },
+];
 
 export default function Home() {
   const caseStudies = getCaseStudies();
@@ -97,6 +133,45 @@ export default function Home() {
         <div className="mt-8 text-center">
           <RetroButton href="/projects" variant="green">
             All Projects
+          </RetroButton>
+        </div>
+      </section>
+
+      <PixelDivider />
+
+      {/* Career Timeline */}
+      <section className="py-12">
+        <PixelHeading as="h2" glow="amber" className="mb-8">
+          Career
+        </PixelHeading>
+        <div className="space-y-6">
+          {timeline.map((item, i) => (
+            <RetroCard key={i}>
+              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                <div className="flex items-center gap-3 sm:flex-col sm:items-start">
+                  <PixelIcon company={item.company} />
+                  <div className="font-[family-name:var(--font-mono)] text-accent-green text-sm whitespace-nowrap min-w-[120px]">
+                    {item.period}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-text-heading font-semibold mb-1">
+                    {item.role}
+                  </h3>
+                  <p className="text-accent-cyan text-sm mb-2">
+                    {item.company}
+                  </p>
+                  <p className="text-text-secondary text-sm">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </RetroCard>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <RetroButton href="/about" variant="amber">
+            More About Me
           </RetroButton>
         </div>
       </section>

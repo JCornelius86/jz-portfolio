@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </Tag>
         ))}
       </div>
-      <div className="flex gap-3 mt-auto">
+      <div className="flex flex-wrap gap-3 mt-auto">
         {project.githubUrl && (
           <a
             href={project.githubUrl}
@@ -42,8 +42,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             rel="noopener noreferrer"
             className="text-xs font-[family-name:var(--font-mono)] text-accent-magenta hover:text-accent-magenta/80 border border-accent-magenta/30 px-2 py-1 rounded-sm transition-colors"
           >
-            Live Demo &rarr;
+            Full Prototype &rarr;
           </a>
+        )}
+        {project.liveUrl && (
+          <Link
+            href={`/projects/${project.slug}`}
+            className="text-xs font-[family-name:var(--font-mono)] text-accent-amber hover:text-accent-amber/80 border border-accent-amber/30 px-2 py-1 rounded-sm transition-colors"
+          >
+            Try It &rarr;
+          </Link>
         )}
       </div>
     </article>

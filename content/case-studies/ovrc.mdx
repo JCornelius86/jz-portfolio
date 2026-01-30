@@ -10,28 +10,44 @@ featured: true
 
 ## Challenge
 
-Contacted by a small audio/video hardware company (SnapAV) to build a cloud app for their IP-connected power conditioners so integrators could reset them remotely. Remote management had been the "holy grail" of the CEDIA industry. Accepted the position as **UX Lead** on a team of five.
+I was contacted by a relatively small audio/video company (SnapAV) that wanted to build an app for one of their IP-connected power conditioners — essentially a surge protector with controllable outlets — so their integrators could reset them remotely.
 
 ![WattBox power conditioner - the hardware that started it all](/images/ovrc/ovrc-wattbox-product.jpg)
 
+Remote management had been the "holy grail" of the CEDIA industry. Integrators spent hours driving to customer homes just to reboot a device. Solving this sounds simple, but no one else in the space had succeeded in making it easy, affordable, and reliable. I accepted the position as **UX Lead** on a team of five.
+
 ## Approach
 
-Built a focused framework for managing multiple customers, each with multiple devices. Settled on four critical pillars: **monitor, control, configure, and notify**. Started with three power conditioner models. Grew to 200+ native models.
+We were building something that had been attempted in this field several times, with high-profile examples of failure. Some competitors became too focused on a single product category; others were so unfocused they never released meaningful features. We had to be different.
+
+We settled on four things being critical: integrators had to be able to **monitor, control, configure**, and be **notified** when problems arose. We started with three power conditioner models, all only differing in the number of outlets they supported.
 
 ![OvrC platform sitemap showing the full information architecture](/images/ovrc/ovrc-sitemap.png)
 
+This would soon grow into an IoT platform supporting over 200 native models across multiple categories.
+
 ## Discovery
 
-Leveraged SnapAV's great customer relationships. Traveled to conferences, tested prototypes, iterated. Discovered dealers needed outlet on/off, reboot, and configuration. Created "Network Device" outlet categorization to prevent accidental shutoffs.
+Leveraged SnapAV's fantastic customer relationships. Traveled to conferences, showed off prototypes, tested, listened, iterated. Integrators needed outlet on/off, reboot, and configuration — but the conversations went much deeper.
 
-![OvrC at a CEDIA trade show booth](/images/ovrc-trade-show.jpg)
+![OvrC customer view showing locations and network health](/images/ovrc/ovrc-app-customers.png)
+
+Not everything was serious — every team member went through the rite of passage of accidentally turning off a router instead of rebooting it, creating a "truck roll" for ourselves. Even this silly use case led us to create "Network Device" outlet categorization to prevent accidental shutoffs.
+
+Going to conferences, getting in the field, and realizing the chance we had to make a real difference in people's lives was invigorating. We could help people be successful in their small businesses and support their families and communities.
 
 ## Vision
 
-Decided to make the platform easy enough that anyone could learn, even sacrificing some functionality. Mantra: **"Make our customers successful by building what they need. No more, no less."**
+If we were going to be successful, we had to realize we could not be everything to everyone. Most integrators were not very tech savvy — they were struggling to find employees who could configure networking equipment. We had a choice: teach someone to be a network engineer, or make it easy enough that anyone can learn?
+
+We chose the latter.
+
+> Make our customers successful by building what they need. No more, no less.
+
+There's a big difference between building what someone _wants_ and what they _need_. It was my job to figure out the difference.
 
 Our goals:
-- Keep integrators informed
+- Keep integrators informed about what's happening at customer locations
 - Make troubleshooting simple from any device
 - Listen to customers and make them successful
 
@@ -39,15 +55,19 @@ Our goals:
 
 ## Launch
 
-Launched in 2014 with immediate CEDIA adoption. Challenges arose with feature requests as internal stakeholders wanted additional device types — surveillance, networking, media.
+Launched in 2014 with immediate CEDIA adoption. But success didn't come without challenges. Internal stakeholders wanted additional device types — surveillance, networking, media — that were very different from the WattBox we started with. Product managers saw the attachment rates and customer satisfaction, and our team wasn't structured to handle the demand.
 
 ![OvrC mobile app showing the device list for a customer location](/images/ovrc/ovrc-app-device-list.png)
 
+![OvrC device details with outlet controls and configuration](/images/ovrc/ovrc-app-device-details.png)
+
 ## Research
 
-Championed usability testing culture at SnapAV. Created a style guide for consistent local UIs across all product lines. Moved away from JDM (Joint Development Manufacturing) model.
+SnapAV was still new to software development and hadn't done much usability testing. I championed speaking with customers as often as possible — going to conferences, getting into the field, showing off designs and testing prototypes.
 
 ![OvrC mobile wireframes showing early design exploration](/images/ovrc/ovrc-mobile-wireframes.jpg)
+
+We created a style guide for consistent UIs across all product lines and moved away from the JDM (Joint Development Manufacturing) model so we could control the full experience.
 
 ## Growth
 
@@ -57,23 +77,35 @@ As OvrC expanded beyond power management, we added networking, surveillance, and
 
 ![Detailed customer map view centered on the Charlotte, NC area](/images/ovrc/ovrc-map-view.png)
 
+![OvrC notifications keeping integrators informed of issues](/images/ovrc/ovrc-app-notifications.png)
+
 ## Feature Expansion
 
-We developed advanced features like WAN settings, billing integration, and video distribution — all while maintaining the core principle of simplicity.
+We developed advanced features like WAN settings, speed testing, billing integration, and video distribution — all while maintaining the core principle of simplicity.
 
 ![OvrC advanced WAN settings configuration](/images/ovrc/ovrc-wan-settings.png)
+
+![OvrC speed test showing network performance diagnostics](/images/ovrc/ovrc-app-speed-test.png)
 
 ![OvrC billing feature wireframes](/images/ovrc/ovrc-billing-wireframes.png)
 
 ![OvrC MOIP video distribution wireframes](/images/ovrc/ovrc-moip-wireframes.png)
 
+## Handoff & Design System
+
+Documentation handed off to dev teams was developed in Axure — providing guides for how each feature should work with links to BRDs and design specs. We built a design system to standardize UIs across multiple product lines.
+
+![OvrC in-app support and troubleshooting](/images/ovrc/ovrc-app-support.png)
+
 ## Impact
 
-OvrC became the **premier remote management system** in CEDIA.
+OvrC became the **premier remote management system** in CEDIA within months.
 
 - **5+ million** devices at **200,000+** locations worldwide
 - Grew from **3 models to 200+** across power, networking, surveillance, and media
 - Introduced a hub for non-SnapAV device visibility
 - Built and led the UX team from **1 to a full design organization**
 
-![OvrC customer map showing millions of devices across the US](/images/ovrc/ovrc-customer-map.png)
+With all the success, challenges have inevitably arisen. We are constantly asked to stretch the bounds of what the system was designed to do. We balance pushing back to ensure the platform doesn't lose the simplicity that made it successful, while continuing to grow and evolve.
+
+This project has been near and dear to my heart, and it has been great to see the impact we've made on small businesses — succeeding in our goal of helping people become more successful and provide for their families and communities.

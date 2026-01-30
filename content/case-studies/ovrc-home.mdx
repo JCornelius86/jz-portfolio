@@ -10,23 +10,35 @@ featured: true
 
 ## Challenge
 
-Integrators wanted to give homeowners similar control to what they had with OvrC. Homeowners had paid tens of thousands for custom setups. DIY competitors — Disney Circle, Nest, Sonos — were entering the market and threatening the custom integration industry.
+With OvrC we had done a lot to make integrators' lives easier, but almost immediately they began asking us for more. Namely, give the homeowner something to control their gear the same way integrators could. The average homeowner had just paid tens of thousands for a custom setup — and now DIY competitors like Disney Circle, Nest, and Sonos were entering the market and threatening the custom integration industry.
+
+They wanted us to do everything. This was going to be a challenge.
 
 OvrC was never designed for homeowner consumption. We had to build something **simple for dealers to set up** and even simpler for homeowners to use.
 
 ## Discovery
 
-Integrators wanted to stop getting late-night calls for simple reboots. Homeowners needed network visibility. Integrators wanted **white-label branding** — their logo, their contact info, their brand.
+Some of the first feedback: integrators wanted to give some version of OvrC to their customers. We thought about what that would look like — but OvrC was built for technicians, not homeowners. The typical integrator customer was later in life and had already dropped significant money for someone to handle this stuff for them.
+
+Integrators wanted to stop getting late-night calls for simple reboots. They also said it would be huge for their business if we could somehow make whatever we built look like something custom that **they** built.
+
+Often we heard of integrators giving customers access to their own OvrC account. This was a big problem — most homeowners didn't understand how to use it and didn't want to.
 
 ![OvrC Home end user app wireframes with detailed annotations](/images/ovrc-home/ovrc-home-end-user-wireframes.png)
 
 ## Vision
 
-We created **macros** — a series of commands to multiple devices triggered by a single button. Instead of knowing which device to reboot, homeowners just tap "Reset Internet" and the system handles the rest.
+We knew we could do anything, but we couldn't do everything. So we started by making it really easy to reboot stuff.
 
-Built dealer branding: logo upload, contact info, customizable support screens. Named the app **"OvrC Home."**
+We created **macros** — a series of commands passed to multiple devices that an integrator could define. If a dealer was regularly having issues with a customer's streaming device, they could create a command called "Reboot AppleTV" which would go to the WattBox and reboot the appropriate outlet, then go to the Araknis switch and do the same for the network port.
 
 ![OvrC Home command grid letting homeowners fix problems with a single tap](/images/ovrc-home/ovrc-home-commands.png)
+
+The homeowner didn't need to know the complexity of what was going on behind the scenes. All they needed to know was that when there's a problem with their AppleTV, they have a button that fixes it.
+
+![OvrC Home quick fix with a single tap reboot](/images/ovrc-home/ovrc-home-app-fix.png)
+
+We also needed a way to showcase the dealer. An app was the obvious way to get this in customers' hands, but we couldn't name it after every integrator. We decided on **"OvrC Home"** and allowed dealers to upload their logo and brand info — making it feel like **their** app.
 
 ## Dealer Setup
 
@@ -34,15 +46,23 @@ The dealer experience was critical. We built the setup flow directly into the Ov
 
 ![OvrC customer access setup wireframes showing the dealer configuration workflow](/images/ovrc/ovrc-customer-access-wireframes.png)
 
+![OvrC add command setup for configuring macros](/images/ovrc/ovrc-add-command.png)
+
 ## Launch
 
-Paired with OvrC Pro device launch (service model initiative). Initial pairing didn't go as planned — integrators struggled to pitch the OvrC Pro device to end consumers. We severed the requirement and saw greater attachment.
+SnapAV had another initiative requiring OvrC Home's launch to be paired with OvrC Pro — pushing the service model to get integrators charging for ongoing support. This didn't go as planned.
+
+Most integrators had a hard time pitching the OvrC Pro device to end consumers and explaining that their expensive system wasn't going to be bulletproof. There was also confusion about whether OvrC Home required the Pro device.
+
+We severed the requirement and saw much greater attachment.
 
 ![OvrC Home app troubleshooting screen](/images/ovrc-home/ovrc-home-app-troubleshooting.png)
 
 ## Parental Controls
 
-Added **"Parental Controls"** feature with profile-based device management, schedules, and content filtering. This became a key differentiator against consumer competitors.
+Once we started getting more users, integrators told us loud and clear: they needed a way to combat DIY competitors in the networking space. We had to add functionality drastically different from what had been essentially a simple reboot feature.
+
+We delivered **"Parental Controls"** along with a full redesign — three core features:
 
 ![OvrC Home parental controls wireframes](/images/ovrc-home/ovrc-home-parental-controls-wireframes.png)
 
@@ -50,7 +70,7 @@ Added **"Parental Controls"** feature with profile-based device management, sche
 
 ### Profiles & Schedules
 
-Each family member gets a profile with associated devices. Parents can pause wireless access and set schedules for homework time, bedtime, or dinner.
+Users could assign devices to different profiles and monitor their status. Parents could pause wireless access and set schedules for homework time, bedtime, or dinner.
 
 ![OvrC Home profile detail showing pause wireless and schedule controls](/images/ovrc-home/ovrc-home-profile.png)
 
@@ -72,6 +92,8 @@ Each dealer gets their own branded support screen with company logo, phone numbe
 
 - **Tens of thousands** of locations using OvrC Home
 - **100,000+** macros created by integrators
-- Healthy portion of users charging end users for the service
+- Healthy portion of users now **charging end users** for the service
 - Converting truck rolls into **better-margin jobs**
 - Positioned custom integrators to compete with DIY smart home solutions
+
+We initially tied the launch to the service model push. We failed, tried again, and found success once we decoupled the hardware requirement. What we've seen since is integrators using OvrC Home as a tentpole in their business — converting those few-hundred-dollar truck rolls and several hours of work into doing more jobs with better margins and happier customers.

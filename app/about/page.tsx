@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const timeline = [
   {
     period: "2022 – Present",
-    role: "Senior UX Designer",
+    role: "Senior UX Designer → Senior UX Manager",
     company: "Microsoft",
     description: "Designing enterprise experiences at scale.",
   },
