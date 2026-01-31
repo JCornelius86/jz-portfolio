@@ -83,8 +83,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <h2 className="font-[family-name:var(--font-pixel)] text-sm text-accent-amber neon-glow-amber mb-6">
               Try It
             </h2>
-            {/* Phone frame — hidden on mobile since they can just use the full prototype */}
-            <div className="hidden md:flex justify-center">
+            <div className="flex justify-center">
               <div className="relative">
                 {/* Phone bezel */}
                 <div className="w-[375px] rounded-[3rem] border-4 border-[#2a2a3e] bg-[#1a1a2e] p-3 shadow-[0_0_30px_rgba(0,255,245,0.1)]">
@@ -105,15 +104,6 @@ export default async function ProjectPage({ params }: PageProps) {
                   <div className="mx-auto mt-3 h-1 w-28 rounded-full bg-[#2a2a3e]" />
                 </div>
               </div>
-            </div>
-            {/* Mobile fallback — just link them to the full prototype */}
-            <div className="md:hidden text-center">
-              <p className="text-text-secondary text-sm mb-4">
-                Best experienced on desktop. Tap below to open the full prototype.
-              </p>
-              <RetroButton href={meta.liveUrl} variant="amber">
-                Open Prototype
-              </RetroButton>
             </div>
           </section>
         )}
