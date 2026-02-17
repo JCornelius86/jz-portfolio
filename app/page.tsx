@@ -60,13 +60,14 @@ export default function Home() {
             <span className="cursor-blink text-accent-cyan">_</span>
           </h1>
           <p className="text-text-body text-lg sm:text-xl leading-relaxed mb-4">
-            UX leader and designer building products that people actually want
-            to use. 10+ years turning complex problems into simple,
-            human-centered solutions.
+            UX leader building products that people actually want to use. 15+
+            years turning complex problems into simple, human-centered
+            solutions.
           </p>
           <p className="text-text-secondary text-base leading-relaxed mb-8">
-            From IoT cloud platforms to consumer apps, I&apos;ve led design for
-            products managing millions of devices. Currently at Microsoft.
+            From green tech and defense contracting to IoT cloud platforms and
+            enterprise software, I&apos;ve led design for products managing
+            millions of devices. Currently at Microsoft.
           </p>
           <div className="flex flex-wrap gap-4">
             <RetroButton href="/work">View My Work</RetroButton>

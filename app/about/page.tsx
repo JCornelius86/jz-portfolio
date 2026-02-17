@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "UX leader based in Charlotte, NC with degrees from Clemson University and 10+ years building products at companies like Microsoft, SnapAV, Lockheed Martin, and GE.",
+    "UX leader based in Charlotte, NC with degrees from Clemson University and 15+ years building products at companies like Microsoft, SnapAV, Lockheed Martin, and GE.",
 };
 
 const timeline = [
@@ -82,7 +82,7 @@ export default function AboutPage() {
                 Clemson University <GlowText color="amber">(Go Tigers!)</GlowText>.
               </p>
               <p>
-                With 10+ years of experience spanning corporate giants and
+                With 15+ years of experience spanning corporate giants and
                 scrappy startups, I&apos;ve had the chance to work on everything
                 from factory automation to green energy to defense contracting to
                 IoT cloud platforms and consumer electronics.

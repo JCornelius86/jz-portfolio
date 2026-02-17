@@ -14,9 +14,74 @@
   --color-border-pixel: #2a2a3e;
   --color-border-glow: #00fff5;
 
+  --color-glow-cyan: 0, 255, 245;
+  --color-glow-magenta: 255, 0, 255;
+  --color-glow-green: 57, 255, 20;
+  --color-glow-amber: 255, 191, 0;
+
   --font-pixel: var(--font-pixel);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
+}
+
+/* Sky period overrides — day */
+[data-sky="day"] {
+  --color-bg-primary: #1a1a28;
+  --color-bg-card: #222234;
+  --color-bg-elevated: #2a2a42;
+  --color-accent-cyan: #00c8c0;
+  --color-accent-magenta: #d946ef;
+  --color-accent-green: #22c55e;
+  --color-accent-amber: #f59e0b;
+  --color-text-body: #d4d4dc;
+  --color-text-secondary: #9898b0;
+  --color-text-heading: #f5f5f5;
+  --color-border-pixel: #3a3a52;
+  --color-border-glow: #00c8c0;
+  --color-glow-cyan: 0, 200, 192;
+  --color-glow-magenta: 217, 70, 239;
+  --color-glow-green: 34, 197, 94;
+  --color-glow-amber: 245, 158, 11;
+}
+
+/* Sky period overrides — dawn (interpolated toward day) */
+[data-sky="dawn"] {
+  --color-bg-primary: #12121c;
+  --color-bg-card: #1a1a28;
+  --color-bg-elevated: #222238;
+  --color-accent-cyan: #00e4dd;
+  --color-accent-magenta: #ec23f7;
+  --color-accent-green: #2edd39;
+  --color-accent-amber: #faa906;
+  --color-text-body: #dadae2;
+  --color-text-secondary: #9090a8;
+  --color-text-heading: #fafafa;
+  --color-border-pixel: #32324a;
+  --color-border-glow: #00e4dd;
+  --color-glow-cyan: 0, 228, 221;
+  --color-glow-magenta: 236, 35, 247;
+  --color-glow-green: 46, 221, 57;
+  --color-glow-amber: 250, 169, 6;
+}
+
+/* Sky period overrides — dusk (interpolated toward night) */
+[data-sky="dusk"] {
+  --color-bg-primary: #12121c;
+  --color-bg-card: #1a1a28;
+  --color-bg-elevated: #222238;
+  --color-accent-cyan: #00e4dd;
+  --color-accent-magenta: #ec23f7;
+  --color-accent-green: #2edd39;
+  --color-accent-amber: #faa906;
+  --color-text-body: #dadae2;
+  --color-text-secondary: #9090a8;
+  --color-text-heading: #fafafa;
+  --color-border-pixel: #32324a;
+  --color-border-glow: #00e4dd;
+  --color-glow-cyan: 0, 228, 221;
+  --color-glow-magenta: 236, 35, 247;
+  --color-glow-green: 46, 221, 57;
+  --color-glow-amber: 250, 169, 6;
 }
 
 /* Base styles */
@@ -24,6 +89,13 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-body);
   font-family: var(--font-body), system-ui, sans-serif;
+  transition: background-color 2s ease-in-out, color 2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
 }
 
 /* Scrollbar styling */
@@ -46,7 +118,7 @@ body {
 
 /* Selection styling */
 ::selection {
-  background-color: rgba(0, 255, 245, 0.25);
+  background-color: rgba(var(--color-glow-cyan), 0.25);
   color: var(--color-text-heading);
 }
 
@@ -74,30 +146,30 @@ body {
 /* Neon glow for headings */
 .neon-glow {
   text-shadow:
-    0 0 7px rgba(0, 255, 245, 0.6),
-    0 0 10px rgba(0, 255, 245, 0.4),
-    0 0 21px rgba(0, 255, 245, 0.2);
+    0 0 7px rgba(var(--color-glow-cyan), 0.6),
+    0 0 10px rgba(var(--color-glow-cyan), 0.4),
+    0 0 21px rgba(var(--color-glow-cyan), 0.2);
 }
 
 .neon-glow-magenta {
   text-shadow:
-    0 0 7px rgba(255, 0, 255, 0.6),
-    0 0 10px rgba(255, 0, 255, 0.4),
-    0 0 21px rgba(255, 0, 255, 0.2);
+    0 0 7px rgba(var(--color-glow-magenta), 0.6),
+    0 0 10px rgba(var(--color-glow-magenta), 0.4),
+    0 0 21px rgba(var(--color-glow-magenta), 0.2);
 }
 
 .neon-glow-green {
   text-shadow:
-    0 0 7px rgba(57, 255, 20, 0.6),
-    0 0 10px rgba(57, 255, 20, 0.4),
-    0 0 21px rgba(57, 255, 20, 0.2);
+    0 0 7px rgba(var(--color-glow-green), 0.6),
+    0 0 10px rgba(var(--color-glow-green), 0.4),
+    0 0 21px rgba(var(--color-glow-green), 0.2);
 }
 
 .neon-glow-amber {
   text-shadow:
-    0 0 7px rgba(255, 191, 0, 0.6),
-    0 0 10px rgba(255, 191, 0, 0.4),
-    0 0 21px rgba(255, 191, 0, 0.2);
+    0 0 7px rgba(var(--color-glow-amber), 0.6),
+    0 0 10px rgba(var(--color-glow-amber), 0.4),
+    0 0 21px rgba(var(--color-glow-amber), 0.2);
 }
 
 /* Pixel border card style */
@@ -114,7 +186,7 @@ body {
   box-shadow:
     inset 2px 2px 0 var(--color-border-glow),
     inset -2px -2px 0 var(--color-border-glow),
-    0 0 15px rgba(0, 255, 245, 0.15);
+    0 0 15px rgba(var(--color-glow-cyan), 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -250,6 +322,9 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .star-field {
     display: none;
+  }
+  .sky-background {
+    transition: none !important;
   }
   .lm-missile,
   .lm-projectile,

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies from 10+ years of UX leadership — IoT platforms, cloud apps, and consumer products.",
+    "Case studies from 15+ years of UX leadership — green tech, defense, IoT platforms, and enterprise software.",
 };
 
 export default function WorkPage() {
@@ -20,7 +20,7 @@ export default function WorkPage() {
           Work
         </PixelHeading>
         <p className="text-text-secondary text-lg mb-12 max-w-2xl">
-          Case studies from 10+ years of UX leadership — from building an IoT
+          Case studies from 15+ years of UX leadership — from building an IoT
           platform from scratch to designing consumer apps used by hundreds of
           thousands.
         </p>

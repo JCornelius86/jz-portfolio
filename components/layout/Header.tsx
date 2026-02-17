@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import SkyToggle from "@/components/sky/SkyToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -46,6 +47,7 @@ export default function Header() {
               </Link>
             );
           })}
+          <SkyToggle />
         </div>
 
         {/* Mobile hamburger */}
@@ -96,6 +98,9 @@ export default function Header() {
                 </Link>
               );
             })}
+            <div className="pt-2 border-t border-border-pixel">
+              <SkyToggle />
+            </div>
           </div>
         </div>
       )}

@@ -1,5 +1,15 @@
 "use client";
 
+import { useSky } from "@/components/sky/SkyProvider";
+import type { SkyPeriod } from "@/lib/sky";
+
+const PERIOD_OPACITY: Record<SkyPeriod, number> = {
+  night: 1,
+  dusk: 0.6,
+  dawn: 0.3,
+  day: 0,
+};
+
 const COLORS = [
   "#00fff5", // cyan
   "#ff00ff", // magenta
@@ -65,9 +75,13 @@ const GLOW: Record<string, string> = {
 };
 
 export default function StarField() {
+  const { period } = useSky();
+  const opacity = PERIOD_OPACITY[period];
+
   return (
     <div
-      className="star-field fixed inset-0 overflow-hidden pointer-events-none z-[1]"
+      className="star-field fixed inset-0 overflow-hidden pointer-events-none z-[1] transition-opacity duration-[3000ms]"
+      style={{ opacity }}
       aria-hidden="true"
     >
       {/* Twinkling background stars */}
