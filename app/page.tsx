@@ -12,7 +12,7 @@ const impactStats = [
   { value: "15+", label: "Years in UX", color: "text-accent-cyan" },
   { value: "3", label: "Teams Built", color: "text-accent-magenta" },
   { value: "20M+", label: "Devices Managed", color: "text-accent-green" },
-  { value: "$25M+", label: "Revenue Impact", color: "text-accent-amber" },
+  { value: "4", label: "Industries", color: "text-accent-amber" },
 ];
 
 const principles = [
