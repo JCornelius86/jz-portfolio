@@ -7,9 +7,8 @@ import SkyToggle from "@/components/sky/SkyToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
 ];
 
 export default function Header() {

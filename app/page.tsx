@@ -5,41 +5,38 @@ import RetroButton from "@/components/ui/RetroButton";
 import PixelDivider from "@/components/ui/PixelDivider";
 import GlowText from "@/components/ui/GlowText";
 import RetroCard from "@/components/ui/RetroCard";
-import PixelIcon from "@/components/ui/PixelIcon";
 import { getCaseStudies, getProjects } from "@/lib/content";
 import ProjectCard from "@/components/ui/ProjectCard";
 
-const timeline = [
+const impactStats = [
+  { value: "15+", label: "Years in UX", color: "text-accent-cyan" },
+  { value: "3", label: "Teams Built", color: "text-accent-magenta" },
+  { value: "20M+", label: "Devices Managed", color: "text-accent-green" },
+  { value: "$25M+", label: "Revenue Impact", color: "text-accent-amber" },
+];
+
+const principles = [
   {
-    period: "2022 – Present",
-    role: "Senior UX Designer → Senior UX Manager",
-    company: "Microsoft",
-    description: "Designing enterprise experiences at scale.",
+    title: "Grow the People",
+    glow: "amber" as const,
+    // TODO: Fill in — your mentorship philosophy, how you develop designers, what you look for
+    body: "The best design orgs are built on trust and growth. I invest in 1:1s, design crits, and stretch assignments because a team that's learning is a team that delivers.",
   },
   {
-    period: "2013 – 2022",
-    role: "UX Lead → Design Manager → Data Science Lead",
-    company: "SnapAV / SnapOne",
-    description:
-      "Built OvrC from scratch. Grew the UX team. Platform scaled to 20MM+ devices.",
+    title: "Ship > Perfect",
+    glow: "cyan" as const,
+    body: "I run my teams on a 75/25 rule. 75% speed and iteration, 25% craft. We ship working increments fast, then polish what matters. Momentum beats perfection.",
   },
   {
-    period: "2012 – 2013",
-    role: "Human Factors Engineer",
-    company: "Lockheed Martin",
-    description: "Defense contracting — human factors for complex systems.",
+    title: "Design the System",
+    glow: "magenta" as const,
+    // TODO: Fill in — how you think about design systems, consistency, scalable patterns
+    body: "I think in systems, not screens. Scalable patterns, shared tokens, and reusable components mean the team moves faster and the product stays coherent as it grows.",
   },
   {
-    period: "2010 – 2012",
-    role: "UX Engineer",
-    company: "General Electric",
-    description: "Green energy and industrial automation.",
-  },
-  {
-    period: "2008 – 2010",
-    role: "Engineering Co-op",
-    company: "SSI Schaefer",
-    description: "Factory automation and warehouse systems.",
+    title: "Test What You Don't Know",
+    glow: "green" as const,
+    body: "We build confidently on what we know and test what we don't. Get it in front of users early, validate fast, and iterate. Assumptions are risks; feedback is fuel.",
   },
 ];
 
@@ -65,14 +62,14 @@ export default function Home() {
             solutions.
           </p>
           <p className="text-text-secondary text-base leading-relaxed mb-8">
-            From green tech and defense contracting to IoT cloud platforms and
-            enterprise software, I&apos;ve led design for products managing
-            millions of devices. Currently at Microsoft.
+            Currently leading a team of 6 designers across Microsoft&apos;s
+            Azure X, Resiliency, and Customer Health orgs. Before that, I built
+            an IoT platform from scratch that scaled to 20M+ devices.
           </p>
           <div className="flex flex-wrap gap-4">
             <RetroButton href="/work">View My Work</RetroButton>
-            <RetroButton href="/about" variant="magenta">
-              About Me
+            <RetroButton href="/resume" variant="magenta">
+              Resume
             </RetroButton>
           </div>
         </div>
@@ -80,37 +77,53 @@ export default function Home() {
 
       <PixelDivider />
 
-      {/* Featured Case Studies */}
-      {caseStudies.length > 0 && (
-        <section className="py-12">
-          <PixelHeading as="h2" glow="magenta" className="mb-8">
-            Featured Work
-          </PixelHeading>
-          <div className="grid gap-8 md:grid-cols-2">
-            {caseStudies
-              .filter((s) => s.featured)
-              .map((study) => (
-                <CaseStudyCard key={study.slug} study={study} />
-              ))}
-          </div>
-          <div className="mt-8 text-center">
-            <RetroButton href="/work" variant="cyan">
-              View All Work
-            </RetroButton>
-          </div>
-        </section>
-      )}
+      {/* Impact Stats */}
+      <section className="py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {impactStats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p
+                className={`font-[family-name:var(--font-pixel)] text-2xl sm:text-3xl ${stat.color} mb-2`}
+              >
+                {stat.value}
+              </p>
+              <p className="text-text-secondary text-sm">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <PixelDivider />
 
-      {/* Projects Preview */}
+      {/* How I Lead */}
+      <section className="py-12">
+        <PixelHeading as="h2" glow="amber" className="mb-8">
+          How I Lead
+        </PixelHeading>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {principles.map((p) => (
+            <RetroCard key={p.title} hover={false}>
+              <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-accent-cyan uppercase tracking-wider mb-3">
+                {p.title}
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                {p.body}
+              </p>
+            </RetroCard>
+          ))}
+        </div>
+      </section>
+
+      <PixelDivider />
+
+      {/* Side Projects — promoted */}
       <section className="py-12">
         <PixelHeading as="h2" glow="green" className="mb-4">
-          Projects
+          Building Things
         </PixelHeading>
         <p className="text-text-secondary mb-8">
-          Side projects and vibe coding experiments. This section grows over
-          time.
+          Apps I&apos;ve designed and built from scratch. The best way to
+          understand engineering constraints is to ship code yourself.
         </p>
         {projects.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -127,7 +140,7 @@ export default function Home() {
               COMING SOON
             </p>
             <p className="text-text-secondary text-sm">
-              Vibe coding projects are in the works. Check back soon.
+              Projects are in the works. Check back soon.
             </p>
           </div>
         )}
@@ -140,42 +153,26 @@ export default function Home() {
 
       <PixelDivider />
 
-      {/* Career Timeline */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="amber" className="mb-8">
-          Career
-        </PixelHeading>
-        <div className="space-y-6">
-          {timeline.map((item, i) => (
-            <RetroCard key={i}>
-              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                <div className="flex items-center gap-3 sm:flex-col sm:items-start">
-                  <PixelIcon company={item.company} />
-                  <div className="font-[family-name:var(--font-mono)] text-accent-green text-sm whitespace-nowrap min-w-[120px]">
-                    {item.period}
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-text-heading font-semibold mb-1">
-                    {item.role}
-                  </h3>
-                  <p className="text-accent-cyan text-sm mb-2">
-                    {item.company}
-                  </p>
-                  <p className="text-text-secondary text-sm">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </RetroCard>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <RetroButton href="/about" variant="amber">
-            More About Me
-          </RetroButton>
-        </div>
-      </section>
+      {/* Featured Case Studies */}
+      {caseStudies.length > 0 && (
+        <section className="py-12">
+          <PixelHeading as="h2" glow="magenta" className="mb-8">
+            Case Studies
+          </PixelHeading>
+          <div className="grid gap-8 md:grid-cols-2">
+            {caseStudies
+              .filter((s) => s.featured)
+              .map((study) => (
+                <CaseStudyCard key={study.slug} study={study} />
+              ))}
+          </div>
+          <div className="mt-8 text-center">
+            <RetroButton href="/work" variant="cyan">
+              View All Work
+            </RetroButton>
+          </div>
+        </section>
+      )}
     </PageContainer>
   );
 }

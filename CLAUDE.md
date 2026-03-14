@@ -21,6 +21,7 @@
 - **Mobile-first** responsive design
 
 ## Content Rules
+- **No em-dashes** (`—`) in user-facing copy. Use periods, commas, or rewrite instead.
 - Case studies follow **Challenge > Approach > Impact** structure
 - All images require descriptive alt text
 - Content lives in `/content/case-studies/` and `/content/projects/`

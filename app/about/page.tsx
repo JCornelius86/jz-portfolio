@@ -15,37 +15,68 @@ export const metadata: Metadata = {
     "UX leader based in Charlotte, NC with degrees from Clemson University and 15+ years building products at companies like Microsoft, SnapAV, Lockheed Martin, and GE.",
 };
 
-const timeline = [
+const timeline: {
+  period: string;
+  role: string;
+  company: string;
+  description: React.ReactNode;
+}[] = [
   {
     period: "2022 – Present",
-    role: "Senior UX Designer → Senior UX Manager",
+    role: "Senior UX Designer → Senior Design Manager",
     company: "Microsoft",
-    description: "Designing enterprise experiences at scale.",
+    description: (
+      <>
+        Managing a team of <GlowText>6 designers and UX researchers</GlowText>{" "}
+        across Azure X, Resiliency, and Customer Health. Established
+        design-driven operating rhythms, led large-scale quality initiatives,
+        and was recognized with{" "}
+        <GlowText color="amber">Azure X Manager of the Year</GlowText>.
+      </>
+    ),
   },
   {
     period: "2013 – 2022",
-    role: "UX Lead → Design Manager → Data Science Lead",
+    role: "UX Engineer → UX Manager",
     company: "SnapAV / SnapOne",
-    description:
-      "Built OvrC from scratch. Grew the UX team. Platform scaled to 20MM+ devices.",
+    description: (
+      <>
+        Early team member on OvrC, an IoT cloud platform that grew to support{" "}
+        <GlowText color="green">20M+ managed devices</GlowText> globally. Led
+        UX for both the pro and consumer apps, managed onshore and offshore
+        design teams, and built the design system across all product lines.
+        Strategic design support for the{" "}
+        <GlowText color="green">$150M+ Connected Device category</GlowText>.
+      </>
+    ),
   },
   {
-    period: "2012 – 2013",
-    role: "Human Factors Engineer",
+    period: "2011 – 2013",
+    role: "Human Systems Integration Engineer",
     company: "Lockheed Martin",
-    description: "Defense contracting — human factors for complex systems.",
+    description: (
+      <>
+        Principal investigator on usability assessments for the{" "}
+        <GlowText color="magenta">
+          Navy Ballistic Missile Defense 5.1
+        </GlowText>{" "}
+        program. Used iterative design and heuristic evaluations to develop new
+        GUIs introduced to fleet architecture, gathering input directly from
+        active duty sailors.
+      </>
+    ),
   },
   {
-    period: "2010 – 2012",
-    role: "UX Engineer",
+    period: "2011",
+    role: "Human Factors Engineer",
     company: "General Electric",
-    description: "Green energy and industrial automation.",
-  },
-  {
-    period: "2008 – 2010",
-    role: "Engineering Co-op",
-    company: "SSI Schaefer",
-    description: "Factory automation and warehouse systems.",
+    description: (
+      <>
+        Conducted risk assessments, Root Cause Analysis investigations, and
+        Preliminary Hazard Assessments for new product development across{" "}
+        <GlowText color="amber">multiple GE business units</GlowText>.
+      </>
+    ),
   },
 ];
 
@@ -76,7 +107,7 @@ export default function AboutPage() {
             </PixelHeading>
             <div className="space-y-4 text-text-body text-base leading-relaxed">
               <p>
-                Hey there! I&apos;m <GlowText>James (JC) Zabel</GlowText> — a UX
+                Hey there! I&apos;m <GlowText>James (JC) Zabel</GlowText>, a UX
                 professional based in Charlotte, NC. I hold a BS in Industrial
                 Engineering and an MS in Human Factors Psychology, both from
                 Clemson University <GlowText color="amber">(Go Tigers!)</GlowText>.
@@ -89,7 +120,7 @@ export default function AboutPage() {
               </p>
               <p>
                 I&apos;m always looking for a challenge and looking to make a
-                difference — building products that real people actually want to
+                difference, building products that real people actually want to
                 use.
               </p>
             </div>

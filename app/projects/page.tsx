@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Side projects and vibe coding experiments — a growing collection of things I build for fun.",
+    "Side projects and vibe coding experiments. A growing collection of things I build for fun.",
 };
 
 export default function ProjectsPage() {

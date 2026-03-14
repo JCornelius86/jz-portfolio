@@ -53,10 +53,9 @@ const MODE_OVERRIDES: Record<"day" | "night", { period: SkyPeriod; progress: num
 
 export default function SkyProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<SkyMode>("auto");
-  const [sky, setSky] = useState(() =>
-    // SSR-safe default: night
-    typeof window === "undefined" ? { period: "night" as SkyPeriod, progress: 0, dayProgress: 0 } : computeFromTime()
-  );
+  // Always start with SSR-safe default to avoid hydration mismatch;
+  // useEffect below will compute the real values on mount.
+  const [sky, setSky] = useState({ period: "night" as SkyPeriod, progress: 0, dayProgress: 0 });
 
   // Read localStorage on mount
   useEffect(() => {
