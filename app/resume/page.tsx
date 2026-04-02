@@ -60,6 +60,7 @@ const experience: Job[] = [
       "Recognized with Azure X Manager of the Year for delivery results and people leadership",
       "Established design-driven operating rhythms improving clarity, velocity, and cross-org alignment with PM and Engineering",
       "Elevated team visibility at senior leadership through executive-ready storytelling and design-led narratives",
+      "Contributing to a cross-org v-team defining the Future of Work vision for the UX organization",
       [
         { text: "Drove quality initiatives including large-scale bug bashes resulting in " },
         { text: "100+ actionable improvements", highlight: true },
