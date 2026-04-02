@@ -1,8 +1,5 @@
 # CLAUDE.md - Project Principles
 
-## 75/25 Rule
-75% speed & iteration, 25% craft. Ship working increments. Take time on design tokens, typography, animations.
-
 ## Technical Rules
 - **Framework**: Next.js (App Router) with TypeScript strict mode
 - **Styling**: Tailwind CSS
