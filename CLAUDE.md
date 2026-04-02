@@ -11,6 +11,9 @@
 - **Fonts**: `next/font/google` — no external font loading
 - **Images**: `next/image` for optimized loading
 
+## Design System
+- See `DESIGN.md` for color roles, component usage guide, and do's/don'ts
+
 ## Design Constraints
 - **Dark mode only** — no light theme toggle
 - **Pixel font** (Press Start 2P) for headings only, never body text

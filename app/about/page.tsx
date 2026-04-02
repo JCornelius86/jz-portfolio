@@ -27,11 +27,14 @@ const timeline: {
     company: "Microsoft",
     description: (
       <>
-        Managing a team of <GlowText>6 designers and UX researchers</GlowText>{" "}
-        across Azure X, Resiliency, and Customer Health. Established
-        design-driven operating rhythms, led large-scale quality initiatives,
-        and was recognized with{" "}
-        <GlowText color="amber">Azure X Manager of the Year</GlowText>.
+        Leading a team of{" "}
+        <GlowText>6 designers and UX researchers</GlowText> across Azure,
+        driving design for internal field tools and{" "}
+        <GlowText>Azure Advisor</GlowText>, helping customers optimize
+        workloads based on their business needs. Work spans multiple
+        organizations and PM, engineering, and UX disciplines. Recognized with{" "}
+        <GlowText color="amber">Manager of the Year</GlowText> for delivery
+        and people leadership.
       </>
     ),
   },
@@ -41,11 +44,15 @@ const timeline: {
     company: "SnapAV / SnapOne",
     description: (
       <>
-        Early team member on OvrC, an IoT cloud platform that grew to support{" "}
-        <GlowText color="green">20M+ managed devices</GlowText> globally. Led
-        UX for both the pro and consumer apps, managed onshore and offshore
-        design teams, and built the design system across all product lines.
-        Strategic design support for the{" "}
+        Founding member of the OvrC team, starting as the lone designer and
+        wearing every hat: design, user testing, front-end, back-end, QA, and
+        feature development. Helped take it from an idea to the{" "}
+        <GlowText color="green">
+          industry-leading integrator management platform
+        </GlowText>{" "}
+        supporting <GlowText color="green">20M+ managed devices</GlowText>{" "}
+        globally. Built the design system across all product lines and provided
+        strategic design support for the{" "}
         <GlowText color="green">$150M+ Connected Device category</GlowText>.
       </>
     ),
@@ -56,13 +63,11 @@ const timeline: {
     company: "Lockheed Martin",
     description: (
       <>
-        Principal investigator on usability assessments for the{" "}
-        <GlowText color="magenta">
-          Navy Ballistic Missile Defense 5.1
-        </GlowText>{" "}
-        program. Used iterative design and heuristic evaluations to develop new
-        GUIs introduced to fleet architecture, gathering input directly from
-        active duty sailors.
+        Modernized combat system interfaces for the{" "}
+        <GlowText color="magenta">Aegis BMD 5.1</GlowText> program, updating
+        legacy systems to a more modern architecture. Cut my teeth on rapid
+        prototyping, user testing with active duty sailors, and iterating based
+        on direct operator feedback.
       </>
     ),
   },
@@ -72,9 +77,10 @@ const timeline: {
     company: "General Electric",
     description: (
       <>
-        Conducted risk assessments, Root Cause Analysis investigations, and
-        Preliminary Hazard Assessments for new product development across{" "}
-        <GlowText color="amber">multiple GE business units</GlowText>.
+        Worked in <GlowText color="amber">green energy</GlowText>, focused on
+        the wind sector. Led risk assessments and built mitigation programs to
+        reduce issues across{" "}
+        <GlowText color="amber">multiple sectors nationwide</GlowText>.
       </>
     ),
   },
