@@ -9,7 +9,8 @@ import Tag from "@/components/ui/Tag";
 import CompanyMark from "@/components/ui/CompanyMark";
 
 export const metadata: Metadata = {
-  title: "Resume | JC Zabel",
+  // Layout sets template "%s | JC Zabel" — just pass the page name here.
+  title: "Resume",
   description:
     "15+ years of UX leadership, from IoT platforms to enterprise Azure products at Microsoft.",
 };
@@ -208,7 +209,7 @@ export default function ResumePage() {
         {/* Sidebar */}
         <aside className="space-y-10">
           <section>
-            <SectionHead label="Skills" />
+            <SectionHead as="h3" label="Skills" />
             <div className="mt-4 flex flex-wrap gap-1.5">
               {skills.map((s) => (
                 <Tag key={s}>{s}</Tag>
@@ -217,7 +218,7 @@ export default function ResumePage() {
           </section>
 
           <section>
-            <SectionHead label="Education" />
+            <SectionHead as="h3" label="Education" />
             <div className="mt-4 space-y-4">
               <div>
                 <p
@@ -248,7 +249,7 @@ export default function ResumePage() {
           </section>
 
           <section>
-            <SectionHead label="Honors" />
+            <SectionHead as="h3" label="Honors" />
             <ul className="mt-4 space-y-2">
               {honors.map((h) => (
                 <li
@@ -283,12 +284,12 @@ export default function ResumePage() {
                   <CompanyMark company={job.company} size="sm" className="mt-0.5" />
                   <div className="flex-1">
                     <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-                      <span
+                      <h3
                         data-ff="serif"
-                        className="text-ink text-[20px] leading-tight tracking-[-0.01em] font-[450]"
+                        className="text-ink text-[20px] leading-tight tracking-[-0.01em] font-[450] m-0"
                       >
                         {job.company}
-                      </span>
+                      </h3>
                       <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
                         {job.dates}
                       </span>

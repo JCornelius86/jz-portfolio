@@ -5,19 +5,27 @@ import Footer from "@/components/layout/Footer";
 import ThemeScript from "@/components/layout/ThemeScript";
 import "./globals.css";
 
+const SHARED_DESCRIPTION =
+  "Currently at Microsoft, where I've led design across Azure CXS, Resiliency, and Customer Health. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://jczabel.com"),
   title: {
-    default: "JC Zabel | UX Leader",
+    default: "JC Zabel — Senior designer, design leader, always building",
     template: "%s | JC Zabel",
   },
-  description:
-    "UX leader with 15+ years of experience building products across green tech, defense, IoT platforms, and enterprise software. Currently at Microsoft.",
+  description: SHARED_DESCRIPTION,
   openGraph: {
-    title: "JC Zabel | UX Leader",
-    description:
-      "UX leader with 15+ years of experience building products across green tech, defense, IoT platforms, and enterprise software.",
+    title: "JC Zabel — Senior designer, design leader, always building",
+    description: SHARED_DESCRIPTION,
+    siteName: "JC Zabel",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JC Zabel — Senior designer, design leader, always building",
+    description: SHARED_DESCRIPTION,
   },
 };
 
