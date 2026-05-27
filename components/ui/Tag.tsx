@@ -1,19 +1,20 @@
+import type { ReactNode } from "react";
+
 interface TagProps {
-  children: React.ReactNode;
+  children: ReactNode;
+  className?: string;
+  /**
+   * Legacy: the old API accepted a color discriminator (cyan / magenta /
+   * green / amber). The new system uses a single ochre accent, so the
+   * prop is accepted for backwards compatibility and ignored.
+   */
   color?: "cyan" | "magenta" | "green" | "amber";
 }
 
-const colorMap = {
-  cyan: "border-accent-cyan/30 text-accent-cyan bg-accent-cyan/5",
-  magenta: "border-accent-magenta/30 text-accent-magenta bg-accent-magenta/5",
-  green: "border-accent-green/30 text-accent-green bg-accent-green/5",
-  amber: "border-accent-amber/30 text-accent-amber bg-accent-amber/5",
-};
-
-export default function Tag({ children, color = "cyan" }: TagProps) {
+export default function Tag({ children, className = "" }: TagProps) {
   return (
     <span
-      className={`inline-block text-[10px] font-[family-name:var(--font-mono)] px-2 py-1 border rounded-sm ${colorMap[color]}`}
+      className={`inline-flex items-center rounded-full font-mono text-[10.5px] uppercase tracking-[0.1em] px-2.5 py-0.5 text-accent bg-accent/10 ${className}`}
     >
       {children}
     </span>
