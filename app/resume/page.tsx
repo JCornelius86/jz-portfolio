@@ -4,6 +4,7 @@ import Heading from "@/components/ui/Heading";
 import Card from "@/components/ui/Card";
 import SectionHead from "@/components/ui/SectionHead";
 import Button from "@/components/ui/Button";
+import PrintButton from "@/components/ui/PrintButton";
 import Tag from "@/components/ui/Tag";
 import CompanyMark from "@/components/ui/CompanyMark";
 
@@ -264,7 +265,8 @@ export default function ResumePage() {
             </ul>
           </section>
 
-          <section>
+          <section className="no-print flex flex-col gap-2 items-start">
+            <PrintButton>Save as PDF</PrintButton>
             <Button href="/JC_Zabel_Resume.docx" variant="ghost" size="sm">
               Download .docx
             </Button>

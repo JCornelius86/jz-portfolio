@@ -8,6 +8,14 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const has = {
+    live: Boolean(project.liveUrl),
+    code: Boolean(project.githubUrl),
+  };
+  const availability: string[] = [];
+  if (has.live) availability.push("Live demo");
+  if (has.code) availability.push("Source");
+
   return (
     <Link href={`/projects/${project.slug}`} className="block group h-full">
       <article className="h-full flex flex-col gap-4 bg-card border border-rule rounded-[18px] p-5 transition-colors duration-150 group-hover:border-accent/60">
@@ -35,6 +43,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <Tag key={tag}>{tag}</Tag>
           ))}
         </div>
+        {availability.length > 0 ? (
+          <div className="flex items-center gap-3 pt-2 border-t border-rule font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">
+            {availability.map((label, i) => (
+              <span key={label} className="flex items-center gap-2">
+                {i > 0 ? (
+                  <span aria-hidden="true" className="text-rule">
+                    ·
+                  </span>
+                ) : null}
+                <span className="text-accent">{label}</span>
+              </span>
+            ))}
+            <span className="ml-auto text-muted group-hover:text-accent transition-colors">
+              View →
+            </span>
+          </div>
+        ) : null}
       </article>
     </Link>
   );

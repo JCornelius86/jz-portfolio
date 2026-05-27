@@ -130,3 +130,49 @@ html {
     opacity: 1;
   }
 }
+
+/* ----------------------------------------------------------------
+   Print — force the light palette and strip nav/footer/CTAs so the
+   resume page (or any page) prints clean to PDF via the browser.
+   ---------------------------------------------------------------- */
+
+@media print {
+  :root,
+  .dark {
+    --c-bg: #FFFFFF;
+    --c-card: #FFFFFF;
+    --c-ink: #111111;
+    --c-ink-soft: #2A2A2A;
+    --c-muted: #555555;
+    --c-rule: #CCCCCC;
+    --c-accent: #8B6F3A;
+    --c-invert-bg: #FFFFFF;
+    --c-invert-fg: #111111;
+    --c-invert-rule: transparent;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #111111;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  /* Keep card content together when possible */
+  article,
+  section,
+  [data-print-keep] {
+    break-inside: avoid;
+  }
+}

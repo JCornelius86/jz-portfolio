@@ -56,7 +56,7 @@ export default function Home() {
             <br />
             design leader,
             <br />
-            still <span className="text-accent">shipping</span>
+            always <span className="text-accent">building</span>
             <Cursor />
           </Heading>
           <div>
