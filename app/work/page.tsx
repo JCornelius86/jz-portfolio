@@ -1,5 +1,6 @@
 import PageContainer from "@/components/layout/PageContainer";
-import PixelHeading from "@/components/ui/PixelHeading";
+import Heading from "@/components/ui/Heading";
+import SectionHead from "@/components/ui/SectionHead";
 import CaseStudyCard from "@/components/ui/CaseStudyCard";
 import { getCaseStudies } from "@/lib/content";
 import type { Metadata } from "next";
@@ -12,20 +13,24 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   const caseStudies = getCaseStudies();
+  const count = String(caseStudies.length).padStart(2, "0");
 
   return (
-    <PageContainer>
-      <section className="py-12">
-        <PixelHeading as="h1" className="mb-4">
+    <PageContainer className="max-w-[1280px]">
+      <section className="pt-10 pb-8 md:pt-16 md:pb-12">
+        <Heading as="h1" variant="page" className="mb-5">
           Work
-        </PixelHeading>
-        <p className="text-text-secondary text-lg mb-12 max-w-2xl">
+        </Heading>
+        <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[640px]">
           Case studies from 15+ years of UX leadership, from building an IoT
           platform from scratch to designing consumer apps used by hundreds of
           thousands.
         </p>
+      </section>
 
-        <div className="grid gap-8 md:grid-cols-2">
+      <section className="pb-16">
+        <SectionHead label="All case studies" count={count} />
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
           {caseStudies.map((study) => (
             <CaseStudyCard key={study.slug} study={study} />
           ))}
