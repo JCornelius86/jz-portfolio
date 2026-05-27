@@ -1,26 +1,31 @@
 import PageContainer from "@/components/layout/PageContainer";
-import RetroButton from "@/components/ui/RetroButton";
+import Heading, { Accent } from "@/components/ui/Heading";
+import Button from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
     <PageContainer className="flex items-center justify-center min-h-[60vh]">
-      <div className="text-center">
-        <p className="font-[family-name:var(--font-pixel)] text-6xl sm:text-8xl text-accent-magenta neon-glow-magenta mb-6">
+      <div className="text-center max-w-[520px]">
+        <p
+          data-ff="display"
+          className="text-accent text-[80px] md:text-[120px] leading-none tracking-[-0.04em] font-[380] mb-4"
+        >
           404
         </p>
-        <p className="font-[family-name:var(--font-pixel)] text-sm sm:text-base text-accent-cyan neon-glow mb-4">
-          GAME OVER
+        <Heading as="h1" variant="section" className="mb-4">
+          Page not <Accent>found</Accent>.
+        </Heading>
+        <p className="text-ink-soft text-[16px] leading-[1.6] mb-8">
+          The page you&apos;re looking for doesn&apos;t exist or has been
+          moved.
         </p>
-        <p className="text-text-secondary mb-8">
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <RetroButton href="/" variant="cyan">
-            &larr; Go Home
-          </RetroButton>
-          <RetroButton href="/work" variant="magenta">
-            View Work
-          </RetroButton>
+        <div className="flex gap-3 justify-center">
+          <Button href="/" variant="primary">
+            ← Home
+          </Button>
+          <Button href="/work" variant="ghost">
+            View work
+          </Button>
         </div>
       </div>
     </PageContainer>

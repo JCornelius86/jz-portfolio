@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------
-   Design tokens — handoff palette (warm paper, single ochre accent)
-   Light is default. Dark via .dark class on <html>.
+   Design tokens — warm paper, single ochre accent.
+   Light is :root, dark via .dark class on <html>.
    ---------------------------------------------------------------- */
 
 @theme inline {
@@ -14,34 +14,14 @@
   --color-rule: var(--c-rule);
   --color-accent: var(--c-accent);
 
-  /* Inverted CTA surface — stays dark in both modes. In light it's
-     a strong dark card; in dark it's a slightly elevated panel. */
+  /* Inverted CTA surface — stays dark in both modes. */
   --color-invert-bg: var(--c-invert-bg);
   --color-invert-fg: var(--c-invert-fg);
   --color-invert-rule: var(--c-invert-rule);
 
-  /* Legacy aliases — let pages that still reference the pixel/CRT
-     token names compile and render against the new palette while
-     Phase 1 components are still pending. Remove once unused. */
-  --color-bg-primary: var(--c-bg);
-  --color-bg-card: var(--c-card);
-  --color-bg-elevated: var(--c-card);
-  --color-text-body: var(--c-ink-soft);
-  --color-text-secondary: var(--c-muted);
-  --color-text-heading: var(--c-ink);
-  --color-border-pixel: var(--c-rule);
-  --color-border-glow: var(--c-accent);
-  --color-accent-cyan: var(--c-accent);
-  --color-accent-magenta: var(--c-accent);
-  --color-accent-green: var(--c-accent);
-  --color-accent-amber: var(--c-accent);
-
   --font-serif: var(--font-fraunces), ui-serif, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
-  /* Legacy aliases */
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-pixel: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -94,7 +74,7 @@ body {
 }
 
 /* ----------------------------------------------------------------
-   Scrollbar + selection + focus — warm-paper tuned
+   Scrollbar, selection, focus
    ---------------------------------------------------------------- */
 
 ::-webkit-scrollbar {
@@ -132,7 +112,7 @@ html {
 }
 
 /* ----------------------------------------------------------------
-   Single allowed system animation: the H1 underscore cursor blink.
+   The single allowed system animation: the H1 underscore cursor blink.
    ---------------------------------------------------------------- */
 
 @keyframes blink {
@@ -148,86 +128,5 @@ html {
   .cursor-blink {
     animation: none;
     opacity: 1;
-  }
-}
-
-/* ----------------------------------------------------------------
-   Transitional shims — kept so legacy pixel/CRT components in
-   /components/ui/* still render until Phase 1 replaces them.
-   These will be deleted alongside the components.
-   ---------------------------------------------------------------- */
-
-.pixel-border {
-  border: 1px solid var(--c-rule);
-}
-
-/* Old neon-glow utility classes become no-ops on the new palette. */
-.neon-glow,
-.neon-glow-magenta,
-.neon-glow-green,
-.neon-glow-amber {
-  text-shadow: none;
-}
-
-/* Legacy company-icon animations used by PixelIcon (kept until that
-   component is replaced in Phase 1). */
-
-@keyframes lm-missile {
-  0% { opacity: 0; transform: translate(0, 0); }
-  8% { opacity: 1; transform: translate(0, 0); }
-  50% { opacity: 1; transform: translate(-22px, 16px); }
-  52% { opacity: 0; transform: translate(-22px, 16px); }
-  100% { opacity: 0; }
-}
-@keyframes lm-projectile {
-  0%, 28% { opacity: 0; transform: translate(0, 0); }
-  30% { opacity: 1; transform: translate(0, 0); }
-  50% { opacity: 1; transform: translate(24px, -12px); }
-  52% { opacity: 0; }
-  100% { opacity: 0; }
-}
-@keyframes lm-explosion {
-  0%, 48% { opacity: 0; }
-  52% { opacity: 1; }
-  62% { opacity: 0.8; }
-  78% { opacity: 0; }
-  100% { opacity: 0; }
-}
-.lm-missile { animation: lm-missile 5s ease-in-out infinite; }
-.lm-projectile { animation: lm-projectile 5s ease-in-out infinite; }
-.lm-explosion { animation: lm-explosion 5s ease-in-out infinite; }
-
-@keyframes snap-rain {
-  0%   { transform: translateY(0);    opacity: 0; }
-  10%  { opacity: 1; }
-  70%  { opacity: 1; }
-  90%  { transform: translateY(18px); opacity: 0; }
-  100% { transform: translateY(18px); opacity: 0; }
-}
-.snap-device { animation: snap-rain 3s ease-in-out infinite; }
-
-@keyframes ge-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-.ge-blades {
-  animation: ge-spin 4s linear infinite;
-  transform-origin: 32px 26px;
-}
-
-@keyframes ssi-conveyor {
-  from { transform: translateX(0); }
-  to   { transform: translateX(20px); }
-}
-.ssi-boxes { animation: ssi-conveyor 3s linear infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .lm-missile,
-  .lm-projectile,
-  .lm-explosion,
-  .snap-device,
-  .ge-blades,
-  .ssi-boxes {
-    animation: none;
   }
 }
