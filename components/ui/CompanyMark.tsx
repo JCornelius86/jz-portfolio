@@ -17,8 +17,8 @@ interface CompanyMarkProps {
 }
 
 const sizeStyles = {
-  sm: { chip: "w-12 h-12 md:w-14 md:h-14", mono: "text-[17px] md:text-[19px]" },
-  md: { chip: "w-14 h-14 md:w-[72px] md:h-[72px]", mono: "text-[20px] md:text-[26px]" },
+  sm: { chip: "w-12 h-12 md:w-16 md:h-16", mono: "text-[17px] md:text-[22px]" },
+  md: { chip: "w-16 h-16 md:w-[88px] md:h-[88px]", mono: "text-[22px] md:text-[32px]" },
 };
 
 function pickGlyph(company: string): ReactNode | null {
@@ -72,32 +72,28 @@ export default function CompanyMark({
    they grow with it. Single ochre accent detail per glyph.
    ---------------------------------------------------------------- */
 
-const GLYPH_BASE = "w-[62%] h-[62%]";
+const GLYPH_BASE = "w-[68%] h-[68%]";
 
 function MicrosoftGlyph() {
-  // Window-pane / Fluent: rounded square divided into four quadrants
-  // by a hairline cross, bottom-right quadrant filled ochre.
+  // Microsoft 4-square logo: 2x2 grid of filled squares with a small
+  // gap between them, top-right square in ochre.
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
       aria-hidden="true"
       className={GLYPH_BASE}
     >
+      <rect x="3" y="3" width="8.5" height="8.5" fill="currentColor" />
       <rect
-        x="12.4"
-        y="12.4"
-        width="8.1"
-        height="8.1"
-        rx="1.2"
-        className="fill-accent stroke-none"
+        x="12.5"
+        y="3"
+        width="8.5"
+        height="8.5"
+        className="fill-accent"
       />
-      <rect x="3.5" y="3.5" width="17" height="17" rx="2.2" />
-      <line x1="12" y1="3.5" x2="12" y2="20.5" />
-      <line x1="3.5" y1="12" x2="20.5" y2="12" />
+      <rect x="3" y="12.5" width="8.5" height="8.5" fill="currentColor" />
+      <rect x="12.5" y="12.5" width="8.5" height="8.5" fill="currentColor" />
     </svg>
   );
 }
