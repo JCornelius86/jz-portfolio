@@ -1,178 +1,196 @@
+import Link from "next/link";
 import PageContainer from "@/components/layout/PageContainer";
-import PixelHeading from "@/components/ui/PixelHeading";
-import CaseStudyCard from "@/components/ui/CaseStudyCard";
-import RetroButton from "@/components/ui/RetroButton";
-import PixelDivider from "@/components/ui/PixelDivider";
-import GlowText from "@/components/ui/GlowText";
-import RetroCard from "@/components/ui/RetroCard";
-import { getCaseStudies, getProjects } from "@/lib/content";
+import Heading, { Accent, Cursor } from "@/components/ui/Heading";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import SectionHead from "@/components/ui/SectionHead";
+import Eyebrow from "@/components/ui/Eyebrow";
+import StatBlock from "@/components/ui/StatBlock";
+import StripeImage from "@/components/ui/StripeImage";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { getCaseStudies, getProjects } from "@/lib/content";
 
-const impactStats = [
-  { value: "15+", label: "Years in UX", color: "text-accent-cyan" },
-  { value: "3", label: "Teams Built", color: "text-accent-magenta" },
-  { value: "20M+", label: "Devices Managed", color: "text-accent-green" },
-  { value: "4", label: "Industries", color: "text-accent-amber" },
-];
-
+// The four principles. Copy edits live in CMS or in this array; the
+// visual treatment stays uniform.
 const principles = [
   {
-    title: "Grow the People",
-    glow: "amber" as const,
-    // TODO: Fill in — your mentorship philosophy, how you develop designers, what you look for
+    title: "Grow the people",
     body: "The best design orgs are built on trust and growth. I invest in 1:1s, design crits, and stretch assignments because a team that's learning is a team that delivers.",
   },
   {
-    title: "Ship > Perfect",
-    glow: "cyan" as const,
-    body: "I run my teams on a 75/25 rule. 75% speed and iteration, 25% craft. We ship working increments fast, then polish what matters. Momentum beats perfection.",
+    title: "Ship over perfect",
+    body: "I run my teams on speed and iteration first, craft second. We ship working increments fast, then polish what matters. Momentum beats perfection.",
   },
   {
-    title: "Design the System",
-    glow: "magenta" as const,
-    // TODO: Fill in — how you think about design systems, consistency, scalable patterns
+    title: "Design the system",
     body: "I think in systems, not screens. Scalable patterns, shared tokens, and reusable components mean the team moves faster and the product stays coherent as it grows.",
   },
   {
-    title: "Test What You Don't Know",
-    glow: "green" as const,
+    title: "Test what you don't know",
     body: "We build confidently on what we know and test what we don't. Get it in front of users early, validate fast, and iterate. Assumptions are risks; feedback is fuel.",
   },
 ];
 
+// Headline stats shown inside the flagship case study card. Sourced
+// from the existing home; can move to MDX frontmatter when content
+// gets a final pass.
+const flagshipStats = [
+  { value: "20M+", label: "Devices managed" },
+  { value: "3", label: "Teams built" },
+  { value: "15+", label: "Years in UX" },
+  { value: "4", label: "Industries" },
+];
+
 export default function Home() {
   const caseStudies = getCaseStudies();
-  const projects = getProjects();
+  const projects = getProjects().filter((p) => p.featured).slice(0, 3);
+  const flagship = caseStudies.find((s) => s.featured) ?? caseStudies[0];
 
   return (
-    <PageContainer>
-      {/* Hero */}
-      <section className="py-16 sm:py-24 md:py-32">
-        <div className="max-w-3xl">
-          <p className="font-[family-name:var(--font-pixel)] text-accent-green text-[10px] sm:text-xs mb-4">
-            &gt; HELLO WORLD_
-          </p>
-          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-3xl text-text-heading leading-relaxed mb-6">
-            I&apos;m <GlowText>JC Zabel</GlowText>
-            <span className="cursor-blink text-accent-cyan">_</span>
-          </h1>
-          <p className="text-text-body text-lg sm:text-xl leading-relaxed mb-4">
-            UX leader building products that people actually want to use. 15+
-            years turning complex problems into simple, human-centered
-            solutions.
-          </p>
-          <p className="text-text-secondary text-base leading-relaxed mb-8">
-            Currently leading a team of 6 designers across Microsoft&apos;s
-            Azure X, Resiliency, and Customer Health orgs. Before that, I built
-            an IoT platform from scratch that scaled to 20M+ devices.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <RetroButton href="/work">View My Work</RetroButton>
-            <RetroButton href="/resume" variant="magenta">
-              Resume
-            </RetroButton>
-          </div>
-        </div>
-      </section>
-
-      <PixelDivider />
-
-      {/* Impact Stats */}
-      <section className="py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {impactStats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p
-                className={`font-[family-name:var(--font-pixel)] text-2xl sm:text-3xl ${stat.color} mb-2`}
-              >
-                {stat.value}
-              </p>
-              <p className="text-text-secondary text-sm">{stat.label}</p>
+    <PageContainer className="max-w-[1280px] py-0">
+      {/* HERO ------------------------------------------------------------ */}
+      <section className="pt-12 pb-10 md:pt-20 md:pb-16">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16 md:items-end">
+          <Heading as="h1" variant="display">
+            Senior <Accent>designer</Accent>,
+            <br />
+            design leader,
+            <br />
+            still <span className="text-accent">shipping</span>
+            <Cursor />
+          </Heading>
+          <div>
+            {/* Status pill — toggle the boolean or remove when not actively open. */}
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Open to senior IC + leadership roles
+              </span>
             </div>
-          ))}
+            <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[520px] mb-7">
+              I&apos;m <strong className="text-ink font-semibold">JC Zabel</strong>. Currently at Microsoft, where I&apos;ve led design across Azure CXS, Resiliency, and Customer Health. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button href="/work" variant="primary">
+                See the work →
+              </Button>
+              <Button href="/projects" variant="ghost">
+                Recent projects
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
-      <PixelDivider />
-
-      {/* How I Lead */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="amber" className="mb-8">
-          How I Lead
-        </PixelHeading>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {principles.map((p) => (
-            <RetroCard key={p.title} hover={false}>
-              <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-accent-cyan uppercase tracking-wider mb-3">
-                {p.title}
+      {/* FLAGSHIP CASE STUDY -------------------------------------------- */}
+      {flagship ? (
+        <section className="py-10 md:py-12">
+          <SectionHead label="Flagship case study" />
+          <div className="mt-6 grid gap-10 md:grid-cols-[360px_1fr] md:gap-12 md:items-start">
+            <div>
+              <Eyebrow tone="accent" className="mb-3">
+                {flagship.title} · 2014–2024
+              </Eyebrow>
+              <h3
+                data-ff="serif"
+                className="text-ink text-[26px] md:text-[30px] leading-[1.15] tracking-[-0.015em] font-[440] mb-4"
+              >
+                Solo UX hire <Accent>→</Accent> 20M-device platform <Accent>→</Accent> a team that took it forward.
               </h3>
-              <p className="text-text-secondary text-sm leading-relaxed">
-                {p.body}
+              <p className="text-ink-soft text-[15.5px] leading-[1.6] mb-6">
+                {flagship.description}
               </p>
-            </RetroCard>
-          ))}
-        </div>
-      </section>
-
-      <PixelDivider />
-
-      {/* Side Projects — promoted */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="green" className="mb-4">
-          Building Things
-        </PixelHeading>
-        <p className="text-text-secondary mb-8">
-          Apps I&apos;ve designed and built from scratch. The best way to
-          understand engineering constraints is to ship code yourself.
-        </p>
-        {projects.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects
-              .filter((p) => p.featured)
-              .slice(0, 3)
-              .map((project) => (
-                <ProjectCard key={project.slug} project={project} />
-              ))}
-          </div>
-        ) : (
-          <div className="bg-bg-card pixel-border rounded-sm p-8 text-center">
-            <p className="font-[family-name:var(--font-pixel)] text-xs text-text-secondary mb-2">
-              COMING SOON
-            </p>
-            <p className="text-text-secondary text-sm">
-              Projects are in the works. Check back soon.
-            </p>
-          </div>
-        )}
-        <div className="mt-8 text-center">
-          <RetroButton href="/projects" variant="green">
-            All Projects
-          </RetroButton>
-        </div>
-      </section>
-
-      <PixelDivider />
-
-      {/* Featured Case Studies */}
-      {caseStudies.length > 0 && (
-        <section className="py-12">
-          <PixelHeading as="h2" glow="magenta" className="mb-8">
-            Case Studies
-          </PixelHeading>
-          <div className="grid gap-8 md:grid-cols-2">
-            {caseStudies
-              .filter((s) => s.featured)
-              .map((study) => (
-                <CaseStudyCard key={study.slug} study={study} />
-              ))}
-          </div>
-          <div className="mt-8 text-center">
-            <RetroButton href="/work" variant="cyan">
-              View All Work
-            </RetroButton>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5 mb-6">
+                {flagshipStats.map((s) => (
+                  <StatBlock key={s.label} value={s.value} label={s.label} />
+                ))}
+              </div>
+              <Link
+                href={`/work/${flagship.slug}`}
+                className="font-medium text-accent text-[15px] hover:underline underline-offset-4"
+              >
+                Read the case study →
+              </Link>
+            </div>
+            <div className="relative">
+              {/* Back layer */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 top-2.5 left-2.5 rounded-[22px] bg-rule/60"
+              />
+              <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
+                <StripeImage
+                  caption={`${flagship.title} — dashboard, full bleed`}
+                  aspect="4/3"
+                />
+              </div>
+            </div>
           </div>
         </section>
-      )}
+      ) : null}
+
+      {/* RECENT PROJECTS ------------------------------------------------ */}
+      {projects.length > 0 ? (
+        <section className="py-10 md:py-12">
+          <SectionHead
+            label="Recent projects"
+            count={String(projects.length).padStart(2, "0")}
+          />
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+          <div className="mt-8">
+            <Button href="/projects" variant="ghost" size="sm">
+              All projects →
+            </Button>
+          </div>
+        </section>
+      ) : null}
+
+      {/* HOW I LEAD ----------------------------------------------------- */}
+      <section className="py-10 md:py-12">
+        <SectionHead label="How I lead" />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {principles.map((p) => (
+            <Card key={p.title} padding="md" radius="sm" hover={false}>
+              <h3
+                data-ff="serif"
+                className="text-ink text-[22px] leading-[1.2] tracking-[-0.015em] font-[460] mb-3"
+              >
+                {p.title}
+              </h3>
+              <p className="text-muted text-[13.5px] leading-[1.55]">
+                {p.body}
+              </p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* INVERTED FOOTER CTA -------------------------------------------- */}
+      <section className="pt-8 pb-16">
+        <div className="bg-ink text-bg rounded-[22px] px-6 py-10 md:px-12 md:py-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-end">
+          <p
+            data-ff="display"
+            className="italic text-[36px] md:text-[56px] leading-[1.05] tracking-[-0.03em] font-[380]"
+          >
+            Working on something <span className="text-accent">mission-shaped?</span>
+          </p>
+          <div>
+            <p className="text-bg/75 text-[15px] md:text-[16px] leading-[1.6] mb-6">
+              I&apos;d like to hear about it. Climate, energy, healthcare, public good. Those are the ones I lean toward, but the criterion is real, not the label.
+            </p>
+            <a
+              href="mailto:jc.zabel@gmail.com"
+              className="inline-flex items-center rounded-full bg-accent text-ink px-6 py-3 text-[15px] font-medium hover:opacity-90 transition-opacity"
+            >
+              jc.zabel@gmail.com →
+            </a>
+          </div>
+        </div>
+      </section>
     </PageContainer>
   );
 }

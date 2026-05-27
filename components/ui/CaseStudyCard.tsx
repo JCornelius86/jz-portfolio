@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Tag from "./Tag";
+import StripeImage from "./StripeImage";
 import type { CaseStudy } from "@/lib/types";
 
 interface CaseStudyCardProps {
@@ -8,37 +9,46 @@ interface CaseStudyCardProps {
 }
 
 export default function CaseStudyCard({ study }: CaseStudyCardProps) {
+  const hasImage = study.coverImage && study.coverImage.length > 0;
   return (
-    <Link href={`/work/${study.slug}`} className="block group">
-      <article className="bg-bg-card pixel-border rounded-sm overflow-hidden transition-colors group-hover:bg-bg-elevated">
-        {study.coverImage && (
-          <div className="relative w-full aspect-[16/9] overflow-hidden bg-bg-card flex items-center justify-center">
+    <Link href={`/work/${study.slug}`} className="block group h-full">
+      <article className="h-full flex flex-col gap-5 bg-card border border-rule rounded-[20px] p-5 transition-colors duration-150 group-hover:border-accent/60">
+        {hasImage ? (
+          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-[14px] border border-rule bg-bg flex items-center justify-center">
             <Image
               src={study.coverImage}
               alt={`${study.title} preview`}
               fill
-              className="object-contain transition-transform duration-500 group-hover:scale-105"
+              className="object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
             />
           </div>
+        ) : (
+          <StripeImage caption={`${study.title} — cover`} aspect="16/9" />
         )}
-        <div className="p-6">
-          <h3 className="font-[family-name:var(--font-pixel)] text-xs sm:text-sm text-accent-cyan mb-2">
+        <div className="flex flex-col gap-2">
+          <h3
+            data-ff="serif"
+            className="text-ink text-[24px] md:text-[26px] leading-[1.2] tracking-[-0.015em] font-[440]"
+          >
             {study.title}
           </h3>
-          {study.subtitle && (
-            <p className="text-text-secondary text-sm mb-3">
+          {study.subtitle ? (
+            <p
+              data-ff="serif"
+              className="italic text-accent text-[15.5px] leading-snug"
+            >
               {study.subtitle}
             </p>
-          )}
-          <p className="text-text-body text-sm mb-4 line-clamp-2">
+          ) : null}
+          <p className="text-ink-soft text-[15px] leading-[1.55] mt-1">
             {study.description}
           </p>
-          <div className="flex flex-wrap gap-2">
-            {study.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
+        </div>
+        <div className="flex flex-wrap gap-1.5 mt-auto">
+          {study.tags.slice(0, 4).map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
         </div>
       </article>
     </Link>
