@@ -1,13 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import PageContainer from "@/components/layout/PageContainer";
-import PixelHeading from "@/components/ui/PixelHeading";
-import RetroCard from "@/components/ui/RetroCard";
-import PixelDivider from "@/components/ui/PixelDivider";
-import GlowText from "@/components/ui/GlowText";
+import Heading, { Accent } from "@/components/ui/Heading";
+import Card from "@/components/ui/Card";
+import SectionHead from "@/components/ui/SectionHead";
 import Tag from "@/components/ui/Tag";
-import RetroButton from "@/components/ui/RetroButton";
-import PixelIcon from "@/components/ui/PixelIcon";
+import CompanyMark from "@/components/ui/CompanyMark";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "About",
@@ -19,7 +19,7 @@ const timeline: {
   period: string;
   role: string;
   company: string;
-  description: React.ReactNode;
+  description: ReactNode;
 }[] = [
   {
     period: "2022 – Present",
@@ -27,14 +27,7 @@ const timeline: {
     company: "Microsoft",
     description: (
       <>
-        Leading a team of{" "}
-        <GlowText>6 designers and UX researchers</GlowText> across Azure,
-        driving design for internal field tools and{" "}
-        <GlowText>Azure Advisor</GlowText>, helping customers optimize
-        workloads based on their business needs. Work spans multiple
-        organizations and PM, engineering, and UX disciplines. Recognized with{" "}
-        <GlowText color="amber">Manager of the Year</GlowText> for delivery
-        and people leadership.
+        Leading a team of <span className="text-accent">6 designers and UX researchers</span> across Azure, driving design for internal field tools and <span className="text-accent">Azure Advisor</span>, helping customers optimize workloads based on their business needs. Work spans multiple organizations and PM, engineering, and UX disciplines. Recognized with <span className="text-accent">Manager of the Year</span> for delivery and people leadership.
       </>
     ),
   },
@@ -44,16 +37,7 @@ const timeline: {
     company: "SnapAV / SnapOne",
     description: (
       <>
-        Founding member of the OvrC team, starting as the lone designer and
-        wearing every hat: design, user testing, front-end, back-end, QA, and
-        feature development. Helped take it from an idea to the{" "}
-        <GlowText color="green">
-          industry-leading integrator management platform
-        </GlowText>{" "}
-        supporting <GlowText color="green">20M+ managed devices</GlowText>{" "}
-        globally. Built the design system across all product lines and provided
-        strategic design support for the{" "}
-        <GlowText color="green">$150M+ Connected Device category</GlowText>.
+        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the <span className="text-accent">industry-leading integrator management platform</span> supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>.
       </>
     ),
   },
@@ -63,11 +47,7 @@ const timeline: {
     company: "Lockheed Martin",
     description: (
       <>
-        Modernized combat system interfaces for the{" "}
-        <GlowText color="magenta">Aegis BMD 5.1</GlowText> program, updating
-        legacy systems to a more modern architecture. Cut my teeth on rapid
-        prototyping, user testing with active duty sailors, and iterating based
-        on direct operator feedback.
+        Modernized combat system interfaces for the <span className="text-accent">Aegis BMD 5.1</span> program, updating legacy systems to a more modern architecture. Cut my teeth on rapid prototyping, user testing with active duty sailors, and iterating based on direct operator feedback.
       </>
     ),
   },
@@ -77,147 +57,155 @@ const timeline: {
     company: "General Electric",
     description: (
       <>
-        Worked in <GlowText color="amber">green energy</GlowText>, focused on
-        the wind sector. Led risk assessments and built mitigation programs to
-        reduce issues across{" "}
-        <GlowText color="amber">multiple sectors nationwide</GlowText>.
+        Worked in <span className="text-accent">green energy</span>, focused on the wind sector. Led risk assessments and built mitigation programs to reduce issues across <span className="text-accent">multiple sectors nationwide</span>.
       </>
     ),
   },
 ];
 
 const skills = [
-  { label: "UX Leadership", color: "cyan" as const },
-  { label: "Product Strategy", color: "cyan" as const },
-  { label: "Design Systems", color: "cyan" as const },
-  { label: "User Research", color: "magenta" as const },
-  { label: "Usability Testing", color: "magenta" as const },
-  { label: "Prototyping", color: "magenta" as const },
-  { label: "IoT / Connected Devices", color: "green" as const },
-  { label: "Enterprise SaaS", color: "green" as const },
-  { label: "Mobile Design", color: "green" as const },
-  { label: "Data Visualization", color: "amber" as const },
-  { label: "Design Thinking", color: "amber" as const },
-  { label: "Team Building", color: "amber" as const },
+  "UX Leadership",
+  "Product Strategy",
+  "Design Systems",
+  "User Research",
+  "Usability Testing",
+  "Prototyping",
+  "IoT / Connected Devices",
+  "Enterprise SaaS",
+  "Mobile Design",
+  "Data Visualization",
+  "Design Thinking",
+  "Team Building",
 ];
 
 export default function AboutPage() {
   return (
-    <PageContainer>
-      <section className="py-12">
-        <div className="grid gap-12 md:grid-cols-[1fr_300px] items-start">
-          {/* Bio */}
+    <PageContainer className="max-w-[1280px]">
+      {/* Bio + photo */}
+      <section className="pt-10 pb-12 md:pt-16 md:pb-16">
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr] md:gap-14 md:items-start">
           <div>
-            <PixelHeading as="h1" className="mb-6">
-              About
-            </PixelHeading>
-            <div className="space-y-4 text-text-body text-base leading-relaxed">
+            <Heading as="h1" variant="page" className="mb-6">
+              About<Accent>.</Accent>
+            </Heading>
+            <div className="space-y-5 text-ink-soft text-[17px] md:text-[19px] leading-[1.6] max-w-[640px]">
               <p>
-                Hey there! I&apos;m <GlowText>James (JC) Zabel</GlowText>, a UX
-                professional based in Charlotte, NC. I hold a BS in Industrial
-                Engineering and an MS in Human Factors Psychology, both from
-                Clemson University <GlowText color="amber">(Go Tigers!)</GlowText>.
+                Hey there. I&apos;m{" "}
+                <strong className="text-ink font-semibold">
+                  James (JC) Zabel
+                </strong>
+                , a UX professional based in Charlotte, NC. I hold a BS in
+                Industrial Engineering and an MS in Human Factors Psychology,
+                both from Clemson University{" "}
+                <span className="text-accent">(Go Tigers)</span>.
               </p>
               <p>
                 With 15+ years of experience spanning corporate giants and
-                scrappy startups, I&apos;ve had the chance to work on everything
-                from factory automation to green energy to defense contracting to
-                IoT cloud platforms and consumer electronics.
+                scrappy startups, I&apos;ve had the chance to work on
+                everything from factory automation to green energy to defense
+                contracting to IoT cloud platforms and consumer electronics.
               </p>
               <p>
                 I&apos;m always looking for a challenge and looking to make a
-                difference, building products that real people actually want to
-                use.
+                difference, building products that real people actually want
+                to use.
               </p>
             </div>
           </div>
 
-          {/* Photo */}
-          <div className="flex justify-center md:justify-end">
-            <div className="pixel-border rounded-sm overflow-hidden">
+          <div className="md:justify-self-end">
+            <div className="rounded-[18px] overflow-hidden border border-rule bg-card">
               <Image
                 src="/images/james-zabel-photo.jpg"
                 alt="JC Zabel looking out over an alpine lake"
-                width={300}
-                height={200}
-                className="object-cover"
+                width={360}
+                height={240}
+                className="object-cover w-full h-auto"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <PixelDivider />
-
-      {/* Career Timeline */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="magenta" className="mb-8">
-          Career
-        </PixelHeading>
-        <div className="space-y-6">
+      {/* Career timeline */}
+      <section className="py-10 md:py-12">
+        <SectionHead label="Career" />
+        <div className="mt-6 space-y-4">
           {timeline.map((item, i) => (
-            <RetroCard key={i}>
-              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                <div className="flex items-center gap-3 sm:flex-col sm:items-start">
-                  <PixelIcon company={item.company} />
-                  <div className="font-[family-name:var(--font-mono)] text-accent-green text-sm whitespace-nowrap min-w-[120px]">
+            <Card key={i} padding="md" hover={false}>
+              <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+                <div className="flex items-center gap-3 md:flex-col md:items-start md:w-[180px] shrink-0">
+                  <CompanyMark company={item.company} />
+                  <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted whitespace-nowrap">
                     {item.period}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-text-heading font-semibold mb-1">
+                <div className="flex-1">
+                  <h3
+                    data-ff="serif"
+                    className="text-ink text-[20px] md:text-[22px] leading-[1.25] tracking-[-0.01em] font-[450] mb-1"
+                  >
                     {item.role}
                   </h3>
-                  <p className="text-accent-cyan text-sm mb-2">
+                  <p className="text-accent text-[14px] mb-3">
                     {item.company}
                   </p>
-                  <p className="text-text-secondary text-sm">
+                  <p className="text-ink-soft text-[15px] leading-[1.6]">
                     {item.description}
                   </p>
                 </div>
               </div>
-            </RetroCard>
+            </Card>
           ))}
         </div>
       </section>
-
-      <PixelDivider />
 
       {/* Skills */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="green" className="mb-8">
-          Skills
-        </PixelHeading>
-        <div className="flex flex-wrap gap-3">
-          {skills.map((skill) => (
-            <Tag key={skill.label} color={skill.color}>
-              {skill.label}
-            </Tag>
+      <section className="py-10 md:py-12">
+        <SectionHead label="Skills" />
+        <div className="mt-6 flex flex-wrap gap-2">
+          {skills.map((s) => (
+            <Tag key={s}>{s}</Tag>
           ))}
         </div>
       </section>
 
-      <PixelDivider />
-
-      {/* Contact */}
-      <section className="py-12">
-        <PixelHeading as="h2" glow="amber" className="mb-6">
-          Contact
-        </PixelHeading>
-        <p className="text-text-body text-base mb-8">
-          Available for freelance projects and interesting opportunities. Let&apos;s
-          connect.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <RetroButton
-            href="https://www.linkedin.com/in/james-zabel-31860816/"
-            variant="cyan"
+      {/* Contact / Inverted CTA */}
+      <section className="pt-8 pb-16">
+        <div className="bg-invert-bg text-invert-fg border border-invert-rule rounded-[22px] px-6 py-10 md:px-12 md:py-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-end">
+          <p
+            data-ff="display"
+            className="italic text-[32px] md:text-[48px] leading-[1.05] tracking-[-0.025em] font-[380]"
           >
-            LinkedIn
-          </RetroButton>
-          <RetroButton href="https://github.com/JCornelius86" variant="green">
-            GitHub
-          </RetroButton>
+            Available for the{" "}
+            <span className="text-accent">interesting stuff.</span>
+          </p>
+          <div className="flex flex-col gap-3 md:items-end">
+            <Link
+              href="mailto:jc.zabel@gmail.com"
+              className="inline-flex items-center rounded-full bg-accent text-[#1A1813] px-6 py-3 text-[15px] font-medium hover:opacity-90 transition-opacity"
+            >
+              jc.zabel@gmail.com →
+            </Link>
+            <div className="flex gap-4 text-invert-fg/70 text-[13px]">
+              <Link
+                href="https://www.linkedin.com/in/james-zabel-31860816/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                LinkedIn
+              </Link>
+              <Link
+                href="https://github.com/JCornelius86"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                GitHub
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </PageContainer>
