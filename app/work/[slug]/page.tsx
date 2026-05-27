@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import PageContainer from "@/components/layout/PageContainer";
-import PixelHeading from "@/components/ui/PixelHeading";
+import Heading from "@/components/ui/Heading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Tag from "@/components/ui/Tag";
-import RetroButton from "@/components/ui/RetroButton";
-import PixelDivider from "@/components/ui/PixelDivider";
-import { getCaseStudy, getCaseStudySlugs } from "@/lib/content";
+import StripeImage from "@/components/ui/StripeImage";
+import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import type { Metadata } from "next";
 
@@ -43,59 +45,149 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const { meta, content } = data;
 
-  // Get all slugs for prev/next navigation
-  const allSlugs = getCaseStudySlugs();
-  const currentIndex = allSlugs.indexOf(slug);
-  const prevSlug = currentIndex > 0 ? allSlugs[currentIndex - 1] : null;
-  const nextSlug =
-    currentIndex < allSlugs.length - 1 ? allSlugs[currentIndex + 1] : null;
+  const all = getCaseStudies();
+  const currentIndex = all.findIndex((s) => s.slug === slug);
+  const nextStudy =
+    currentIndex >= 0 && currentIndex < all.length - 1
+      ? all[currentIndex + 1]
+      : null;
+  const prevStudy = currentIndex > 0 ? all[currentIndex - 1] : null;
+
+  const year = meta.date ? new Date(meta.date).getFullYear() : null;
 
   return (
-    <PageContainer className="max-w-4xl">
-      <article className="py-12">
-        {/* Header */}
-        <header className="mb-12">
-          <RetroButton href="/work" variant="cyan" className="mb-8">
-            &larr; All Work
-          </RetroButton>
-          <PixelHeading as="h1" className="mb-3 mt-8">
-            {meta.title}
-          </PixelHeading>
-          {meta.subtitle && (
-            <p className="text-text-secondary text-lg mb-4">{meta.subtitle}</p>
-          )}
-          <div className="flex flex-wrap gap-2">
-            {meta.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
-        </header>
+    <PageContainer className="max-w-[1280px]">
+      {/* Breadcrumb */}
+      <nav className="pt-8 md:pt-12 pb-6">
+        <Eyebrow>
+          <Link
+            href="/work"
+            className="hover:text-accent transition-colors"
+          >
+            Work
+          </Link>{" "}
+          / {meta.title}
+        </Eyebrow>
+      </nav>
 
-        {/* MDX Content */}
-        <div className="prose-custom">
+      {/* Hero */}
+      <header className="pb-8 md:pb-12 grid gap-8 md:grid-cols-[1.6fr_1fr] md:gap-12 md:items-end">
+        <div>
+          <Heading as="h1" variant="hero" className="mb-4">
+            {meta.title}
+          </Heading>
+          {meta.subtitle ? (
+            <p
+              data-ff="serif"
+              className="italic text-accent text-[20px] md:text-[24px] leading-snug mb-6"
+            >
+              {meta.subtitle}
+            </p>
+          ) : null}
+          <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[560px]">
+            {meta.description}
+          </p>
+        </div>
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 md:block md:space-y-4">
+          {year ? (
+            <div>
+              <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+                Span
+              </dt>
+              <dd
+                data-ff="serif"
+                className="text-ink text-[18px] mt-1"
+              >
+                {year}
+              </dd>
+            </div>
+          ) : null}
+          {meta.tags.length > 0 ? (
+            <div className="col-span-2 md:col-span-1">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted mb-2">
+                Areas
+              </dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {meta.tags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </dd>
+            </div>
+          ) : null}
+        </dl>
+      </header>
+
+      {/* Hero image */}
+      <div className="pb-12 md:pb-16">
+        {meta.coverImage ? (
+          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-[20px] border border-rule bg-card">
+            <Image
+              src={meta.coverImage}
+              alt={`${meta.title} cover`}
+              fill
+              priority
+              className="object-contain"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          </div>
+        ) : (
+          <StripeImage caption={`${meta.title} — hero`} aspect="16/9" />
+        )}
+      </div>
+
+      {/* MDX body — constrained measure */}
+      <article className="pb-16">
+        <div className="max-w-[680px] mx-auto md:mx-0">
           <MDXRemote source={content} components={mdxComponents} />
         </div>
-
-        <PixelDivider className="my-12" />
-
-        {/* Prev/Next Navigation */}
-        <nav className="flex justify-between items-center gap-4">
-          {prevSlug ? (
-            <RetroButton href={`/work/${prevSlug}`} variant="cyan">
-              &larr; Previous
-            </RetroButton>
-          ) : (
-            <div />
-          )}
-          {nextSlug ? (
-            <RetroButton href={`/work/${nextSlug}`} variant="cyan">
-              Next &rarr;
-            </RetroButton>
-          ) : (
-            <div />
-          )}
-        </nav>
       </article>
+
+      {/* Next / Prev — inverted card */}
+      {(nextStudy || prevStudy) ? (
+        <section className="pb-16">
+          <div className="bg-invert-bg text-invert-fg border border-invert-rule rounded-[22px] px-6 py-10 md:px-12 md:py-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-end">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-invert-fg/60 mb-3">
+                {nextStudy ? "Next case" : "Previous case"}
+              </p>
+              <p
+                data-ff="display"
+                className="italic text-[32px] md:text-[48px] leading-[1.05] tracking-[-0.025em] font-[380]"
+              >
+                {(nextStudy ?? prevStudy)!.title}
+              </p>
+              {(nextStudy ?? prevStudy)!.subtitle ? (
+                <p className="text-invert-fg/70 text-[15px] md:text-[16px] leading-[1.55] mt-3 max-w-[480px]">
+                  {(nextStudy ?? prevStudy)!.subtitle}
+                </p>
+              ) : null}
+            </div>
+            <div className="flex flex-col gap-3 md:items-end">
+              <Link
+                href={`/work/${(nextStudy ?? prevStudy)!.slug}`}
+                className="inline-flex items-center rounded-full bg-accent text-[#1A1813] px-6 py-3 text-[15px] font-medium hover:opacity-90 transition-opacity"
+              >
+                Read it →
+              </Link>
+              <Link
+                href="/work"
+                className="font-mono text-[11px] uppercase tracking-[0.12em] text-invert-fg/60 hover:text-accent transition-colors"
+              >
+                ← All work
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="pb-16">
+          <Link
+            href="/work"
+            className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors"
+          >
+            ← All work
+          </Link>
+        </section>
+      )}
     </PageContainer>
   );
 }

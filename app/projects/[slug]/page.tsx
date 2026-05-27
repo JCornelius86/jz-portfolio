@@ -1,11 +1,18 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import PageContainer from "@/components/layout/PageContainer";
-import PixelHeading from "@/components/ui/PixelHeading";
+import Heading from "@/components/ui/Heading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Tag from "@/components/ui/Tag";
-import RetroButton from "@/components/ui/RetroButton";
-import PixelDivider from "@/components/ui/PixelDivider";
-import { getProject, getProjectSlugs } from "@/lib/content";
+import Button from "@/components/ui/Button";
+import StripeImage from "@/components/ui/StripeImage";
+import SectionHead from "@/components/ui/SectionHead";
+import {
+  getProject,
+  getProjectSlugs,
+  getProjects,
+} from "@/lib/content";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import type { Metadata } from "next";
 
@@ -38,84 +45,142 @@ export default async function ProjectPage({ params }: PageProps) {
 
   const { meta, content } = data;
 
+  const all = getProjects();
+  const currentIndex = all.findIndex((p) => p.slug === slug);
+  const prev = currentIndex > 0 ? all[currentIndex - 1] : null;
+  const next =
+    currentIndex >= 0 && currentIndex < all.length - 1
+      ? all[currentIndex + 1]
+      : null;
+
   return (
-    <PageContainer className="max-w-4xl">
-      <article className="py-12">
-        <header className="mb-12">
-          <RetroButton href="/projects" variant="green" className="mb-8">
-            &larr; All Projects
-          </RetroButton>
-          <PixelHeading as="h1" glow="green" className="mb-3 mt-8">
+    <PageContainer className="max-w-[1280px]">
+      {/* Breadcrumb */}
+      <nav className="pt-8 md:pt-12 pb-6">
+        <Eyebrow>
+          <Link
+            href="/projects"
+            className="hover:text-accent transition-colors"
+          >
+            Projects
+          </Link>{" "}
+          / {meta.title}
+        </Eyebrow>
+      </nav>
+
+      {/* Hero */}
+      <header className="pb-12 md:pb-16 grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-start">
+        <div>
+          <Heading as="h1" variant="hero" className="mb-4">
             {meta.title}
-          </PixelHeading>
-          <p className="text-text-secondary text-lg mb-4">
+          </Heading>
+          <p
+            data-ff="serif"
+            className="italic text-accent text-[20px] md:text-[24px] leading-snug mb-6"
+          >
             {meta.description}
           </p>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-7">
             {meta.tags.map((tag) => (
-              <Tag key={tag} color="green">
-                {tag}
-              </Tag>
+              <Tag key={tag}>{tag}</Tag>
             ))}
           </div>
-          {(meta.githubUrl || meta.liveUrl) && (
-            <div className="flex gap-4">
-              {meta.githubUrl && (
-                <RetroButton href={meta.githubUrl} variant="cyan">
-                  GitHub
-                </RetroButton>
-              )}
-              {meta.liveUrl && (
-                <RetroButton href={meta.liveUrl} variant="magenta">
-                  Full Prototype
-                </RetroButton>
-              )}
-            </div>
-          )}
-        </header>
+          <div className="flex flex-wrap gap-3">
+            {meta.liveUrl ? (
+              <Button href={meta.liveUrl} external variant="primary">
+                Try it →
+              </Button>
+            ) : null}
+            {meta.githubUrl ? (
+              <Button href={meta.githubUrl} external variant="ghost">
+                GitHub
+              </Button>
+            ) : null}
+          </div>
+        </div>
+        <StripeImage
+          caption={`${meta.title} — app shot`}
+          aspect="3/4"
+        />
+      </header>
 
-        <div className="prose-custom">
+      {/* MDX body */}
+      <article className="pb-12">
+        <div className="max-w-[680px] mx-auto md:mx-0">
           <MDXRemote source={content} components={mdxComponents} />
         </div>
+      </article>
 
-        {meta.liveUrl && (
-          <section className="my-12">
-            <h2 className="font-[family-name:var(--font-pixel)] text-sm text-accent-amber neon-glow-amber mb-6">
-              Try It
-            </h2>
-            <div className="flex justify-center">
-              <div className="relative">
-                {/* Phone bezel */}
-                <div className="w-[375px] rounded-[3rem] border-4 border-[#2a2a3e] bg-[#1a1a2e] p-3 shadow-[0_0_30px_rgba(0,255,245,0.1)]">
-                  {/* Notch */}
-                  <div className="mx-auto mb-2 h-6 w-32 rounded-b-2xl bg-[#0a0a0f]" />
-                  {/* Screen */}
-                  <div className="overflow-hidden rounded-2xl bg-white">
-                    <iframe
-                      src={meta.liveUrl}
-                      width="100%"
-                      height="700"
-                      className="border-0"
-                      loading="lazy"
-                      title={`${meta.title} live demo`}
-                    />
-                  </div>
-                  {/* Home indicator */}
-                  <div className="mx-auto mt-3 h-1 w-28 rounded-full bg-[#2a2a3e]" />
-                </div>
+      {/* Live demo */}
+      {meta.liveUrl ? (
+        <section className="pb-16">
+          <SectionHead label="Live demo" />
+          <div className="mt-6 flex justify-center">
+            <div className="w-full max-w-[400px] rounded-[28px] border border-rule bg-card p-3">
+              <div className="overflow-hidden rounded-[20px] bg-bg">
+                <iframe
+                  src={meta.liveUrl}
+                  width="100%"
+                  height="640"
+                  className="block border-0"
+                  loading="lazy"
+                  title={`${meta.title} live demo`}
+                />
               </div>
             </div>
-          </section>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Prev / Next */}
+      <nav className="pb-16 flex items-center justify-between gap-4 border-t border-rule pt-8">
+        {prev ? (
+          <Link
+            href={`/projects/${prev.slug}`}
+            className="group flex flex-col gap-1 max-w-[45%]"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+              ← Previous
+            </span>
+            <span
+              data-ff="serif"
+              className="text-ink text-[18px] md:text-[20px] leading-tight group-hover:text-accent transition-colors"
+            >
+              {prev.title}
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href="/projects"
+            className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors"
+          >
+            ← All projects
+          </Link>
         )}
-
-        <PixelDivider className="my-12" />
-
-        <div className="text-center">
-          <RetroButton href="/projects" variant="green">
-            &larr; All Projects
-          </RetroButton>
-        </div>
-      </article>
+        {next ? (
+          <Link
+            href={`/projects/${next.slug}`}
+            className="group flex flex-col gap-1 max-w-[45%] text-right"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+              Next →
+            </span>
+            <span
+              data-ff="serif"
+              className="text-ink text-[18px] md:text-[20px] leading-tight group-hover:text-accent transition-colors"
+            >
+              {next.title}
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href="/projects"
+            className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors ml-auto"
+          >
+            All projects →
+          </Link>
+        )}
+      </nav>
     </PageContainer>
   );
 }
