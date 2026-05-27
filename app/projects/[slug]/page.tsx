@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import PageContainer from "@/components/layout/PageContainer";
 import Heading from "@/components/ui/Heading";
@@ -98,10 +99,29 @@ export default async function ProjectPage({ params }: PageProps) {
             ) : null}
           </div>
         </div>
-        <StripeImage
-          caption={`${meta.title} — app shot`}
-          aspect="3/4"
-        />
+        {(() => {
+          const heroSrc = meta.heroImage || meta.coverImage;
+          if (heroSrc) {
+            return (
+              <div className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-[18px] border border-rule bg-bg">
+                <Image
+                  src={heroSrc}
+                  alt={`${meta.title} screenshot`}
+                  fill
+                  priority
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                />
+              </div>
+            );
+          }
+          return (
+            <StripeImage
+              caption={`${meta.title} — app shot`}
+              aspect="3/4"
+            />
+          );
+        })()}
       </header>
 
       {/* MDX body */}

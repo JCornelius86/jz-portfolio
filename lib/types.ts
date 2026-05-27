@@ -14,7 +14,10 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
+  /** Image shown on cards (home + /projects). Typically a single hero screenshot. */
   coverImage?: string;
+  /** Image shown in the hero of the detail page. Falls back to coverImage if omitted. */
+  heroImage?: string;
   githubUrl?: string;
   liveUrl?: string;
   date: string;
