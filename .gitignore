@@ -39,6 +39,9 @@ yarn-error.log*
 # source content
 Squarespace scrub.docx
 
+# design handoff (reference only, not shipped)
+/handoff/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

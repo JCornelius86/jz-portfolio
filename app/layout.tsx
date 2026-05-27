@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { pixelFont, bodyFont, monoFont } from "@/lib/fonts";
+import { serifFont, sansFont, monoFont } from "@/lib/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import CrtOverlay from "@/components/layout/CrtOverlay";
-import StarField from "@/components/layout/StarField";
-import SkyProvider from "@/components/sky/SkyProvider";
-import SkyBackground from "@/components/sky/SkyBackground";
+import ThemeScript from "@/components/layout/ThemeScript";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,18 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" data-sky="night">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body
-        className={`${pixelFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased min-h-screen flex flex-col relative`}
+        className={`${serifFont.variable} ${sansFont.variable} ${monoFont.variable} antialiased min-h-screen flex flex-col`}
       >
-        <SkyProvider>
-          <SkyBackground />
-          <StarField />
-          <CrtOverlay />
-          <Header />
-          <div className="relative z-10 flex-1 pt-16">{children}</div>
-          <Footer />
-        </SkyProvider>
+        <Header />
+        <div className="flex-1 pt-16">{children}</div>
+        <Footer />
       </body>
     </html>
   );

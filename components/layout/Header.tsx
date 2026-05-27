@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import SkyToggle from "@/components/sky/SkyToggle";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
   { href: "/resume", label: "Resume" },
 ];
@@ -16,17 +17,18 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-bg-primary/90 backdrop-blur-sm border-b border-border-pixel">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-bg/85 backdrop-blur-sm border-b border-rule">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link
           href="/"
-          className="font-[family-name:var(--font-pixel)] text-accent-cyan text-xs sm:text-sm neon-glow hover:text-white transition-colors"
+          data-ff="serif"
+          className="text-ink hover:text-accent transition-colors text-lg tracking-tight"
         >
-          JC ZABEL
+          JC Zabel
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => {
             const isActive =
               link.href === "/"
@@ -36,23 +38,23 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-[family-name:var(--font-pixel)] text-[10px] uppercase tracking-wider transition-colors ${
+                className={`font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
                   isActive
-                    ? "text-accent-cyan neon-glow"
-                    : "text-text-secondary hover:text-text-heading"
+                    ? "text-accent"
+                    : "text-muted hover:text-ink"
                 }`}
               >
                 {link.label}
               </Link>
             );
           })}
-          <SkyToggle />
+          <ThemeToggle />
         </div>
 
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-text-secondary hover:text-accent-cyan transition-colors"
+          className="md:hidden p-2 text-muted hover:text-accent transition-colors"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
@@ -75,8 +77,8 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-bg-card border-b border-border-pixel">
-          <div className="px-4 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-card border-b border-rule">
+          <div className="px-4 py-4 flex flex-col gap-3">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -87,18 +89,18 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`font-[family-name:var(--font-pixel)] text-[10px] uppercase tracking-wider py-2 transition-colors ${
+                  className={`font-mono text-[11px] uppercase tracking-[0.12em] py-2 transition-colors ${
                     isActive
-                      ? "text-accent-cyan neon-glow"
-                      : "text-text-secondary hover:text-text-heading"
+                      ? "text-accent"
+                      : "text-muted hover:text-ink"
                   }`}
                 >
                   {link.label}
                 </Link>
               );
             })}
-            <div className="pt-2 border-t border-border-pixel">
-              <SkyToggle />
+            <div className="pt-2 border-t border-rule">
+              <ThemeToggle />
             </div>
           </div>
         </div>

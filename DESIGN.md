@@ -1,85 +1,111 @@
 # DESIGN.md
 
-> This file documents design intent and conventions. For actual token values, see `app/globals.css`.
-> For component APIs, see the TypeScript interfaces in `/components/ui/`.
+> This file documents design intent and conventions. For actual token values, see `app/globals.css`. Component APIs live in `/components/`.
 
-## 1. Design Identity
+## 1. Identity
 
-Retro cyberpunk terminal aesthetic with time-of-day sky theming. Dark-mode only, neon accents on deep backgrounds. Pixel art headings create contrast with clean, modern body text (Space Grotesk). The overall feel is a developer's personal CRT monitor brought to life, with subtle scanlines, star particles, and neon glows as decorative atmosphere.
+Editorial, warm-paper, restrained. A single ochre accent on warm off-white (light) or warm near-black (dark). Fraunces with its WONK axis on gives the serif voice; Inter handles UI and body; JetBrains Mono carries eyebrows, labels, and numerics. No decorative chrome, no glow, no scanlines, no sky-period theming. The personality lives in type and one accent, not in effects.
 
-## 2. Color Roles & Sky Theming
+## 2. Color tokens
 
-### Accent color assignments
+Defined in `app/globals.css` and exposed to Tailwind via `@theme inline`. Light is `:root`; dark is the `.dark` class on `<html>`.
 
-- **Cyan** -- Primary accent. Default for headings, CTAs, case study content, and navigation highlights.
-- **Green** -- Projects, code-related content, GitHub links, and technical/side-project sections.
-- **Magenta** -- Secondary accent. Used for secondary headings (h2 in section pairs), secondary CTAs, resume sections, and "live demo" links.
-- **Amber** -- Tertiary accent. Leadership, impact stats, certifications, and emphasis moments.
+| Token            | Tailwind class root | Light    | Dark     | Use                                       |
+|------------------|---------------------|----------|----------|-------------------------------------------|
+| `--c-bg`         | `bg-bg`             | `#FAF6EC`| `#1A1813`| Page ground. NEVER pure white / pure black.|
+| `--c-card`       | `bg-card`           | `#FFFCF3`| `#221F18`| Raised surfaces.                          |
+| `--c-ink`        | `text-ink`          | `#221E16`| `#F2EDE0`| Headlines, primary buttons.                |
+| `--c-ink-soft`   | `text-ink-soft`     | `#3A352B`| `#C9C2B0`| Body prose.                                |
+| `--c-muted`      | `text-muted`        | `#7A7159`| `#8A8473`| Eyebrows, captions, metadata.              |
+| `--c-rule`       | `border-rule`       | `#E8E0CC`| `#34301F`| Borders, dividers, hairlines.              |
+| `--c-accent`     | `text-accent`       | `#A8823F`| `#C49558`| The single accent. Ochre.                  |
 
-When adding a new page or section, match the accent to the content domain above. When in doubt, default to cyan.
+### Color usage — non-negotiable
+- **One accent only.** Ochre. Never introduce a second hue.
+- **No pure black on pure white.** Warm tones are the design.
+- **No gradients, glassmorphism, blur, or glow effects.**
+- **No second accent for emphasis.** If something needs to pop more, it should be ochre or it shouldn't pop.
 
-### Sky theming rules
+### Legacy token aliases
+The pixel/CRT era left several token names referenced across existing pages (`text-accent-cyan`, `text-text-secondary`, `bg-bg-primary`, etc.). Those are aliased in `globals.css` to the new palette so legacy pages still render. **Do not use them in new code** — use the canonical `bg`, `card`, `ink`, `ink-soft`, `muted`, `rule`, `accent` names instead. Aliases will be deleted as the last legacy component is replaced.
 
-The site has 4 sky periods (night, dawn, day, dusk) that swap the entire color palette via CSS custom properties on `[data-sky]`. Night is the default/SSR state and has the highest contrast and most vibrant neon glows. Day is intentionally muted.
+## 3. Typography
 
-- Always use semantic Tailwind token classes (`text-accent-cyan`, `bg-bg-card`, etc.). Never use raw hex values.
-- When adding new components, verify they look acceptable in all 4 sky periods using the SkyToggle.
-- Do not add effects that only work in one sky period.
-- Token values live in `app/globals.css`. Do not duplicate them elsewhere.
+### Families
 
-## 3. Component & Layout Patterns
+| Family           | CSS var               | Use                                       |
+|------------------|-----------------------|-------------------------------------------|
+| Fraunces         | `--font-fraunces`     | Display + serif body. Apply via `data-ff="serif"`, `data-ff="display"`, `.font-serif`, or `.font-display`. |
+| Inter            | `--font-inter`        | Body, UI. Default `<body>` font.          |
+| JetBrains Mono   | `--font-mono`         | Eyebrows, labels, numerics, captions.     |
 
-### Component usage guide
+Variation settings (applied automatically by the `.font-serif` / `.font-display` rules):
 
-| Component | When to use |
-|---|---|
-| `PixelHeading` | All styled headings (h1, h2, h3). Always use this. Never apply the pixel font class inline. |
-| `RetroCard` | Any content container that needs the pixel-border treatment (cards, panels, stat blocks). |
-| `RetroButton` | All CTAs and navigation actions. Border-only style with accent color variant. |
-| `GlowText` | Inline emphasis within body text. Use sparingly for key terms or stats. |
-| `Tag` | Labels for technologies, categories, or metadata. |
-| `PixelDivider` | Section separator. Place between major content sections to create rhythm. |
-| `ImageLightbox` | Any content image that benefits from click-to-zoom. |
-| `CaseStudyCard` | Case study listing cards (on /work and homepage). |
-| `ProjectCard` | Project listing cards (on /projects and homepage). |
+- **Body-size serif** — `'opsz' 48, 'SOFT' 80, 'WONK' 1`
+- **Display (>40px)** — `'opsz' 144, 'SOFT' 80, 'WONK' 1`
 
-### Page rhythm
+The WONK axis on `1` gives Fraunces its swooping `f`, `J`, and `g`. This is intentional; do not turn it off.
 
-Pages follow a consistent section flow:
+### Italic accent rule
+Italic Fraunces is reserved for:
+1. One or two key words inside an H1 ("designer", "shipping").
+2. Display-size pull-arrows (`→`) used as separators.
+3. Marginalia pull-quotes.
 
-```
-<section>  (content block with py-12)
-<PixelDivider />
-<section>  (next content block)
-<PixelDivider />
-...
-```
+Never italic for full sentences of body copy.
 
-Each top-level section uses `py-12` or `py-16` for vertical spacing. Cards use `p-6` internally. Grid gaps are `gap-6` or `gap-8`.
+### Scale — desktop (1280)
 
-### Layout
+| Role                  | Size  | Line-height | Letter-spacing | Weight |
+|-----------------------|-------|-------------|----------------|--------|
+| Hero H1 (display)     | 124   | 0.94        | -0.04em        | 380    |
+| Page H1 (display)     | 72–96 | 1.0         | -0.025em       | 380    |
+| Section H2 (serif)    | 30–36 | 1.15        | -0.015em       | 440    |
+| Card title (serif)    | 24    | 1.2         | -0.01em        | 450    |
+| Lede (Inter)          | 19    | 1.55        | 0              | 400    |
+| Body (Inter)          | 15.5  | 1.6         | 0              | 400    |
+| Caption/eyebrow (mono)| 11–12 | 1.4         | 0.10em         | 500    |
+| Stat number (serif)   | 28–48 | 1.0         | -0.01em        | 440    |
 
-- Page container: `max-w-6xl` with `px-4 sm:px-6` (via `PageContainer` component)
-- Card grids: `grid-cols-1 md:grid-cols-2` for pairs, `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` for collections
-- All pages wrapped in `<PageContainer>` for consistent max-width and padding
+### Scale — mobile (390)
 
-## 4. Do's and Don'ts
+| Role            | Size  | Notes                |
+|-----------------|-------|----------------------|
+| Hero H1         | 46    | letter-spacing -0.03em |
+| Page H1         | 36    |                      |
+| Section H2      | 22–24 |                      |
+| Card title      | 19    |                      |
+| Lede            | 15.5  |                      |
+| Body            | 15    |                      |
+| Caption/eyebrow | 10.5–11 |                    |
+
+## 4. Layout
+
+- Page container: `max-w-6xl` with `px-4 sm:px-6` (via `PageContainer`).
+- Mobile section padding: `36px 22px 40px`. Desktop: `24–72px 56px`.
+- Section spacing: 36px mobile, 48–72px desktop.
+- Card-to-card gap: 12–22px.
+- Radii: compact cards `12–14`, medium `16–18`, large `18–22`, pills `999`.
+
+## 5. Motion
+
+- The H1 underscore cursor blink (`.cursor-blink`, 1.1s steps(2)) is the only system animation.
+- Hover: a 1–2px translate or hairline shadow shift. Never a glow.
+- Theme toggle: instant, no transition.
+- All motion respects `prefers-reduced-motion`.
+
+## 6. Do's and Don'ts
 
 ### Do
-
-- Use `PixelHeading` for every styled heading. It handles font, sizing, and glow consistently.
-- Use semantic color token classes for all color references.
-- Keep CRT scanlines, star particles, and neon glows purely decorative. They must not block interaction or reduce readability.
-- Use `pixel-border` class (via `RetroCard` or directly) for bordered containers. It provides the signature inset shadow + glow-on-hover effect.
-- Respect `prefers-reduced-motion` for all animations.
-- Maintain WCAG AA contrast on all text, across all sky periods.
+- Use semantic token classes (`bg-bg`, `text-ink`, `border-rule`, `text-accent`). Never raw hex.
+- Apply Fraunces via `data-ff` attributes or the `.font-serif` / `.font-display` classes — never inline `font-family` strings.
+- Verify every screen in both light and dark before shipping.
+- Maintain WCAG AA contrast on all text.
 
 ### Don't
-
-- Apply the pixel font inline via `font-[family-name:var(--font-pixel)]`. Use `PixelHeading` instead.
-- Use border radius larger than `rounded-sm`. The aesthetic is sharp/pixelated, not rounded.
-- Use filled/solid background buttons. All buttons are border-only with translucent hover fill (`hover:bg-accent-*/10`).
-- Use traditional drop shadows (`shadow-md`, `shadow-lg`). Only use inset pixel-border shadows and `neon-glow-*` text-shadows.
-- Hard-code hex color values in components. Always use the Tailwind token classes.
-- Stack more than 2 different neon glow colors in a single viewport section. It becomes visually noisy.
-- Use the pixel font (Press Start 2P) for body text, descriptions, or any readable paragraph content.
+- Add a second accent color.
+- Use neon glows, CRT scanlines, scroll-jacking, parallax, carousels, custom cursors, or heavy load animations.
+- Use pure black on pure white.
+- Hard-code hex values in components.
+- Stack effects to make something "pop." If it doesn't read, fix the typography or hierarchy.
+- Disable Fraunces's WONK axis.
