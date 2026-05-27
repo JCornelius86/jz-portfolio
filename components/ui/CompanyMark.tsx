@@ -71,18 +71,30 @@ export default function CompanyMark({
    ---------------------------------------------------------------- */
 
 function MicrosoftGlyph(size: number) {
+  // Window-pane / Fluent: rounded square divided into four quadrants
+  // by a hairline cross, bottom-right quadrant filled ochre.
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <rect x="3" y="3" width="8" height="8" fill="currentColor" />
-      <rect x="13" y="3" width="8" height="8" fill="currentColor" />
-      <rect x="3" y="13" width="8" height="8" fill="currentColor" />
-      <rect x="13" y="13" width="8" height="8" className="fill-accent" />
+      <rect
+        x="12.4"
+        y="12.4"
+        width="8.1"
+        height="8.1"
+        rx="1.2"
+        className="fill-accent stroke-none"
+      />
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2.2" />
+      <line x1="12" y1="3.5" x2="12" y2="20.5" />
+      <line x1="3.5" y1="12" x2="20.5" y2="12" />
     </svg>
   );
 }
@@ -113,19 +125,25 @@ function SnapGlyph(size: number) {
 }
 
 function LockheedGlyph(size: number) {
+  // Shield silhouette with a small ochre five-point star at the center.
+  // Refers to the Aegis BMD work without being a literal missile/weapon.
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
       aria-hidden="true"
     >
+      <path d="M 12 3.5 L 4.5 5.8 L 4.5 12.5 C 4.5 17.4 7.6 19.8 12 21 C 16.4 19.8 19.5 17.4 19.5 12.5 L 19.5 5.8 Z" />
       <polygon
-        points="12,3 14.6,9.4 21.5,9.7 16.1,14 17.9,20.7 12,17 6.1,20.7 7.9,14 2.5,9.7 9.4,9.4"
-        fill="currentColor"
+        points="12,8.5 12.82,10.87 15.33,10.92 13.33,12.43 14.06,14.83 12,13.4 9.94,14.83 10.67,12.43 8.67,10.92 11.18,10.87"
+        className="fill-accent stroke-none"
       />
-      <circle cx="12" cy="13" r="1.4" className="fill-accent" />
     </svg>
   );
 }
