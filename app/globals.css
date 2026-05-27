@@ -14,6 +14,12 @@
   --color-rule: var(--c-rule);
   --color-accent: var(--c-accent);
 
+  /* Inverted CTA surface — stays dark in both modes. In light it's
+     a strong dark card; in dark it's a slightly elevated panel. */
+  --color-invert-bg: var(--c-invert-bg);
+  --color-invert-fg: var(--c-invert-fg);
+  --color-invert-rule: var(--c-invert-rule);
+
   /* Legacy aliases — let pages that still reference the pixel/CRT
      token names compile and render against the new palette while
      Phase 1 components are still pending. Remove once unused. */
@@ -46,6 +52,9 @@
   --c-muted: #7A7159;
   --c-rule: #E8E0CC;
   --c-accent: #A8823F;
+  --c-invert-bg: #221E16;
+  --c-invert-fg: #FAF6EC;
+  --c-invert-rule: transparent;
 }
 
 .dark {
@@ -56,6 +65,9 @@
   --c-muted: #8A8473;
   --c-rule: #34301F;
   --c-accent: #C49558;
+  --c-invert-bg: #2A2519;
+  --c-invert-fg: #F2EDE0;
+  --c-invert-rule: #3D3724;
 }
 
 /* ----------------------------------------------------------------

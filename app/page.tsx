@@ -171,7 +171,7 @@ export default function Home() {
 
       {/* INVERTED FOOTER CTA -------------------------------------------- */}
       <section className="pt-8 pb-16">
-        <div className="bg-ink text-bg rounded-[22px] px-6 py-10 md:px-12 md:py-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-end">
+        <div className="bg-invert-bg text-invert-fg border border-invert-rule rounded-[22px] px-6 py-10 md:px-12 md:py-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-end">
           <p
             data-ff="display"
             className="italic text-[36px] md:text-[56px] leading-[1.05] tracking-[-0.03em] font-[380]"
@@ -179,12 +179,12 @@ export default function Home() {
             Working on something <span className="text-accent">mission-shaped?</span>
           </p>
           <div>
-            <p className="text-bg/75 text-[15px] md:text-[16px] leading-[1.6] mb-6">
+            <p className="text-invert-fg/70 text-[15px] md:text-[16px] leading-[1.6] mb-6">
               I&apos;d like to hear about it. Climate, energy, healthcare, public good. Those are the ones I lean toward, but the criterion is real, not the label.
             </p>
             <a
               href="mailto:jc.zabel@gmail.com"
-              className="inline-flex items-center rounded-full bg-accent text-ink px-6 py-3 text-[15px] font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center rounded-full bg-accent text-[#1A1813] px-6 py-3 text-[15px] font-medium hover:opacity-90 transition-opacity"
             >
               jc.zabel@gmail.com →
             </a>
