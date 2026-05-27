@@ -18,8 +18,8 @@ const principles = [
     body: "The best design orgs are built on trust and growth. I invest in 1:1s, design crits, and stretch assignments because a team that's learning is a team that delivers.",
   },
   {
-    title: "Ship over perfect",
-    body: "I run my teams on speed and iteration first, craft second. We ship working increments fast, then polish what matters. Momentum beats perfection.",
+    title: "Ship over perfection",
+    body: "I run my teams on speed and iteration first. We ship working increments fast, then polish what matters. Momentum beats perfection.",
   },
   {
     title: "Design the system",
