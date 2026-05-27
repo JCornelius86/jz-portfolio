@@ -1,31 +1,33 @@
 /**
  * Small editorial company badge for /about and /resume. Each company
- * gets a bespoke geometric glyph (Microsoft 4-square, Snap power
- * button, Lockheed star, GE wind blades) in the ink color with one
+ * gets a bespoke geometric glyph (Microsoft window-pane, Snap power
+ * button, Lockheed shield, GE wind blades) in the ink color with one
  * ochre accent detail. Falls back to a Fraunces letter monogram for
  * any company without a custom glyph.
  *
- * Stays inside the editorial system: hairline border on the card
- * surface, no brand colors, single ochre accent per glyph.
+ * Chip size scales up at the md breakpoint so the glyph isn't lost
+ * in the editorial whitespace of a desktop layout.
  */
+import type { ReactNode } from "react";
+
 interface CompanyMarkProps {
   company: string;
   size?: "sm" | "md";
   className?: string;
 }
 
-const sizeStyles: Record<"sm" | "md", { chip: string; svg: number; mono: string }> = {
-  sm: { chip: "w-10 h-10", svg: 22, mono: "text-[15px]" },
-  md: { chip: "w-12 h-12", svg: 26, mono: "text-[18px]" },
+const sizeStyles = {
+  sm: { chip: "w-12 h-12 md:w-14 md:h-14", mono: "text-[17px] md:text-[19px]" },
+  md: { chip: "w-14 h-14 md:w-[72px] md:h-[72px]", mono: "text-[20px] md:text-[26px]" },
 };
 
-function pickGlyph(company: string): ((size: number) => React.ReactNode) | null {
+function pickGlyph(company: string): ReactNode | null {
   const c = company.toLowerCase();
-  if (c.includes("microsoft")) return MicrosoftGlyph;
-  if (c.includes("snap")) return SnapGlyph;
-  if (c.includes("lockheed")) return LockheedGlyph;
+  if (c.includes("microsoft")) return <MicrosoftGlyph />;
+  if (c.includes("snap")) return <SnapGlyph />;
+  if (c.includes("lockheed")) return <LockheedGlyph />;
   if (c.includes("general electric") || c.includes("axiem") || /\bge\b/.test(c))
-    return GEGlyph;
+    return <GEGlyph />;
   return null;
 }
 
@@ -42,16 +44,16 @@ export default function CompanyMark({
   size = "md",
   className = "",
 }: CompanyMarkProps) {
-  const Glyph = pickGlyph(company);
+  const glyph = pickGlyph(company);
   const s = sizeStyles[size];
   return (
     <span
       role="img"
       aria-label={`${company} mark`}
-      className={`inline-flex items-center justify-center shrink-0 rounded-[10px] bg-card border border-rule text-ink ${s.chip} ${className}`}
+      className={`inline-flex items-center justify-center shrink-0 rounded-[12px] bg-card border border-rule text-ink ${s.chip} ${className}`}
     >
-      {Glyph ? (
-        Glyph(s.svg)
+      {glyph ? (
+        glyph
       ) : (
         <span
           data-ff="serif"
@@ -66,23 +68,24 @@ export default function CompanyMark({
 }
 
 /* ----------------------------------------------------------------
-   Glyphs — each 24x24 viewBox, fill/stroke currentColor for ink,
-   with one element using text-accent for the ochre detail.
+   Glyphs — each in a 24x24 viewBox, rendered at 62% of the chip so
+   they grow with it. Single ochre accent detail per glyph.
    ---------------------------------------------------------------- */
 
-function MicrosoftGlyph(size: number) {
+const GLYPH_BASE = "w-[62%] h-[62%]";
+
+function MicrosoftGlyph() {
   // Window-pane / Fluent: rounded square divided into four quadrants
   // by a hairline cross, bottom-right quadrant filled ochre.
   return (
     <svg
-      width={size}
-      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinejoin="round"
       aria-hidden="true"
+      className={GLYPH_BASE}
     >
       <rect
         x="12.4"
@@ -99,11 +102,10 @@ function MicrosoftGlyph(size: number) {
   );
 }
 
-function SnapGlyph(size: number) {
+function SnapGlyph() {
+  // Power button: ring with an ochre vertical stroke at the top.
   return (
     <svg
-      width={size}
-      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -111,26 +113,18 @@ function SnapGlyph(size: number) {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      className={GLYPH_BASE}
     >
       <path d="M6.5 8.5 A7 7 0 1 0 17.5 8.5" />
-      <line
-        x1="12"
-        y1="3.5"
-        x2="12"
-        y2="11"
-        className="stroke-accent"
-      />
+      <line x1="12" y1="3.5" x2="12" y2="11" className="stroke-accent" />
     </svg>
   );
 }
 
-function LockheedGlyph(size: number) {
+function LockheedGlyph() {
   // Shield silhouette with a small ochre five-point star at the center.
-  // Refers to the Aegis BMD work without being a literal missile/weapon.
   return (
     <svg
-      width={size}
-      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -138,6 +132,7 @@ function LockheedGlyph(size: number) {
       strokeLinejoin="round"
       strokeLinecap="round"
       aria-hidden="true"
+      className={GLYPH_BASE}
     >
       <path d="M 12 3.5 L 4.5 5.8 L 4.5 12.5 C 4.5 17.4 7.6 19.8 12 21 C 16.4 19.8 19.5 17.4 19.5 12.5 L 19.5 5.8 Z" />
       <polygon
@@ -148,17 +143,18 @@ function LockheedGlyph(size: number) {
   );
 }
 
-function GEGlyph(size: number) {
+function GEGlyph() {
+  // 3-blade wind turbine: three lines radiating from an ochre hub at
+  // 120 degree intervals.
   return (
     <svg
-      width={size}
-      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       aria-hidden="true"
+      className={GLYPH_BASE}
     >
       <line x1="12" y1="12" x2="12" y2="3.5" />
       <line x1="12" y1="12" x2="19.4" y2="16.3" />
