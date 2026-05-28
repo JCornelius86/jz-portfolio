@@ -8,6 +8,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Tag from "@/components/ui/Tag";
 import StripeImage from "@/components/ui/StripeImage";
 import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
+import { getImageDims } from "@/lib/imageDims";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import type { Metadata } from "next";
 
@@ -120,16 +121,39 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* Hero image */}
       <div className="pb-12 md:pb-16">
         {meta.coverImage ? (
-          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-[20px] border border-rule bg-card">
-            <Image
-              src={meta.coverImage}
-              alt={`${meta.title} cover`}
-              fill
-              priority
-              className="object-contain"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-          </div>
+          (() => {
+            const dims = getImageDims(meta.coverImage);
+            const isPortrait = dims ? dims.height > dims.width : false;
+            const frameClass = isPortrait
+              ? "relative w-full max-w-[360px] mx-auto overflow-hidden rounded-[22px] border border-rule bg-card"
+              : "relative w-full aspect-[16/9] overflow-hidden rounded-[20px] border border-rule bg-card";
+            const aspectStyle =
+              isPortrait && dims
+                ? { aspectRatio: `${dims.width} / ${dims.height}` }
+                : undefined;
+            return (
+              <div className={frameClass} style={aspectStyle}>
+                <Image
+                  src={meta.coverImage}
+                  alt={`${meta.title} cover`}
+                  fill={!isPortrait || !dims}
+                  width={isPortrait && dims ? dims.width : undefined}
+                  height={isPortrait && dims ? dims.height : undefined}
+                  priority
+                  className={
+                    isPortrait && dims
+                      ? "block w-full h-auto"
+                      : "object-contain"
+                  }
+                  sizes={
+                    isPortrait
+                      ? "(max-width: 768px) 100vw, 360px"
+                      : "(max-width: 1280px) 100vw, 1280px"
+                  }
+                />
+              </div>
+            );
+          })()
         ) : (
           <StripeImage caption={`${meta.title} — hero`} aspect="16/9" />
         )}
