@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import Heading, { Accent, Cursor } from "@/components/ui/Heading";
 import Card from "@/components/ui/Card";
@@ -9,6 +10,7 @@ import StatBlock from "@/components/ui/StatBlock";
 import StripeImage from "@/components/ui/StripeImage";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getCaseStudies, getProjects } from "@/lib/content";
+import { getImageDims } from "@/lib/imageDims";
 
 // The four principles. Copy edits live in CMS or in this array; the
 // visual treatment stays uniform.
@@ -119,10 +121,38 @@ export default function Home() {
                 className="absolute inset-0 top-2.5 left-2.5 rounded-[22px] bg-rule/60"
               />
               <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
-                <StripeImage
-                  caption={`${flagship.title} — dashboard, full bleed`}
-                  aspect="4/3"
-                />
+                {(() => {
+                  if (!flagship.coverImage) {
+                    return (
+                      <StripeImage
+                        caption={`${flagship.title} — dashboard, full bleed`}
+                        aspect="4/3"
+                      />
+                    );
+                  }
+                  const dims = getImageDims(flagship.coverImage);
+                  const aspectStyle = dims
+                    ? { aspectRatio: `${dims.width} / ${dims.height}` }
+                    : { aspectRatio: "4 / 3" };
+                  return (
+                    <div
+                      className="relative w-full overflow-hidden rounded-[14px] border border-rule bg-bg"
+                      style={aspectStyle}
+                    >
+                      <Image
+                        src={flagship.coverImage}
+                        alt={`${flagship.title} cover`}
+                        fill={!dims}
+                        width={dims?.width}
+                        height={dims?.height}
+                        className={
+                          dims ? "block w-full h-auto" : "object-contain"
+                        }
+                        sizes="(max-width: 768px) 100vw, 600px"
+                      />
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </div>
