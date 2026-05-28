@@ -268,8 +268,8 @@ export default function ResumePage() {
 
           <section className="no-print flex flex-col gap-2 items-start">
             <PrintButton>Save as PDF</PrintButton>
-            <Button href="/JC_Zabel_Resume.docx" variant="ghost" size="sm">
-              Download .docx
+            <Button href="/JC_Zabel_Resume.pdf" variant="ghost" size="sm">
+              Download PDF
             </Button>
           </section>
         </aside>
