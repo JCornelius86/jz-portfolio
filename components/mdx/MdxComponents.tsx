@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import { Children, isValidElement, type ReactNode } from "react";
-import ImageLightbox from "@/components/ui/ImageLightbox";
+import MdxFigure from "./MdxFigure";
+import MdxImageRow from "./MdxImageRow";
 
 function hasImage(children: ReactNode): boolean {
   return Children.toArray(children).some(
@@ -95,12 +96,10 @@ export const mdxComponents: MDXComponents = {
     <em data-ff="serif" className="italic text-ink" {...props} />
   ),
   img: (props) => {
-    const { src, alt, ...rest } = props;
+    const { src, alt } = props;
     if (!src) return null;
-    return (
-      <span className="block my-7">
-        <ImageLightbox src={src} alt={alt || ""} {...rest} />
-      </span>
-    );
+    return <MdxFigure src={src} alt={alt || ""} />;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ImageRow: MdxImageRow as unknown as any,
 };

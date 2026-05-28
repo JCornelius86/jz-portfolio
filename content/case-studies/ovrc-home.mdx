@@ -24,29 +24,30 @@ Integrators wanted to stop getting late-night calls for simple reboots. They als
 
 Often we heard of integrators giving customers access to their own OvrC account. This was a big problem. Most homeowners didn't understand how to use it and didn't want to.
 
-![OvrC Home end user app wireframes with detailed annotations](/images/ovrc-home/ovrc-home-end-user-wireframes.png)
+![Annotated end-user wireframes exploring the homeowner experience](/images/ovrc-home/ovrc-home-end-user-wireframes.png)
 
 ## Vision
 
 We knew we could do anything, but we couldn't do everything. So we started by making it really easy to reboot stuff.
 
-We created **macros**, a series of commands passed to multiple devices that an integrator could define. If a dealer was regularly having issues with a customer's streaming device, they could create a command called "Reboot AppleTV" which would go to the WattBox and reboot the appropriate outlet, then go to the Araknis switch and do the same for the network port.
-
-![OvrC Home command grid letting homeowners fix problems with a single tap](/images/ovrc-home/ovrc-home-commands.png)
+We created **macros**: a series of commands passed to multiple devices that an integrator could define. If a dealer was regularly having issues with a customer's streaming device, they could create a command called "Reboot AppleTV" which would go to the WattBox and reboot the appropriate outlet, then go to the Araknis switch and do the same for the network port.
 
 The homeowner didn't need to know the complexity of what was going on behind the scenes. All they needed to know was that when there's a problem with their AppleTV, they have a button that fixes it.
 
-![OvrC Home quick fix with a single tap reboot](/images/ovrc-home/ovrc-home-app-fix.png)
+<ImageRow images={[
+  { src: "/images/ovrc-home/ovrc-home-commands.png", alt: "Macro grid: tap to run a multi-device fix" },
+  { src: "/images/ovrc-home/ovrc-home-app-fix.png", alt: "Quick-fix confirmation with a single-tap reboot" }
+]} />
 
-We also needed a way to showcase the dealer. An app was the obvious way to get this in customers' hands, but we couldn't name it after every integrator. We decided on **"OvrC Home"** and allowed dealers to upload their logo and brand info, making it feel like **their** app.
+We also needed a way to showcase the dealer. An app was the obvious way to get this in customers' hands, but we couldn't name it after every integrator. We decided on **OvrC Home** and allowed dealers to upload their logo and brand info, making it feel like **their** app.
 
 ## Dealer Setup
 
 The dealer experience was critical. We built the setup flow directly into the OvrC web platform, allowing integrators to configure commands, add users, and customize branding for each customer location.
 
-![OvrC customer access setup wireframes showing the dealer configuration workflow](/images/ovrc/ovrc-customer-access-wireframes.png)
+![Customer-access wireframes showing the dealer's configuration workflow](/images/ovrc/ovrc-customer-access-wireframes.png)
 
-![OvrC add command setup for configuring macros](/images/ovrc/ovrc-add-command.png)
+![Add-command setup for configuring macros that ship to the homeowner](/images/ovrc/ovrc-add-command.png)
 
 ## Launch
 
@@ -56,37 +57,38 @@ Most integrators had a hard time pitching the OvrC Pro device to end consumers a
 
 We severed the requirement and saw much greater attachment.
 
-![OvrC Home app troubleshooting screen](/images/ovrc-home/ovrc-home-app-troubleshooting.png)
+![Homeowner troubleshooting flow when a fix doesn't fully resolve the issue](/images/ovrc-home/ovrc-home-app-troubleshooting.png)
 
 ## Parental Controls
 
 Once we started getting more users, integrators told us loud and clear: they needed a way to combat DIY competitors in the networking space. We had to add functionality drastically different from what had been essentially a simple reboot feature.
 
-We delivered **"Parental Controls"** along with a full redesign, featuring three core capabilities:
+We delivered **Parental Controls** along with a full redesign, featuring three core capabilities.
 
-![OvrC Home parental controls wireframes](/images/ovrc-home/ovrc-home-parental-controls-wireframes.png)
+![Parental-controls exploration spanning profiles, schedules, and filtering](/images/ovrc-home/ovrc-home-parental-controls-wireframes.png)
 
-![OvrC Home dashboard with wireless profiles and security settings](/images/ovrc-home/ovrc-home-dashboard.png)
+![Dashboard surfacing wireless profiles and security settings at a glance](/images/ovrc-home/ovrc-home-dashboard.png)
 
 ### Profiles & Schedules
 
 Users could assign devices to different profiles and monitor their status. Parents could pause wireless access and set schedules for homework time, bedtime, or dinner.
 
-![OvrC Home profile detail showing pause wireless and schedule controls](/images/ovrc-home/ovrc-home-profile.png)
-
-![OvrC Home schedule settings for setting daily pause/resume times](/images/ovrc-home/ovrc-home-schedule.png)
+<ImageRow images={[
+  { src: "/images/ovrc-home/ovrc-home-profile.png", alt: "Profile detail with pause-wireless and schedule controls" },
+  { src: "/images/ovrc-home/ovrc-home-schedule.png", alt: "Schedule settings for daily pause and resume times" }
+]} />
 
 ### Security & Content Filtering
 
 Three tiers of content filtering, from basic SafeSearch to medium filtering of adult and explicit content.
 
-![OvrC Home security settings with content filtering tiers](/images/ovrc-home/ovrc-home-security.png)
+![Security settings with three content-filter tiers](/images/ovrc-home/ovrc-home-security.png)
 
 ## Branded Support
 
 Each dealer gets their own branded support screen with company logo, phone number, and email, making the app feel like it belongs to the integrator, not SnapAV.
 
-![OvrC Home branded support contact screen for Tech Integrators](/images/ovrc-home/ovrc-home-support.png)
+![Branded support contact screen for a dealer named Tech Integrators](/images/ovrc-home/ovrc-home-support.png)
 
 ## Impact
 

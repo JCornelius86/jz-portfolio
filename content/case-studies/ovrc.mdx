@@ -12,27 +12,26 @@ featured: true
 
 I was contacted by a relatively small audio/video company (SnapAV) that wanted to build an app for one of their IP-connected power conditioners, essentially a surge protector with controllable outlets, so their integrators could reset them remotely.
 
-![WattBox power conditioner - the hardware that started it all](/images/ovrc/ovrc-wattbox-product.jpg)
-
 Remote management had been the "holy grail" of the CEDIA industry. Integrators spent hours driving to customer homes just to reboot a device. Solving this sounds simple, but no one else in the space had succeeded in making it easy, affordable, and reliable. I accepted the position as **UX Lead** on a team of five.
+
+![The WattBox power conditioner: the hardware that started it all](/images/ovrc/ovrc-wattbox-product.jpg)
 
 ## Approach
 
 We were building something that had been attempted in this field several times, with high-profile examples of failure. Some competitors became too focused on a single product category; others were so unfocused they never released meaningful features. We had to be different.
 
-We settled on four things being critical: integrators had to be able to **monitor, control, configure**, and be **notified** when problems arose. We started with three power conditioner models, all only differing in the number of outlets they supported.
+We settled on four things being critical: integrators had to be able to **monitor, control, configure**, and be **notified** when problems arose. We started with three power conditioner models, all only differing in the number of outlets they supported. This would soon grow into an IoT platform supporting over 200 native models across multiple categories.
 
-![OvrC platform sitemap showing the full information architecture](/images/ovrc/ovrc-sitemap.png)
-
-This would soon grow into an IoT platform supporting over 200 native models across multiple categories.
+![Platform sitemap showing the full information architecture across product lines](/images/ovrc/ovrc-sitemap.png)
 
 ## Discovery
 
-Leveraged SnapAV's fantastic customer relationships. Traveled to conferences, showed off prototypes, tested, listened, iterated. Integrators needed outlet on/off, reboot, and configuration, but the conversations went much deeper.
+We leveraged SnapAV's fantastic customer relationships. We traveled to conferences, showed off prototypes, tested, listened, iterated. Integrators needed outlet on/off, reboot, and configuration, but the conversations went much deeper.
 
-![OvrC customer view showing locations and network health](/images/ovrc/ovrc-app-customers.png)
-
-![Drilling into a single customer location to see network health, linked resources, and speed history](/images/ovrc/ovrc-home-view.png)
+<ImageRow images={[
+  { src: "/images/ovrc/ovrc-app-customers.png", alt: "Customer list showing every location and its health" },
+  { src: "/images/ovrc/ovrc-home-view.png", alt: "Drilling into one location for network health and speed history" }
+]} />
 
 Not everything was serious. Every team member went through the rite of passage of accidentally turning off a router instead of rebooting it, creating a "truck roll" for ourselves. Even this silly use case led us to create "Network Device" outlet categorization to prevent accidental shutoffs.
 
@@ -53,51 +52,51 @@ Our goals:
 - Make troubleshooting simple from any device
 - Listen to customers and make them successful
 
-![OvrC customer dashboard with network health overview](/images/ovrc/ovrc-dashboard.png)
+![Customer dashboard with a network-health overview across every site](/images/ovrc/ovrc-dashboard.png)
 
 ## Launch
 
 Launched in 2014 with immediate CEDIA adoption. But success didn't come without challenges. Internal stakeholders wanted additional device types (surveillance, networking, media) that were very different from the WattBox we started with. Product managers saw the attachment rates and customer satisfaction, and our team wasn't structured to handle the demand.
 
-![OvrC mobile app showing the device list for a customer location](/images/ovrc/ovrc-app-device-list.png)
-
-![OvrC device details with outlet controls and configuration](/images/ovrc/ovrc-app-device-details.png)
+<ImageRow images={[
+  { src: "/images/ovrc/ovrc-app-device-list.png", alt: "Device list for a customer location" },
+  { src: "/images/ovrc/ovrc-app-device-details.png", alt: "Device detail with outlet controls and configuration" }
+]} />
 
 ## Research
 
 SnapAV was still new to software development and hadn't done much usability testing. I championed speaking with customers as often as possible, going to conferences, getting into the field, showing off designs and testing prototypes.
 
-![OvrC mobile wireframes showing early design exploration](/images/ovrc/ovrc-mobile-wireframes.jpg)
-
 We created a style guide for consistent UIs across all product lines and moved away from the JDM (Joint Development Manufacturing) model so we could control the full experience.
+
+![Early mobile wireframes exploring information density and tap targets](/images/ovrc/ovrc-mobile-wireframes.jpg)
 
 ## Growth
 
 As OvrC expanded beyond power management, we added networking, surveillance, and media categories. The platform needed to scale without losing its simplicity.
 
-![OvrC map view showing customer distribution across the US](/images/ovrc/ovrc-customer-map.png)
+![Regional view zoomed to the Charlotte area, color-coded by site status](/images/ovrc/ovrc-map-view.png)
 
-![Detailed customer map view centered on the Charlotte, NC area](/images/ovrc/ovrc-map-view.png)
-
-![OvrC notifications keeping integrators informed of issues](/images/ovrc/ovrc-app-notifications.png)
+![Notifications keeping integrators informed of issues at any location](/images/ovrc/ovrc-app-notifications.png)
 
 ## Feature Expansion
 
 We developed advanced features like WAN settings, speed testing, billing integration, and video distribution, all while maintaining the core principle of simplicity.
 
-![OvrC advanced WAN settings configuration](/images/ovrc/ovrc-wan-settings.png)
+<ImageRow images={[
+  { src: "/images/ovrc/ovrc-wan-settings.png", alt: "WAN settings configuration in the integrator app" },
+  { src: "/images/ovrc/ovrc-app-speed-test.png", alt: "Speed test showing network performance diagnostics" }
+]} />
 
-![OvrC speed test showing network performance diagnostics](/images/ovrc/ovrc-app-speed-test.png)
+![Billing feature wireframes exploring service-tier flows](/images/ovrc/ovrc-billing-wireframes.png)
 
-![OvrC billing feature wireframes](/images/ovrc/ovrc-billing-wireframes.png)
-
-![OvrC MOIP video distribution wireframes](/images/ovrc/ovrc-moip-wireframes.png)
+![MOIP video distribution wireframes](/images/ovrc/ovrc-moip-wireframes.png)
 
 ## Handoff & Design System
 
 Documentation handed off to dev teams was developed in Axure, providing guides for how each feature should work with links to BRDs and design specs. We built a design system to standardize UIs across multiple product lines.
 
-![OvrC in-app support and troubleshooting](/images/ovrc/ovrc-app-support.png)
+![In-app support and troubleshooting flow](/images/ovrc/ovrc-app-support.png)
 
 ## Impact
 

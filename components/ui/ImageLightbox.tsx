@@ -9,6 +9,8 @@ interface ImageLightboxProps {
   width?: number;
   height?: number;
   className?: string;
+  /** Visual rounding for the thumbnail. lg ~ phone screens; md ~ wide art. */
+  rounded?: "sm" | "md" | "lg";
 }
 
 export default function ImageLightbox({
@@ -17,6 +19,7 @@ export default function ImageLightbox({
   width = 800,
   height = 500,
   className = "",
+  rounded = "md",
 }: ImageLightboxProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +50,13 @@ export default function ImageLightbox({
           alt={alt}
           width={width}
           height={height}
-          className="rounded-sm pixel-border w-full h-auto"
+          className={`block w-full h-auto border border-rule bg-bg ${
+            rounded === "lg"
+              ? "rounded-[18px]"
+              : rounded === "sm"
+              ? "rounded-[6px]"
+              : "rounded-[12px]"
+          }`}
         />
       </button>
 
@@ -61,10 +70,10 @@ export default function ImageLightbox({
         >
           <button
             onClick={close}
-            className="absolute top-4 right-4 text-white hover:text-accent-cyan font-[family-name:var(--font-pixel)] text-xs z-10"
+            className="absolute top-4 right-4 text-white/80 hover:text-accent font-mono uppercase tracking-[0.14em] text-[11px] z-10"
             aria-label="Close lightbox"
           >
-            [X] CLOSE
+            Close ×
           </button>
           <div
             className="relative max-w-[90vw] max-h-[90vh]"
