@@ -14,6 +14,7 @@ import {
   getProjectSlugs,
   getProjects,
 } from "@/lib/content";
+import { getImageDims } from "@/lib/imageDims";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import type { Metadata } from "next";
 
@@ -102,15 +103,26 @@ export default async function ProjectPage({ params }: PageProps) {
         {(() => {
           const heroSrc = meta.heroImage || meta.coverImage;
           if (heroSrc) {
+            const dims = getImageDims(heroSrc);
+            const aspectStyle = dims
+              ? { aspectRatio: `${dims.width} / ${dims.height}` }
+              : undefined;
             return (
-              <div className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-[18px] border border-rule bg-bg">
+              <div
+                className="relative w-full max-w-[360px] mx-auto md:ml-auto md:mr-0 overflow-hidden rounded-[22px] border border-rule bg-bg"
+                style={aspectStyle}
+              >
                 <Image
                   src={heroSrc}
                   alt={`${meta.title} screenshot`}
-                  fill
+                  fill={!dims}
+                  width={dims?.width}
+                  height={dims?.height}
                   priority
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 500px"
+                  className={
+                    dims ? "block w-full h-auto" : "object-contain"
+                  }
+                  sizes="(max-width: 768px) 100vw, 360px"
                 />
               </div>
             );

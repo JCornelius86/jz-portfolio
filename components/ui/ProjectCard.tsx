@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Tag from "./Tag";
 import StripeImage from "./StripeImage";
+import { getImageDims } from "@/lib/imageDims";
 import type { Project } from "@/lib/types";
 
 interface ProjectCardProps {
@@ -17,17 +18,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   if (has.live) availability.push("Live demo");
   if (has.code) availability.push("Source");
 
+  const dims = project.coverImage ? getImageDims(project.coverImage) : null;
+
   return (
     <Link href={`/projects/${project.slug}`} className="block group h-full">
       <article className="h-full flex flex-col gap-4 bg-card border border-rule rounded-[18px] p-5 transition-colors duration-150 group-hover:border-accent/60">
         {project.coverImage ? (
-          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[14px] border border-rule bg-bg">
+          <div
+            className="relative w-full max-w-[260px] mx-auto overflow-hidden rounded-[14px] border border-rule bg-bg"
+            style={
+              dims
+                ? { aspectRatio: `${dims.width} / ${dims.height}` }
+                : undefined
+            }
+          >
             <Image
               src={project.coverImage}
               alt={`${project.title} screenshot`}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
+              fill={!dims}
+              width={dims?.width}
+              height={dims?.height}
+              className={dims ? "block w-full h-auto" : "object-contain"}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 260px"
             />
           </div>
         ) : (
