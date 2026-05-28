@@ -93,6 +93,11 @@ export default async function ProjectPage({ params }: PageProps) {
                 Try it →
               </Button>
             ) : null}
+            {meta.appStoreUrl ? (
+              <Button href={meta.appStoreUrl} external variant="ghost">
+                App Store →
+              </Button>
+            ) : null}
             {meta.githubUrl ? (
               <Button href={meta.githubUrl} external variant="ghost">
                 GitHub

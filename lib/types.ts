@@ -20,6 +20,7 @@ export interface Project {
   heroImage?: string;
   githubUrl?: string;
   liveUrl?: string;
+  appStoreUrl?: string;
   date: string;
   featured: boolean;
 }

@@ -13,9 +13,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const has = {
     live: Boolean(project.liveUrl),
     code: Boolean(project.githubUrl),
+    app: Boolean(project.appStoreUrl),
   };
   const availability: string[] = [];
   if (has.live) availability.push("Live demo");
+  if (has.app) availability.push("App Store");
   if (has.code) availability.push("Source");
 
   const dims = project.coverImage ? getImageDims(project.coverImage) : null;
