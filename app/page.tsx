@@ -66,7 +66,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-                Open to senior IC + leadership roles
+                Always up for an interesting problem
               </span>
             </div>
             <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[520px] mb-7">
