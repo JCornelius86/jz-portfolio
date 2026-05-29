@@ -210,7 +210,7 @@ export default function Home() {
           </p>
           <div>
             <p className="text-invert-fg/70 text-[15px] md:text-[16px] leading-[1.6] mb-6">
-              I&apos;d like to hear about it. Climate, energy, healthcare, public good. Those are the ones I lean toward. If it&apos;s real work on a real problem, write anyway.
+              I&apos;d like to hear about it. Climate, energy, healthcare, public good. Those are the ones I lean toward. If it&apos;s real work on a real problem, drop me a line.
             </p>
             <a
               href="mailto:jc.zabel@gmail.com"
