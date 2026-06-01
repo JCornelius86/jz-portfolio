@@ -24,6 +24,11 @@ export function getImageDims(publicPath: string): ImageDims | null {
     return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
   }
 
+  // GIF ("GIF87a" / "GIF89a") — logical-screen dimensions are little-endian.
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46) {
+    return { width: buf.readUInt16LE(6), height: buf.readUInt16LE(8) };
+  }
+
   if (buf[0] === 0xff && buf[1] === 0xd8) {
     let offset = 2;
     while (offset < buf.length) {
