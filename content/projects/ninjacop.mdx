@@ -1,0 +1,93 @@
+---
+title: "NinjaCop"
+description: "A 1980s-cyberpunk idle game played entirely as a CRT police terminal. Take a corrupt megacity back one district at a time."
+tags: ["React Native", "Expo", "TypeScript", "Game Design", "Idle Game"]
+coverImage: "/images/ninjacop/city.png"
+heroImage: "/images/ninjacop/boss-fight.png"
+liveUrl: "/play/ninjacop"
+githubUrl: "https://github.com/JCornelius86/ninja-cop"
+date: "2026-06-01"
+featured: true
+---
+
+## Overview
+
+NinjaCop is a mobile idle game with a single, deliberate art direction: the whole
+thing is a 1980s police terminal. You command **Precinct Zero**, a black-ops unit
+of augmented ninja-cops, and take Kestrel City back from five crime syndicates one
+district at a time. Deploy a squad, win the auto-combat, convert a fallen syndicate
+base into an income-generating precinct, and let the passive economy fund your push
+toward the next target. Paid up front. No ads, no IAP, no dark patterns.
+
+I wanted to take a full game from concept to shipping build, so I wrote a design
+bible first (vision, economy, content, the five bosses, the visual language) and
+built against it.
+
+## The core loop
+
+One readable loop, learnable in about ninety seconds and deep enough to carry a
+full campaign:
+
+> deploy → auto-combat → earn → convert a base → passive income → unlock the next district.
+
+Combat resolves live in the CRT log with health bars and three timed tactical
+abilities: Stim, Overclock, and Focus. Trash fights are reliable, but every
+district boss demands intervention. Try the playable build embedded at the bottom
+of this page.
+
+![A Strip raid resolving live in the terminal: auto-combat, a tactical Overclock, then the payout.](/images/ninjacop/ninjacop-demo.gif)
+
+## Five districts, five bosses
+
+Each district is a hand-authored syndicate ruled by a named **Oyabun**, and each
+boss teaches a distinct combat mechanic that escalates toward a multi-phase finale:
+summoned reinforcements, an armored tank with drone adds, a fire-rate lockout, and
+a final CEO who cycles all of them. The story tightens as you climb. Every
+syndicate, it turns out, reports to the same parent company.
+
+<ImageRow
+  images={[
+    { src: "/images/ninjacop/city.png", alt: "CITY: the campaign map and the active district's boss" },
+    { src: "/images/ninjacop/intel.png", alt: "INTEL: syndicate dossiers and the conspiracy reveal" }
+  ]}
+  portraitMax={260}
+/>
+
+## An idle game with decisions
+
+Underneath the loop sits a small economy that keeps choices on the table even while
+numbers tick on their own:
+
+- **Officer Pool.** Fire-and-forget Surveillance and Patrol timers that gather Intel (the only thing that unlocks the next district) and suppress Heat.
+- **Heat.** Aggressive play raises it, and high Heat triggers syndicate counterattacks that can hit your squad, online and offline.
+- **Upgrades and cyberware.** Yen buildings (Barracks, Infirmary, Surveillance Net, a Vault income ceiling) plus permanent Tech-Core cyberware that carries through New Game+.
+- **An honest economy.** Light upkeep keeps net income just below gross, and offline earns at half rate, capped. Generous, never a trap.
+
+<ImageRow
+  images={[
+    { src: "/images/ninjacop/ops.png", alt: "OPS: squad deploy and Officer-Pool dispatch" },
+    { src: "/images/ninjacop/precinct.png", alt: "PRECINCT: gear, buildings, and Tech-Core cyberware" }
+  ]}
+  portraitMax={260}
+/>
+
+## Built to ship
+
+The whole game is a single React Native + Expo codebase that targets iOS, Android,
+and the web build you can play here. State lives in one Zustand store with a
+versioned, migrating save. The interesting part is the combat: it is a
+**deterministic, seeded simulation**, which made it fully unit-testable and let me
+tune balance by measurement rather than by feel. Each boss is guarded by tests that
+assert passive play loses and full tactical play wins. The build ships with 144
+passing tests.
+
+The art direction does double duty. A CRT-terminal aesthetic is period-accurate,
+distinctive on a storefront, and the cheapest possible art lift: typography, a
+neon-on-near-black palette (IBM Plex Mono and Press Start 2P), and scanline and glow
+effects with an accessibility toggle. The only illustrated art is hand-made pixel
+portraits of the named characters.
+
+## My role
+
+Concept, systems and UX design, art direction, and development, from the design
+bible through to a tested, playable build and this embedded web demo.
