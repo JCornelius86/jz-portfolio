@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { getImageDims } from "@/lib/imageDims";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 
@@ -19,9 +20,13 @@ export default function MdxFigure({
   const dims = getImageDims(src);
   const isPortrait = dims ? dims.height > dims.width : false;
 
-  const wrapperClass = isPortrait ? "mx-auto" : "w-full";
+  // Portrait shots use most of the column on mobile, but cap on sm+ so they
+  // stay tidy on desktop (tall phone aspect ratios read large otherwise).
+  const wrapperClass = isPortrait
+    ? "mx-auto w-[85%] sm:w-full sm:max-w-[var(--portrait-max)]"
+    : "w-full";
   const wrapperStyle = isPortrait
-    ? { maxWidth: `${portraitMax}px` }
+    ? ({ "--portrait-max": `${portraitMax}px` } as CSSProperties)
     : undefined;
 
   return (

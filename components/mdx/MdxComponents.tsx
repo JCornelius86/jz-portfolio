@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import { Children, isValidElement, type ReactNode } from "react";
 import MdxFigure from "./MdxFigure";
 import MdxImageRow from "./MdxImageRow";
+import MdxRow from "./MdxRow";
 
 function hasImage(children: ReactNode): boolean {
   return Children.toArray(children).some(
@@ -102,4 +103,8 @@ export const mdxComponents: MDXComponents = {
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ImageRow: MdxImageRow as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Figure: MdxFigure as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Row: MdxRow as unknown as any,
 };
