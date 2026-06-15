@@ -1,7 +1,7 @@
 ---
 title: "CharTaker"
-description: "A TTRPG character manager for creating, organizing, and tracking tabletop RPG characters."
-tags: ["JavaScript", "TTRPG", "Side Project"]
+description: "A Starfinder character manager that carries a player from a guided build through live play, starships, and shared campaigns. Built solo and shipped to the App Store."
+tags: ["React", "Vite", "Capacitor", "Supabase", "TTRPG", "iOS"]
 coverImage: "/images/chartaker/character-sheet.png"
 heroImage: "/images/chartaker/critical.png"
 githubUrl: "https://github.com/JCornelius86/chartaker"
@@ -13,12 +13,96 @@ featured: true
 
 ## Overview
 
-I play Starfinder weekly with a local group, and none of the existing character management tools felt right. They were clunky, overwhelming for new players, and not built with Starfinder in mind. So I built CharTaker to be the tool I wished existed: intuitive enough to help onboard new players while still being useful for experienced ones.
+I play Starfinder weekly with a local group, and none of the existing character
+tools felt right. They were clunky, overwhelming for a new player, and none of them
+were really built for Starfinder. So I built CharTaker to be the tool I wished
+existed: gentle enough to onboard someone who has never opened a rulebook, and fast
+enough that a veteran can run their whole table from a phone.
 
-CharTaker lets you create, organize, and track characters across campaigns with a clean interface built on React and Vite.
+What started as "a cleaner character sheet" grew into the thing I have spent the most
+time on. It now covers the full arc of a campaign, from rolling up a character to
+running live combat, flying starships, and sharing a session with the rest of the
+table in real time. It is on the App Store, and it is the project I am proudest of.
 
-## Tech Stack
+## Build a character without reading the rulebook
 
-- **Framework**: React with Vite
-- **Styling**: CSS with HMR support
-- **Linting**: ESLint
+The hardest moment in any tabletop game is the first one: a blank sheet and four
+hundred pages of rules. CharTaker turns that into a guided wizard. You pick an
+ancestry, a class, and a theme, and the app does the rulebook lookups for you,
+surfacing only the choices that actually apply at your level. Skill ranks, class
+features, and feats each get their own browsable, searchable picker, with the
+mechanical effects written in plain language instead of cross-references.
+
+Leveling works the same way. A level-up wizard walks you through exactly what changes
+at the next tier and applies it to the sheet, so growing a character never means
+re-reading the chapter you read six weeks ago.
+
+<Figure
+  src="/images/chartaker/character-sheet.png"
+  alt="A full character sheet: stats, skills, class features, and equipment in one scrollable view."
+  portraitMax="230"
+/>
+
+## Run the table, live
+
+Once play starts, the sheet becomes a control surface. Combat tracks stamina, hit
+points, and shields separately the way Starfinder actually works, applies and clears
+conditions, and handles rests without math. A built-in dice roller resolves attacks
+and checks in place, and a dedicated critical-hit flow makes the best moment at the
+table feel like one instead of a footnote.
+
+<D20 />
+
+<Figure
+  src="/images/chartaker/critical.png"
+  alt="The critical-hit flow firing during a live combat roll."
+  portraitMax="230"
+/>
+
+## The Starfinder parts other tools forget
+
+This is where building specifically for one system paid off. Starfinder has two whole
+subsystems that generic character trackers ignore, so CharTaker treats them as
+first-class:
+
+- **Starships.** A full ship view for the vessel the party shares, with its own
+  vitality and combat-relevant stats, edited the same clean way as a character.
+- **Drones.** The mechanic's drone is its own managed companion rather than a note
+  scribbled in the margin.
+
+## Campaigns and shared sessions
+
+CharTaker reaches past the single player. A campaign holds its encounters, session
+notes, and the conditions in play, so the GM has somewhere to run from. And because
+the backend is real, a GM can open a live session and have players join it from their
+own phones, with the table's state synced between everyone in real time. The solo
+character app quietly became a multiplayer one.
+
+## Bring the character you already have
+
+New tools die on the migration problem: nobody wants to retype a character they have
+already built somewhere else. CharTaker ships an importer for Hephaistos, a popular
+Starfinder builder, so existing players can pull a character in and keep playing
+instead of starting over. It is a small feature that does a lot of the work of
+getting a real group to switch.
+
+## Built to ship
+
+Under the surface, CharTaker is a React 19 and Vite single-page app styled with
+Tailwind, wrapped by **Capacitor** into the native iOS and Android builds that put it
+on the App Store from the same codebase as the web build linked above. **Supabase**
+provides auth, the Postgres database, and the realtime layer behind shared sessions.
+
+The interesting engineering is in the data. The full equipment, spell, feat, class,
+and ancestry rules are modeled as structured data the app reasons over, and the big
+browsers (the shop and the spell list) are virtualized with TanStack Virtual so
+thousands of items scroll smoothly on a phone. Character, campaign, and ship state
+each run through reducers covered by a Vitest suite, and product analytics run through
+PostHog behind a proper consent banner. It is at version 1.3.x because it is a real
+app with real users, and it keeps shipping.
+
+## My role
+
+Everything. Concept, product and UX design, the data modeling of the game rules, the
+full-stack build on Supabase, and the release to the App Store. CharTaker is the
+clearest single answer to "still shipping the software myself."

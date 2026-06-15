@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { getImageDims } from "@/lib/imageDims";
 import ImageLightbox from "@/components/ui/ImageLightbox";
+import Reveal from "@/components/ui/Reveal";
 
 interface MdxFigureProps {
   src: string;
@@ -30,21 +31,23 @@ export default function MdxFigure({
     : undefined;
 
   return (
-    <figure className={inline ? "" : "my-8"}>
-      <div className={wrapperClass} style={wrapperStyle}>
-        <ImageLightbox
-          src={src}
-          alt={alt}
-          width={dims?.width ?? 1200}
-          height={dims?.height ?? 800}
-          rounded={isPortrait ? "lg" : "md"}
-        />
-      </div>
-      {alt ? (
-        <figcaption className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted mt-3 text-center leading-[1.5]">
-          {alt}
-        </figcaption>
-      ) : null}
-    </figure>
+    <Reveal>
+      <figure className={inline ? "" : "my-8"}>
+        <div className={wrapperClass} style={wrapperStyle}>
+          <ImageLightbox
+            src={src}
+            alt={alt}
+            width={dims?.width ?? 1200}
+            height={dims?.height ?? 800}
+            rounded={isPortrait ? "lg" : "md"}
+          />
+        </div>
+        {alt ? (
+          <figcaption className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted mt-3 text-center leading-[1.5]">
+            {alt}
+          </figcaption>
+        ) : null}
+      </figure>
+    </Reveal>
   );
 }
