@@ -23,6 +23,8 @@ export interface Project {
   appStoreUrl?: string;
   date: string;
   featured: boolean;
+  /** Manual sort position within the featured group (lower = earlier). Falls back to date. */
+  order?: number;
 }
 
 export interface ContentMeta {

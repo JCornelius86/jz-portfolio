@@ -67,7 +67,14 @@ export function getProjects(): Project[] {
         ...data,
       } as Project;
     })
-    .sort((a, b) => (a.featured === b.featured ? 0 : a.featured ? -1 : 1));
+    .sort((a, b) => {
+      // Featured first, then manual `order`, then newest date as a fallback.
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      const ao = a.order ?? Number.POSITIVE_INFINITY;
+      const bo = b.order ?? Number.POSITIVE_INFINITY;
+      if (ao !== bo) return ao - bo;
+      return (b.date ?? "").localeCompare(a.date ?? "");
+    });
 }
 
 export function getProject(slug: string) {
