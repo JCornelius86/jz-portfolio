@@ -44,8 +44,13 @@
 - **Never narrate the IC/manager transition on the site.** Don't say "former manager," "previously managed," "stepped back from management." Don't water down leadership verbs in past-tense content.
 - Avoid: "passionate," "thought leader," "leveraged," "synergy," "ecosystem."
 
+## Resume PDF
+- `public/JC_Zabel_Resume.pdf` is **generated, never hand-edited.** Source of truth is `resume-src/resume.html` (a standalone classic two-column print template, intentionally decoupled from the website `/resume` page styling).
+- Edit the content in `resume-src/resume.html`, then rebuild with `npm run resume:pdf` (renders via headless Chrome to `public/`). Commit both files together.
+- Keep the role/bullet content in sync with the `/resume`, `/about`, and home-page copy when experience changes.
+
 ## Hosting
 - Code on GitHub
-- Deployed via Vercel (free tier)
+- Deployed via Vercel (free tier) from `main` (push to `main` = production deploy)
 - No secrets in repo
 - Custom domain added later via Vercel dashboard
