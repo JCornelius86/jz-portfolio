@@ -51,23 +51,39 @@ interface Job {
 const experience: Job[] = [
   {
     company: "Microsoft",
-    title: "Senior Design Manager",
-    dates: "Apr 2023 – Present",
+    title: "Senior Product Designer",
+    dates: "May 2026 – Present",
     bullets: [
       [
-        { text: "Manage and mentor a team of " },
+        { text: "Lead UX for AI-powered, agentic experiences in " },
+        { text: "Azure Advisor", highlight: true },
+        {
+          text:
+            ", Microsoft's recommendation engine that helps enterprise customers cut cloud cost, reduce risk, and modernize their workloads",
+        },
+      ],
+      "Design workflows that turn long, generic recommendation lists into prioritized, contextual actions, so customers know what to fix first",
+      [
+        { text: "Helped modernize authoring and governance for a catalog of " },
+        { text: "~1,700 recommendations", highlight: true },
+        { text: ", introducing AI-assisted drafting with human review to raise quality and consistency" },
+      ],
+      "Partner with platform and engineering teams to align AI interaction patterns, accessibility, and Responsible AI standards; also drive UX for CX Observe, internal tooling for customer-health insights",
+    ],
+  },
+  {
+    company: "Microsoft",
+    title: "Senior Design Manager",
+    dates: "Apr 2023 – May 2026",
+    bullets: [
+      [
+        { text: "Managed and coached a multidisciplinary team of " },
         { text: "6 designers and UX researchers", highlight: true },
-        { text: " across Azure X, Resiliency, and Customer Health" },
+        { text: " across Azure Advisor, CX Observe, and customer-health products" },
       ],
       "Recognized with Azure X Manager of the Year for delivery results and people leadership",
-      "Established design-driven operating rhythms improving clarity, velocity, and cross-org alignment with PM and Engineering",
-      "Elevated team visibility at senior leadership through executive-ready storytelling and design-led narratives",
-      "Contributing to a cross-org v-team defining the Future of Work vision for the UX organization",
-      [
-        { text: "Drove quality initiatives including large-scale bug bashes resulting in " },
-        { text: "100+ actionable improvements", highlight: true },
-        { text: " shipped or prioritized" },
-      ],
+      "Translated ambiguous, cross-organization priorities into clear product direction and execution plans; influenced roadmap and investment decisions",
+      "Built alignment across product, engineering, research, and leadership while empowering the team to own major workstreams; elevated visibility through executive-ready storytelling",
     ],
   },
   {
@@ -77,20 +93,17 @@ const experience: Job[] = [
     bullets: [
       [
         { text: "Led UX for internal Azure field platforms serving " },
-        { text: "4,000+ internal users across 10+ Microsoft orgs", highlight: true },
+        { text: "4,000+ users across 10+ Microsoft organizations", highlight: true },
       ],
       [
         { text: "Drove " },
-        { text: "175% MAU growth", highlight: true },
-        { text: " post-preview on internal tooling" },
-      ],
-      [
-        { text: "Supported business outcomes tied to " },
+        { text: "175% monthly-active-user growth", highlight: true },
+        { text: " post-launch; supported outcomes tied to " },
         { text: "$25M+ projected revenue", highlight: true },
         { text: " and " },
         { text: "$3M annual cost savings", highlight: true },
       ],
-      "Trusted IC partner to senior PM and Engineering leaders; influenced roadmap investment and contributed to early AI/LLM exploration",
+      "Trusted IC partner to senior PM and engineering leaders; contributed to early AI/LLM exploration that shaped later agentic work",
     ],
   },
   {
@@ -176,7 +189,7 @@ export default function ResumePage() {
             James C. E. Zabel
           </p>
           <p className="text-ink-soft text-[16px] mb-4">
-            Senior Design Manager · UX Leader · 15+ Years Experience
+            Senior Product Designer · UX & Design Leader · 15+ Years Experience
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[12px] uppercase tracking-[0.08em] text-muted">
             <span>Fort Mill, SC</span>

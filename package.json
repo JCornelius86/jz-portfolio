@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "resume:pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=12000 --print-to-pdf=public/JC_Zabel_Resume.pdf \"file://$PWD/resume-src/resume.html\""
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

@@ -1,0 +1,430 @@
+<!doctype html>
+<!--
+  Standalone print source for public/JC_Zabel_Resume.pdf.
+  This is intentionally NOT the website /resume page: the PDF keeps a classic,
+  grayscale, typeset two-column format. Edit content here, then regenerate:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=10000 \
+      --print-to-pdf="public/JC_Zabel_Resume.pdf" \
+      "file://$(pwd)/resume-src/resume.html"
+
+  Two explicit .page blocks keep it to exactly 2 pages (US Letter).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>James C. E. Zabel - Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #2c2c2c;
+    --gray: #6f6f6f;
+    --gray-light: #9a9a9a;
+    --rule: #111;
+    --rule-soft: #d8d8d8;
+  }
+  * { box-sizing: border-box; }
+  @page { size: letter; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--ink);
+    font-size: 9pt;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    position: relative;
+    width: 8.5in;
+    height: 11in;
+    padding: 0.5in 0.62in 0.55in;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---- Masthead ---- */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end; }
+  .name {
+    font-family: "Fraunces", serif;
+    font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+    font-weight: 540;
+    font-size: 30pt;
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    margin: 0;
+  }
+  .tagline {
+    font-size: 9.5pt;
+    font-weight: 500;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 9px;
+  }
+  .contacts { text-align: right; font-size: 9pt; color: var(--ink-soft); line-height: 1.55; }
+  .contacts .dim { color: var(--gray-light); padding: 0 4px; }
+  .rule-top { border-bottom: 1.2px solid var(--rule); margin-top: 13px; }
+
+  /* ---- Columns ---- */
+  .cols { display: grid; grid-template-columns: 30% 1fr; gap: 0.45in; margin-top: 20px; }
+
+  .sec-label {
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 5px;
+    margin: 0 0 11px;
+  }
+  .block { margin-bottom: 19px; }
+
+  /* ---- Profile ---- */
+  .profile {
+    font-family: "Fraunces", serif;
+    font-variation-settings: "opsz" 32, "SOFT" 0, "WONK" 0;
+    font-size: 10pt;
+    line-height: 1.46;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .profile em { font-style: italic; }
+
+  /* ---- Skills ---- */
+  .skill-group { margin-bottom: 9px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-cat {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7pt;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 2px;
+  }
+  .skill-list { font-size: 8.8pt; line-height: 1.38; color: var(--ink-soft); }
+
+  /* ---- Education ---- */
+  .edu { margin-bottom: 10px; }
+  .edu:last-child { margin-bottom: 0; }
+  .edu-deg { font-weight: 600; font-size: 9.2pt; color: var(--ink); }
+  .edu-meta { font-size: 8.4pt; color: var(--gray); line-height: 1.35; }
+
+  /* ---- Honors ---- */
+  .honors { list-style: none; margin: 0; padding: 0; }
+  .honors li {
+    position: relative;
+    padding-left: 12px;
+    font-size: 8.9pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .honors li::before { content: "\2013"; position: absolute; left: 0; color: var(--gray); }
+
+  /* ---- Experience ---- */
+  .job { margin-bottom: 11px; }
+  .job:last-child { margin-bottom: 0; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .job-title { font-size: 10pt; color: var(--ink); }
+  .job-title .co { font-weight: 600; }
+  .job-title .role { font-weight: 400; }
+  .job-title .sub { color: var(--gray); font-weight: 400; }
+  .job-date { font-size: 8.6pt; color: var(--gray); white-space: nowrap; }
+  ul.bullets { list-style: none; margin: 4px 0 0; padding: 0; }
+  ul.bullets li {
+    position: relative;
+    padding-left: 12px;
+    font-size: 8.9pt;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin-bottom: 1.5px;
+  }
+  ul.bullets li::before {
+    content: "\2022";
+    position: absolute;
+    left: 1px;
+    color: var(--ink);
+  }
+  strong { font-weight: 600; color: var(--ink); }
+
+  /* ---- Side projects ---- */
+  .proj { margin-bottom: 8px; }
+  .proj-line { font-size: 8.9pt; color: var(--ink-soft); padding-left: 12px; position: relative; line-height: 1.4; }
+  .proj-line::before { content: "\2022"; position: absolute; left: 1px; color: var(--ink); }
+
+  /* ---- How I lead ---- */
+  .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 26px; }
+  .lead-item {
+    position: relative;
+    padding-left: 12px;
+    font-size: 8.9pt;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+  .lead-item::before { content: "\2022"; position: absolute; left: 1px; color: var(--ink); }
+  .lead-item b { font-weight: 600; color: var(--ink); }
+
+  /* ---- Footers / page-2 header ---- */
+  .footer {
+    position: absolute;
+    left: 0.62in;
+    right: 0.62in;
+    bottom: 0.42in;
+    display: flex;
+    justify-content: space-between;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+  .mini-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1.2px solid var(--rule);
+    padding-bottom: 11px;
+  }
+  .mini-head .name { font-size: 15pt; }
+  .mini-head .cont {
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .section-spacer { margin-top: 22px; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<div class="page">
+  <div class="masthead">
+    <div>
+      <h1 class="name">James C. E. Zabel</h1>
+      <div class="tagline">Senior Product Designer &middot; UX Leader &middot; 15+ Years</div>
+    </div>
+    <div class="contacts">
+      <div>Fort Mill, SC<span class="dim">&middot;</span>(803) 984-5744</div>
+      <div>jc.zabel@gmail.com</div>
+      <div>jczabel.com<span class="dim">&middot;</span>linkedin.com/in/james-zabel</div>
+    </div>
+  </div>
+  <div class="rule-top"></div>
+
+  <div class="cols">
+    <!-- Sidebar -->
+    <aside>
+      <div class="block">
+        <div class="sec-label">Profile</div>
+        <p class="profile">
+          Senior product designer at Microsoft, building <em>AI-powered, agentic experiences</em> in Azure Advisor. Previously led design across <em>Azure CXS, Resiliency, and Customer Health</em>, and scaled an enterprise IoT platform past <em>20M devices</em> as the founding designer. AI-native, mission-oriented, still shipping software myself.
+        </p>
+      </div>
+
+      <div class="block">
+        <div class="sec-label">Skills</div>
+        <div class="skill-group">
+          <div class="skill-cat">Leadership</div>
+          <div class="skill-list">Design management, UX research, design ops, mentorship, executive storytelling</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-cat">Craft</div>
+          <div class="skill-list">Design systems, prototyping, information architecture, data visualization, mobile &amp; enterprise SaaS</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-cat">AI</div>
+          <div class="skill-list">Agentic UX, AI-assisted authoring, human-in-the-loop review, Responsible AI</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-cat">Tools</div>
+          <div class="skill-list">Figma, Adobe XD, Sketch, Axure, Zeplin</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-cat">Build</div>
+          <div class="skill-list">HTML, CSS, TypeScript, React Native, SQL</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="sec-label">Education</div>
+        <div class="edu">
+          <div class="edu-deg">M.S. Industrial Engineering</div>
+          <div class="edu-meta">Human Factors Psychology focus<br>Clemson University &middot; 2010</div>
+        </div>
+        <div class="edu">
+          <div class="edu-deg">B.S. Industrial Engineering</div>
+          <div class="edu-meta">Clemson University &middot; 2009</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="sec-label">Honors</div>
+        <ul class="honors">
+          <li>Azure X Manager of the Year</li>
+          <li>AWS Certified Cloud Practitioner</li>
+          <li>Six Sigma Green Belt</li>
+          <li>IIE President, 2009&ndash;2010</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Experience -->
+    <main>
+      <div class="sec-label">Experience</div>
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title"><span class="co">Microsoft</span> <span class="sub">/</span> <span class="role">Senior Product Designer</span></div>
+          <div class="job-date">May 2026 &ndash; Present</div>
+        </div>
+        <ul class="bullets">
+          <li>Lead UX for AI-powered, agentic experiences in <strong>Azure Advisor</strong>, Microsoft&rsquo;s recommendation engine that helps enterprise customers cut cloud cost, reduce risk, and modernize their workloads.</li>
+          <li>Design workflows that turn long, generic recommendation lists into prioritized, contextual actions, so customers know what to fix first.</li>
+          <li>Helped modernize authoring and governance for a catalog of <strong>~1,700 recommendations</strong>, introducing AI-assisted drafting with human review.</li>
+          <li>Partner with platform and engineering teams on AI interaction patterns, accessibility, and Responsible AI; also drive UX for CX Observe, internal customer-health tooling.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title"><span class="co">Microsoft</span> <span class="sub">/</span> <span class="role">Senior Design Manager</span></div>
+          <div class="job-date">Apr 2023 &ndash; May 2026</div>
+        </div>
+        <ul class="bullets">
+          <li>Managed and coached a multidisciplinary team of <strong>6 designers and UX researchers</strong> across Azure Advisor, CX Observe, and customer-health products.</li>
+          <li>Recognized with <strong>Azure X Manager of the Year</strong> for delivery results and people leadership.</li>
+          <li>Translated ambiguous, cross-organization priorities into clear product direction and execution plans; influenced roadmap and investment decisions.</li>
+          <li>Built alignment across product, engineering, research, and leadership while empowering the team to own major workstreams.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title"><span class="co">Microsoft</span> <span class="sub">/</span> <span class="role">Senior UX Designer</span></div>
+          <div class="job-date">Feb 2022 &ndash; Apr 2023</div>
+        </div>
+        <ul class="bullets">
+          <li>Led UX for internal Azure field platforms serving <strong>4,000+ users across 10+ Microsoft organizations</strong>.</li>
+          <li>Drove <strong>175% monthly-active-user growth</strong> post-launch; supported outcomes tied to <strong>$25M+ projected revenue</strong> and <strong>$3M annual cost savings</strong>.</li>
+          <li>Trusted IC partner to senior PM and engineering leaders; contributed to early AI/LLM exploration that shaped later agentic work.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title"><span class="co">SnapOne</span> <span class="sub">(formerly SnapAV) /</span> <span class="role">UX Manager</span></div>
+          <div class="job-date">Feb 2015 &ndash; Feb 2022</div>
+        </div>
+        <ul class="bullets">
+          <li>Led UX for OvrC, an IoT cloud remote management platform supporting <strong>20M+ managed devices</strong> globally.</li>
+          <li>Led OvrC Home, a residential consumer app for monitoring and controlling smart home devices.</li>
+          <li>Provided strategic design support for the <strong>$150M+ Connected Device category</strong>, driving double-digit annual growth.</li>
+          <li>Managed onshore and offshore design teams; built a standardized design system across all software interfaces.</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <div class="footer">
+    <span>James C. E. Zabel</span>
+    <span>Page 1 of 2</span>
+  </div>
+</div>
+
+<!-- ============================ PAGE 2 ============================ -->
+<div class="page">
+  <div class="mini-head">
+    <h1 class="name">James C. E. Zabel</h1>
+    <div class="cont">Experience, continued</div>
+  </div>
+
+  <div class="section-spacer">
+    <div class="sec-label">Experience, continued</div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title"><span class="co">SnapOne</span> <span class="sub">(formerly SnapAV) /</span> <span class="role">User Experience Engineer</span></div>
+        <div class="job-date">Aug 2013 &ndash; Feb 2015</div>
+      </div>
+      <ul class="bullets">
+        <li>Early team member helping launch OvrC, a device management platform now supporting <strong>20M+ IoT devices</strong>.</li>
+        <li>Led offshore UI team using AngularJS, HTML5, CSS3, Bootstrap, and WebSocket.</li>
+        <li>Created wireframes, prototypes, and flowcharts; ran usability studies with clients to iterate design.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title"><span class="co">Lockheed Martin</span> <span class="sub">/</span> <span class="role">Human Systems Integration Engineer</span></div>
+        <div class="job-date">Nov 2011 &ndash; Aug 2013</div>
+      </div>
+      <ul class="bullets">
+        <li>Principal investigator on usability assessments for the Navy <strong>Ballistic Missile Defense 5.1</strong> program.</li>
+        <li>Used iterative design and heuristic evaluations to develop new GUIs introduced to fleet architecture.</li>
+        <li>Gathered input from active-duty sailors to resolve novel interface and layout problems.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title"><span class="co">General Electric</span> <span class="sub">(Axiem Engineering) /</span> <span class="role">Human Factors Engineer</span></div>
+        <div class="job-date">2011</div>
+      </div>
+      <ul class="bullets">
+        <li>Risk assessments, Root Cause Analysis, and Preliminary Hazard Assessments supporting new product development across multiple GE business units.</li>
+        <li>Identified safety-critical components and systems; completed PHA, HazOp, and Accident Scenario Reviews.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-spacer">
+    <div class="sec-label">Recent Side Projects</div>
+    <div class="proj">
+      <div class="job-head">
+        <div class="job-title"><span class="co">CharTaker</span> <span class="sub">/ JavaScript &middot; iOS</span></div>
+        <div class="job-date">2024 &ndash; Present</div>
+      </div>
+      <div class="proj-line">A TTRPG character manager for creating, organizing, and tracking tabletop RPG characters. Shipped to the App Store.</div>
+    </div>
+    <div class="proj">
+      <div class="job-head">
+        <div class="job-title"><span class="co">Inspec</span> <span class="sub">/ TypeScript</span></div>
+        <div class="job-date">2024</div>
+      </div>
+      <div class="proj-line">Franchise management application for streamlining inspections and operations across distributed teams.</div>
+    </div>
+    <div class="proj">
+      <div class="job-head">
+        <div class="job-title"><span class="co">MealMapper</span> <span class="sub">/ React Native &middot; Supabase</span></div>
+        <div class="job-date">2024</div>
+      </div>
+      <div class="proj-line">Cross-platform mobile app for meal planning, grocery list generation, and real-time household sync.</div>
+    </div>
+  </div>
+
+  <div class="section-spacer">
+    <div class="sec-label">How I Lead</div>
+    <div class="lead-grid">
+      <div class="lead-item"><b>Grow the people.</b> Built on trust, 1:1s, design crits, and stretch assignments. Teams that learn deliver.</div>
+      <div class="lead-item"><b>Design the system.</b> Systems, not screens. Scalable patterns keep product coherent as it grows.</div>
+      <div class="lead-item"><b>Ship over perfection.</b> Working increments first, polish what matters. Momentum beats perfection.</div>
+      <div class="lead-item"><b>Test what you don&rsquo;t know.</b> Validate fast. Assumptions are risks; feedback is fuel.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>jc.zabel@gmail.com &middot; jczabel.com</span>
+    <span>Page 2 of 2</span>
+  </div>
+</div>
+
+</body>
+</html>
