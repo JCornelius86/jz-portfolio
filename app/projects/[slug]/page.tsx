@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: PageProps) {
           }
           return (
             <StripeImage
-              caption={`${meta.title} — app shot`}
+              caption={`${meta.title}, app shot`}
               aspect="3/4"
             />
           );

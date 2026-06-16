@@ -24,7 +24,7 @@ export default function CaseStudyCard({ study }: CaseStudyCardProps) {
             />
           </div>
         ) : (
-          <StripeImage caption={`${study.title} — cover`} aspect="16/9" />
+          <StripeImage caption={`${study.title}, cover`} aspect="16/9" />
         )}
         <div className="flex flex-col gap-2">
           <h3

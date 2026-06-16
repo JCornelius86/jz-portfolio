@@ -70,7 +70,7 @@ export default function Home() {
               </span>
             </div>
             <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[520px] mb-7">
-              I&apos;m <strong className="text-ink font-semibold">JC Zabel</strong>. Currently at Microsoft, designing AI-native guidance across Azure, from Portal patterns to Advisor recommendations to the tools our field teams use to support customers. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.
+              I&apos;m <strong className="text-ink font-semibold">JC Zabel</strong>. Currently at Microsoft, designing AI-powered guidance across Azure, from Portal patterns to Advisor recommendations to the tools our field teams use to support customers. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button href="/work" variant="primary">
@@ -125,7 +125,7 @@ export default function Home() {
                   if (!flagship.coverImage) {
                     return (
                       <StripeImage
-                        caption={`${flagship.title} — dashboard, full bleed`}
+                        caption={`${flagship.title}, dashboard, full bleed`}
                         aspect="4/3"
                       />
                     );

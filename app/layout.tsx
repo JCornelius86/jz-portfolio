@@ -11,12 +11,12 @@ const SHARED_DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL("https://jczabel.com"),
   title: {
-    default: "JC Zabel — Senior designer, design leader, always building",
+    default: "JC Zabel: Senior designer, design leader, always building",
     template: "%s | JC Zabel",
   },
   description: SHARED_DESCRIPTION,
   openGraph: {
-    title: "JC Zabel — Senior designer, design leader, always building",
+    title: "JC Zabel: Senior designer, design leader, always building",
     description: SHARED_DESCRIPTION,
     siteName: "JC Zabel",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JC Zabel — Senior designer, design leader, always building",
+    title: "JC Zabel: Senior designer, design leader, always building",
     description: SHARED_DESCRIPTION,
   },
 };

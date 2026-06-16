@@ -155,7 +155,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             );
           })()
         ) : (
-          <StripeImage caption={`${meta.title} — hero`} aspect="16/9" />
+          <StripeImage caption={`${meta.title}, hero`} aspect="16/9" />
         )}
       </div>
 

@@ -1,6 +1,6 @@
 ---
 title: "MealMapper"
-description: "A cross-platform app that turns a week of meals into a sorted grocery list and a one-tap store order — built for two people sharing one kitchen."
+description: "A cross-platform app that turns a week of meals into a sorted grocery list and a one-tap store order, built for two people sharing one kitchen."
 tags: ["React Native", "Expo", "TypeScript", "Supabase", "Kroger API"]
 coverImage: "/images/mealmapper/weekplan.png"
 heroImage: "/images/mealmapper/grocerylist.png"
@@ -15,9 +15,9 @@ order: 2
 
 MealMapper came out of a chore my wife and I repeat every single week: decide what
 we're eating, then turn those decisions into a grocery order. The deciding is the
-fun part. The translation — cross-referencing recipes, consolidating ingredients,
-remembering we're already out of garlic, retyping the whole thing into a store app —
-is pure friction.
+fun part. The translation is pure friction: cross-referencing recipes, consolidating
+ingredients, remembering we're already out of garlic, retyping the whole thing into a
+store app.
 
 So MealMapper follows one straight line and removes the friction at every step:
 
@@ -30,7 +30,7 @@ our own phones and see each other's changes live.
 ## Plan a week of meals
 
 The week is the home screen. Tap any day, and a picker opens with your whole recipe
-library — searchable, filterable by how the meal cooks (Quick Prep, Slow Cooker,
+library: searchable, filterable by how the meal cooks (Quick Prep, Slow Cooker,
 Rice Cooker), and with a **Surprise Me** button for the nights you can't decide. The
 library itself is organized into collections you define ("Kids meals," "Pasta,"
 "Quick meals"), with favorites and prep times on every card.
@@ -44,7 +44,7 @@ library itself is organized into collections you define ("Kids meals," "Pasta,"
 
 You shouldn't have to retype a recipe you found online. Paste a URL and MealMapper
 reads the page's structured recipe data, pulling the photo, ingredients,
-instructions, times, and servings into a clean preview before you save it — pick a
+instructions, times, and servings into a clean preview before you save it. Pick a
 different hero image from the page's thumbnails if you like. You can also enter one
 by hand. Every saved recipe gets Details / Ingredients / Cook tabs, a serving scaler
 that adjusts quantities, and a quiet "times made" counter.
@@ -58,7 +58,7 @@ that adjusts quantities, and a quiet "times made" counter.
 
 This is the step that used to eat the most time, so it's the step MealMapper
 automates completely. From the week's planned meals it generates one consolidated
-list — merging duplicate ingredients across recipes, carrying their quantities, and
+list, merging duplicate ingredients across recipes, carrying their quantities, and
 sorting everything into the order you actually walk a store: produce, bakery, meat,
 dairy, pantry, frozen. Pantry staples you always keep on hand are tracked separately
 so they don't clutter the run. Check items off as you shop, and because the list
@@ -67,7 +67,7 @@ the same thing in real time.
 
 ## Order without retyping it
 
-A finished list is only half the job — you still have to buy it. MealMapper closes
+A finished list is only half the job. You still have to buy it. MealMapper closes
 that gap by connecting straight to the store. Link a Kroger account and it matches
 each item on your list to a real product on the shelf, with live prices, sale flags,
 and pickup-or-delivery availability, so you can confirm the exact thing you meant and
@@ -84,8 +84,8 @@ there instead.
 
 Under the product-y surface, MealMapper is a single Expo + React Native codebase that
 ships to iOS, Android, and the web build linked above. State is split between a
-Zustand store for UI and TanStack Query for server data. Supabase is the backbone —
-auth, Postgres, and Realtime for the live household sync — and the parts that have to
+Zustand store for UI and TanStack Query for server data. Supabase is the backbone
+(auth, Postgres, and Realtime for the live household sync), and the parts that have to
 talk to the outside world run as Supabase Edge Functions: a recipe importer that
 parses structured recipe markup from arbitrary URLs, and the Kroger OAuth, product
 search, and cart endpoints (plus Instacart link generation) that make the one-tap
@@ -93,6 +93,6 @@ order possible.
 
 ## My role
 
-Everything — concept, product and UX design, and the full-stack build, from the
+Everything: concept, product and UX design, and the full-stack build, from the
 Supabase schema and edge functions through to the cross-platform app and this web
 deployment.

@@ -45,7 +45,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             />
           </div>
         ) : (
-          <StripeImage caption={`${project.title} — app shot`} aspect="4/5" />
+          <StripeImage caption={`${project.title}, app shot`} aspect="4/5" />
         )}
         <div className="flex flex-col gap-2 flex-1">
           <div className="flex items-baseline justify-between gap-3">
