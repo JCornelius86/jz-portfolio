@@ -26,6 +26,8 @@ const skills = [
   "Mobile Design",
   "Data Visualization",
   "AI-Assisted Design",
+  "Competitive Analysis",
+  "Product Analytics",
   "Information Architecture",
   "HTML / CSS",
   "SQL",
@@ -34,8 +36,6 @@ const skills = [
 const honors = [
   "Azure X Manager of the Year",
   "AWS Certified Cloud Practitioner",
-  "Six Sigma Green Belt",
-  "IIE President, 2009–2010",
 ];
 
 type Segment = { text: string; highlight?: boolean };
