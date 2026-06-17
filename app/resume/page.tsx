@@ -108,8 +108,27 @@ const experience: Job[] = [
   },
   {
     company: "SnapOne (formerly SnapAV)",
+    title: "Lead Data Analyst",
+    dates: "2020 – Feb 2022",
+    bullets: [
+      [
+        { text: "Founding member of SnapOne's data team, turning insights from its " },
+        { text: "connected IoT platforms", highlight: true },
+        { text: " into product strategy" },
+      ],
+      "Designed and launched data-insight experiences for customers, end customers, and internal stakeholders across SnapOne's platforms",
+      "Served as team scrum master, prioritizing product-development requests and partnering with product managers to define and refine asks",
+      [
+        { text: "Delivered quarterly insight presentations to executives, proposing strategic decisions across " },
+        { text: "all major SnapOne brands", highlight: true },
+      ],
+      "Ran regular competitive analysis to keep brands market-relevant, and stood up NPS monitoring to channel customer feedback to product managers",
+    ],
+  },
+  {
+    company: "SnapOne (formerly SnapAV)",
     title: "UX Manager",
-    dates: "Feb 2015 – Feb 2022",
+    dates: "Feb 2015 – 2020",
     bullets: [
       [
         { text: "Led UX for OvrC, an IoT cloud remote management platform supporting " },
