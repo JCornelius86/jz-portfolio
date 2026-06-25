@@ -91,7 +91,7 @@ export default function Home() {
           <div className="mt-6 grid gap-10 md:grid-cols-[360px_1fr] md:gap-12 md:items-start">
             <div>
               <Eyebrow tone="accent" className="mb-3">
-                {flagship.title} · 2014–2024
+                {flagship.title} · 2014–2022
               </Eyebrow>
               <h3
                 data-ff="serif"
