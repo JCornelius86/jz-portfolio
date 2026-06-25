@@ -206,7 +206,7 @@ export default function Home() {
             data-ff="display"
             className="italic text-[36px] md:text-[56px] leading-[1.05] tracking-[-0.03em] font-[380]"
           >
-            Working on something <span className="text-accent">mission-shaped?</span>
+            Working on something <span className="text-accent">that matters?</span>
           </p>
           <div>
             <p className="text-invert-fg/70 text-[15px] md:text-[16px] leading-[1.6] mb-6">
