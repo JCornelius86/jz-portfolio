@@ -1,12 +1,13 @@
 ---
 title: "CharTaker"
 description: "A Starfinder character manager that carries a player from a guided build through live play, starships, and shared campaigns. Built solo and shipped to the App Store."
-tags: ["React", "Vite", "Capacitor", "Supabase", "TTRPG", "iOS"]
+tags: ["React", "Vite", "Capacitor", "Supabase", "TTRPG", "iOS", "Android"]
 coverImage: "/images/chartaker/character-sheet.png"
 heroImage: "/images/chartaker/critical.png"
 githubUrl: "https://github.com/JCornelius86/chartaker"
 liveUrl: "https://chartaker.vercel.app/"
 appStoreUrl: "https://apps.apple.com/us/app/chartaker/id6759470246"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.chartaker.app"
 date: "2025-11-05"
 featured: true
 order: 1
@@ -91,7 +92,7 @@ getting a real group to switch.
 
 Under the surface, CharTaker is a React 19 and Vite single-page app styled with
 Tailwind, wrapped by **Capacitor** into the native iOS and Android builds that put it
-on the App Store from the same codebase as the web build linked above. **Supabase**
+on the App Store and Google Play from the same codebase as the web build linked above. **Supabase**
 provides auth, the Postgres database, and the realtime layer behind shared sessions.
 
 The interesting engineering is in the data. The full equipment, spell, feat, class,

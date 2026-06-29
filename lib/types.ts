@@ -21,6 +21,7 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   appStoreUrl?: string;
+  playStoreUrl?: string;
   date: string;
   featured: boolean;
   /** Manual sort position within the featured group (lower = earlier). Falls back to date. */
