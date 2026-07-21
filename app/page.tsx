@@ -6,7 +6,6 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import SectionHead from "@/components/ui/SectionHead";
 import Eyebrow from "@/components/ui/Eyebrow";
-import StatBlock from "@/components/ui/StatBlock";
 import StripeImage from "@/components/ui/StripeImage";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getCaseStudies, getProjects } from "@/lib/content";
@@ -32,16 +31,6 @@ const principles = [
     title: "Test what you don't know",
     body: "We build confidently on what we know and test what we don't. Get it in front of users early, validate fast, and iterate. Assumptions are risks; feedback is fuel.",
   },
-];
-
-// Headline stats shown inside the flagship case study card (currently
-// Azure Advisor); can move to MDX frontmatter when content gets a
-// final pass.
-const flagshipStats = [
-  { value: "5", label: "Recommendations, not 500" },
-  { value: "2", label: "Jobs at launch" },
-  { value: "10+10", label: "Subscriptions + groups scoped" },
-  { value: "2026", label: "Unveiled at Build" },
 ];
 
 export default function Home() {
@@ -103,11 +92,6 @@ export default function Home() {
               <p className="text-ink-soft text-[15.5px] leading-[1.6] mb-6">
                 {flagship.description}
               </p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-5 mb-6">
-                {flagshipStats.map((s) => (
-                  <StatBlock key={s.label} value={s.value} label={s.label} />
-                ))}
-              </div>
               <Link
                 href={`/work/${flagship.slug}`}
                 className="font-medium text-accent text-[15px] hover:underline underline-offset-4"
