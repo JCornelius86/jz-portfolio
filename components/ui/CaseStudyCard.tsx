@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Tag from "./Tag";
 import StripeImage from "./StripeImage";
+import { imageExists } from "@/lib/imageDims";
 import type { CaseStudy } from "@/lib/types";
 
 interface CaseStudyCardProps {
@@ -9,7 +10,10 @@ interface CaseStudyCardProps {
 }
 
 export default function CaseStudyCard({ study }: CaseStudyCardProps) {
-  const hasImage = study.coverImage && study.coverImage.length > 0;
+  const hasImage =
+    study.coverImage &&
+    study.coverImage.length > 0 &&
+    imageExists(study.coverImage);
   return (
     <Link href={`/work/${study.slug}`} className="block group h-full">
       <article className="h-full flex flex-col gap-5 bg-card border border-rule rounded-[20px] p-5 transition-colors duration-150 group-hover:border-accent/60">

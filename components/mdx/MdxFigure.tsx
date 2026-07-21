@@ -1,7 +1,8 @@
 import type { CSSProperties } from "react";
-import { getImageDims } from "@/lib/imageDims";
+import { getImageDims, imageExists } from "@/lib/imageDims";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import Reveal from "@/components/ui/Reveal";
+import StripeImage from "@/components/ui/StripeImage";
 
 interface MdxFigureProps {
   src: string;
@@ -10,6 +11,8 @@ interface MdxFigureProps {
   portraitMax?: number;
   /** When true, render without the outer my-8 spacing — used inside ImageRow. */
   inline?: boolean;
+  /** Aspect ratio for the placeholder frame when the asset is missing. */
+  aspect?: string;
 }
 
 export default function MdxFigure({
@@ -17,7 +20,25 @@ export default function MdxFigure({
   alt = "",
   portraitMax = 280,
   inline = false,
+  aspect = "16/9",
 }: MdxFigureProps) {
+  // Asset not committed yet: hold the layout with the site's stripe
+  // placeholder and keep the caption so the page still reads.
+  if (!imageExists(src)) {
+    return (
+      <Reveal>
+        <figure className={inline ? "" : "my-8"}>
+          <StripeImage caption="Image forthcoming" aspect={aspect} />
+          {alt ? (
+            <figcaption className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted mt-3 text-center leading-[1.5]">
+              {alt}
+            </figcaption>
+          ) : null}
+        </figure>
+      </Reveal>
+    );
+  }
+
   const dims = getImageDims(src);
   const isPortrait = dims ? dims.height > dims.width : false;
 

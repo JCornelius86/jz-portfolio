@@ -4,6 +4,8 @@ import MdxFigure from "./MdxFigure";
 import MdxImageRow from "./MdxImageRow";
 import MdxRow from "./MdxRow";
 import D20 from "./D20";
+import ContextGapDiagram from "./ContextGapDiagram";
+import TwoTrackDiagram from "./TwoTrackDiagram";
 
 function hasImage(children: ReactNode): boolean {
   return Children.toArray(children).some(
@@ -110,4 +112,8 @@ export const mdxComponents: MDXComponents = {
   Row: MdxRow as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   D20: D20 as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ContextGapDiagram: ContextGapDiagram as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TwoTrackDiagram: TwoTrackDiagram as unknown as any,
 };

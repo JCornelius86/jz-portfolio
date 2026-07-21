@@ -10,7 +10,7 @@ import StatBlock from "@/components/ui/StatBlock";
 import StripeImage from "@/components/ui/StripeImage";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getCaseStudies, getProjects } from "@/lib/content";
-import { getImageDims } from "@/lib/imageDims";
+import { getImageDims, imageExists } from "@/lib/imageDims";
 
 // The four principles. Copy edits live in CMS or in this array; the
 // visual treatment stays uniform.
@@ -33,14 +33,14 @@ const principles = [
   },
 ];
 
-// Headline stats shown inside the flagship case study card. Sourced
-// from the existing home; can move to MDX frontmatter when content
-// gets a final pass.
+// Headline stats shown inside the flagship case study card (currently
+// Azure Advisor); can move to MDX frontmatter when content gets a
+// final pass.
 const flagshipStats = [
-  { value: "20M+", label: "Devices managed" },
-  { value: "3", label: "Teams built" },
-  { value: "15+", label: "Years in UX" },
-  { value: "4", label: "Industries" },
+  { value: "5", label: "Recommendations, not 500" },
+  { value: "2", label: "Jobs at launch" },
+  { value: "10+10", label: "Subscriptions + groups scoped" },
+  { value: "2026", label: "Unveiled at Build" },
 ];
 
 export default function Home() {
@@ -91,13 +91,13 @@ export default function Home() {
           <div className="mt-6 grid gap-10 md:grid-cols-[360px_1fr] md:gap-12 md:items-start">
             <div>
               <Eyebrow tone="accent" className="mb-3">
-                {flagship.title} · 2014–2022
+                {flagship.title} · Build 2026 · Private preview
               </Eyebrow>
               <h3
                 data-ff="serif"
                 className="text-ink text-[26px] md:text-[30px] leading-[1.15] tracking-[-0.015em] font-[440] mb-4"
               >
-                Solo UX hire <Accent>→</Accent> 20M-device platform <Accent>→</Accent> a team that took it forward.
+                A wall of recommendations <Accent>→</Accent> five decisions that matter.
               </h3>
               <p className="text-ink-soft text-[15.5px] leading-[1.6] mb-6">
                 {flagship.description}
@@ -122,7 +122,10 @@ export default function Home() {
               />
               <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
                 {(() => {
-                  if (!flagship.coverImage) {
+                  if (
+                    !flagship.coverImage ||
+                    !imageExists(flagship.coverImage)
+                  ) {
                     return (
                       <StripeImage
                         caption={`${flagship.title}, dashboard, full bleed`}

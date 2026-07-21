@@ -8,7 +8,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Tag from "@/components/ui/Tag";
 import StripeImage from "@/components/ui/StripeImage";
 import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
-import { getImageDims } from "@/lib/imageDims";
+import { getImageDims, imageExists } from "@/lib/imageDims";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import type { Metadata } from "next";
 
@@ -74,6 +74,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* Hero */}
       <header className="pb-8 md:pb-12 grid gap-8 md:grid-cols-[1.6fr_1fr] md:gap-12 md:items-end">
         <div>
+          {meta.status ? (
+            <div className="mb-5">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-accent"
+                />
+                {meta.status}
+              </span>
+            </div>
+          ) : null}
           <Heading as="h1" variant="hero" className="mb-4">
             {meta.title}
           </Heading>
@@ -120,7 +131,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
       {/* Hero image */}
       <div className="pb-12 md:pb-16">
-        {meta.coverImage ? (
+        {meta.coverImage && imageExists(meta.coverImage) ? (
           (() => {
             const dims = getImageDims(meta.coverImage);
             const isPortrait = dims ? dims.height > dims.width : false;

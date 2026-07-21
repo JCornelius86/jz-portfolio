@@ -6,6 +6,12 @@ export interface ImageDims {
   height: number;
 }
 
+/** True when the referenced public asset exists on disk. Lets pages fall
+ * back to StripeImage placeholders for art that hasn't been dropped in yet. */
+export function imageExists(publicPath: string): boolean {
+  return existsSync(join(process.cwd(), "public", publicPath.replace(/^\//, "")));
+}
+
 export function getImageDims(publicPath: string): ImageDims | null {
   const filePath = join(
     process.cwd(),

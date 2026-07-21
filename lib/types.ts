@@ -7,6 +7,8 @@ export interface CaseStudy {
   coverImage: string;
   date: string;
   featured: boolean;
+  /** Optional label rendered as a pill near the title, e.g. "Private Preview". */
+  status?: string;
 }
 
 export interface Project {

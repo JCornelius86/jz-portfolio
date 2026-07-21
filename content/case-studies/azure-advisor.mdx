@@ -1,0 +1,109 @@
+---
+title: "Azure Advisor"
+subtitle: "Designing advice people actually take"
+description: "AI-powered, agentic guidance for enterprise cloud resiliency and retirements. Turning walls of context-free recommendations into five decisions that matter. Private preview, unveiled at Microsoft Build 2026."
+tags: ["AI / Agentic UX", "Enterprise SaaS", "Azure", "Human-in-the-Loop", "Systems Design"]
+coverImage: "/images/azure-advisor/advisor-03-curated-five.png"
+date: "2026-05-01"
+featured: true
+status: "Private Preview · In Flight"
+---
+
+*This work is in private preview. Visuals are drawn from Microsoft's public Build 2026 materials and abstracted diagrams.*
+
+## The problem: advice without context is noise
+
+Azure Advisor evaluates your cloud footprint and tells you how to improve it. Cut costs, improve reliability, prepare for service retirements. The recommendations are technically sound. And for years, customers largely ignored them.
+
+Here's why. Companies organize resources in Azure a dozen different ways, across tags, resource groups, and subscriptions, with no standardized approach. Advisor generates recommendations at the individual resource level. For a large enterprise, that's thousands of resources, each producing its own advice.
+
+The system can see everything and understands almost nothing. It knows you have a VM that isn't zone-redundant. It has no idea whether that VM runs your ecommerce platform or your company dodgeball team's stats page. Both get the same recommendation, with the same urgency, in the same endless list.
+
+<Figure
+  src="/images/azure-advisor/advisor-00-before-state.png"
+  alt="The classic experience: 8,483 impacted resources under a single category, hundreds of recommendations across five pillars. Technically correct advice with no way to know which of it matters to your business."
+  aspect="16/9"
+/>
+
+Faced with a wall of context-free advice, customers made a rational choice: they did nothing.
+
+The recommendations were right. The users were right to ignore them. That's a design problem.
+
+<ContextGapDiagram />
+
+## The insight: don't rank harder, ask better
+
+The tempting fix is a smarter ranking algorithm. But no model can rank its way out of missing information. The criticality of a workload lives in the customer's head, not in the resource metadata. The only way to get it is to ask.
+
+So we inverted the problem. Instead of Advisor broadcasting everything it knows, the new experience, an AI-powered chat unveiled at Microsoft Build 2026, starts by asking the customer what matters:
+
+- **Scope:** Which subscriptions and resource groups map to your mission-critical applications? Up to 10 of each, an intentional constraint.
+- **Intent:** What are you actually here to do? We launched with two jobs: improving **resiliency** (raising your nines of availability) and navigating **service retirements** (what your resources depend on that's going away, and by when).
+
+From there, the experience returns a curated list: the top five recommendations per category. Not five hundred. Five.
+
+<Figure
+  src="/images/azure-advisor/advisor-01-classic-overview.png"
+  alt="The GA Advisor experience: thousands of active resources, recommendations organized by category, and the new AI-powered entry point."
+  aspect="16/9"
+/>
+
+<Figure
+  src="/images/azure-advisor/advisor-02-scoping-conversation.png"
+  alt="The experience starts by asking, not telling: pick up to 10 subscriptions and 10 resource groups where your mission-critical workloads live."
+  aspect="16/9"
+/>
+
+## Designing the decision, not the data
+
+I drove two decisions that shaped how the experience feels.
+
+**Capping recommendations at five per category.** The wall of recommendations was the original sin of the old experience. Every additional item past a handful reduces the odds that any get acted on. Five is enough to matter and few enough to finish.
+
+**Designing what each recommendation shows.** The old model was a dense table where most columns were noise most of the time. I reframed the question: what is the minimum information that tips someone into a decision? For retirements, it's two things: when the retirement happens and how many resources are affected. For resiliency, it's the number of resources involved and cost impact, deliberately abstracted to high, medium, or low. Showing false precision the underlying estimate can't support would manufacture confidence we hadn't earned. Everything else is available on demand, not by default.
+
+<Figure
+  src="/images/azure-advisor/advisor-03-curated-five.png"
+  alt="Five recommendations, not five hundred. Each shows the minimum information that tips a decision: impact, benefit, and why it's prioritized."
+  aspect="4/3"
+/>
+
+<Figure
+  src="/images/azure-advisor/advisor-04-action-plan.png"
+  alt="From list to plan: recommendations sequenced into short, mid, and long-term action."
+  aspect="21/9"
+/>
+
+## The honest tradeoff
+
+This is the part of the project I think about most.
+
+The chat experience shipped under real constraints. Build and Ignite are immovable dates, and the durable infrastructure wasn't ready. So what we launched is deliberately scoped: each conversation is point-in-time, the context a customer provides isn't yet captured back into the system, and it happens at the individual user level rather than the organization level.
+
+That last one matters. Resource management is a team sport. If one engineer has a great conversation with Advisor and the resulting priorities aren't visible to anyone else at the company, we've created communication churn. The tool got smarter for one person and the organization stayed exactly as confused. I pushed hard on this tension internally, and it shaped what came next.
+
+## The systems play: from asking to knowing
+
+Running behind the preview is the real answer: **Service Groups**, which went live at Ignite 2025. Service Groups let organizations formally capture which resources belong together as an application or service, the context Advisor always lacked, and attach goals to them. Today that's resiliency intent: should this group be zonally resilient? The trajectory is goals across the Well-Architected pillars: performance, cost, security, reliability.
+
+The chat experience and Service Groups are two halves of one strategy. The conversation captures intent now, one session at a time. Service Groups make intent durable, shared, and organizational, so the system eventually stops interviewing you and starts knowing you. The one-off conversation was never the destination; it was the fastest honest way to start delivering value while the foundation was poured.
+
+<TwoTrackDiagram />
+
+## What this taught me about agentic systems
+
+The scarcest resource in enterprise AI isn't model capability. It's captured human intent. The hardest design decisions weren't about what the AI should do; they were about what it should *ask*, when it had earned the right to act, and how to avoid manufacturing confidence the data couldn't back. Human-in-the-loop isn't a checkbox. It's the architecture.
+
+## Role & status
+
+I led design across the Azure Advisor, Resiliency, and Customer Health teams through this work, and I personally own the recommendation experience design described above. The AI experience is in private preview as of Build 2026; Service Groups are generally available. This is in-flight work, and some of what's described will evolve before general availability.
+
+## Learn more
+
+Public sources on the work described here:
+
+- [Build 2026: Modern resiliency from build to recovery through agentic AI (BRK228)](https://www.youtube.com/watch?v=nzDPYlNXRf0)
+- [Azure Infrastructure Resiliency Manager public preview announcement](https://techcommunity.microsoft.com/blog/reliability-and-resiliency-in-azure/announcing-azure-infrastructure-resiliency-manager-public-preview/4523710)
+- [Ignite 2025: Improve your resiliency posture with new capabilities and intelligent assistance](https://techcommunity.microsoft.com/blog/azuregovernanceandmanagementblog/improve-your-resiliency-posture-with-new-capabilities-and-intelligent-assistance/4469771)
+
+*Product images from Microsoft's public Build 2026 session BRK228 and public Azure Advisor videos.*
