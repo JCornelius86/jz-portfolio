@@ -11,6 +11,7 @@ import StripeImage from "@/components/ui/StripeImage";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getCaseStudies, getProjects } from "@/lib/content";
 import { getImageDims, imageExists } from "@/lib/imageDims";
+import { heroComponents } from "@/components/heroes/registry";
 
 // The four principles. Copy edits live in CMS or in this array; the
 // visual treatment stays uniform.
@@ -120,24 +121,38 @@ export default function Home() {
                 aria-hidden="true"
                 className="absolute inset-0 top-2.5 left-2.5 rounded-[22px] bg-rule/60"
               />
-              <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
-                {(() => {
-                  if (
-                    !flagship.coverImage ||
-                    !imageExists(flagship.coverImage)
-                  ) {
-                    return (
+              {(() => {
+                // Component heroes (e.g. the Advisor poster) bring their
+                // own card frame; render directly over the back layer.
+                const Hero = flagship.heroComponent
+                  ? heroComponents[flagship.heroComponent]
+                  : undefined;
+                if (Hero) {
+                  return (
+                    <div className="relative">
+                      <Hero />
+                    </div>
+                  );
+                }
+                if (
+                  !flagship.coverImage ||
+                  !imageExists(flagship.coverImage)
+                ) {
+                  return (
+                    <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
                       <StripeImage
                         caption={`${flagship.title}, dashboard, full bleed`}
                         aspect="4/3"
                       />
-                    );
-                  }
-                  const dims = getImageDims(flagship.coverImage);
-                  const aspectStyle = dims
-                    ? { aspectRatio: `${dims.width} / ${dims.height}` }
-                    : { aspectRatio: "4 / 3" };
-                  return (
+                    </div>
+                  );
+                }
+                const dims = getImageDims(flagship.coverImage);
+                const aspectStyle = dims
+                  ? { aspectRatio: `${dims.width} / ${dims.height}` }
+                  : { aspectRatio: "4 / 3" };
+                return (
+                  <div className="relative bg-card border border-rule rounded-[22px] p-4 md:p-5">
                     <div
                       className="relative w-full overflow-hidden rounded-[14px] border border-rule bg-bg"
                       style={aspectStyle}
@@ -154,9 +169,9 @@ export default function Home() {
                         sizes="(max-width: 768px) 100vw, 600px"
                       />
                     </div>
-                  );
-                })()}
-              </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </section>

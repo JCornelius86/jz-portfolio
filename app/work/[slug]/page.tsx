@@ -10,6 +10,7 @@ import StripeImage from "@/components/ui/StripeImage";
 import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
 import { getImageDims, imageExists } from "@/lib/imageDims";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
+import { heroComponents } from "@/components/heroes/registry";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -131,7 +132,12 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
       {/* Hero image */}
       <div className="pb-12 md:pb-16">
-        {meta.coverImage && imageExists(meta.coverImage) ? (
+        {meta.heroComponent && heroComponents[meta.heroComponent] ? (
+          (() => {
+            const Hero = heroComponents[meta.heroComponent];
+            return <Hero />;
+          })()
+        ) : meta.coverImage && imageExists(meta.coverImage) ? (
           (() => {
             const dims = getImageDims(meta.coverImage);
             const isPortrait = dims ? dims.height > dims.width : false;

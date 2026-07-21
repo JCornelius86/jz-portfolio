@@ -9,6 +9,9 @@ export interface CaseStudy {
   featured: boolean;
   /** Optional label rendered as a pill near the title, e.g. "Private Preview". */
   status?: string;
+  /** Optional key into the hero component registry ([slug]/page.tsx). When
+   * set, the named component renders as the hero instead of coverImage. */
+  heroComponent?: string;
 }
 
 export interface Project {
