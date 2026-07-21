@@ -3,6 +3,7 @@ import Image from "next/image";
 import Tag from "./Tag";
 import StripeImage from "./StripeImage";
 import { imageExists } from "@/lib/imageDims";
+import { heroComponents } from "@/components/heroes/registry";
 import type { CaseStudy } from "@/lib/types";
 
 interface CaseStudyCardProps {
@@ -14,10 +15,17 @@ export default function CaseStudyCard({ study }: CaseStudyCardProps) {
     study.coverImage &&
     study.coverImage.length > 0 &&
     imageExists(study.coverImage);
+  // Same lead visual as the case study page: component heroes win
+  // over the cover screenshot.
+  const Hero = study.heroComponent
+    ? heroComponents[study.heroComponent]
+    : undefined;
   return (
     <Link href={`/work/${study.slug}`} className="block group h-full">
       <article className="h-full flex flex-col gap-5 bg-card border border-rule rounded-[20px] p-5 transition-colors duration-150 group-hover:border-accent/60">
-        {hasImage ? (
+        {Hero ? (
+          <Hero />
+        ) : hasImage ? (
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-[14px] border border-rule bg-bg flex items-center justify-center">
             <Image
               src={study.coverImage}
