@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import { useState, useCallback, useEffect, useRef } from "react";
 
 interface ImageLightboxProps {
@@ -76,7 +77,10 @@ export default function ImageLightbox({
         />
       </button>
 
-      {isOpen && (
+      {/* Portaled to <body>: ancestors with transforms (e.g. Reveal's
+          fade-in) would otherwise trap this fixed overlay in their box. */}
+      {isOpen &&
+        createPortal(
         <div
           className="fixed inset-0 z-[10000] bg-black/90"
           onClick={close}
@@ -121,27 +125,28 @@ export default function ImageLightbox({
               </div>
             </div>
           ) : (
-            <div
-              className="absolute inset-0 flex items-center justify-center p-4 md:p-8"
-              onClick={close}
-            >
-              <Image
-                src={src}
-                alt={alt}
-                width={width}
-                height={height}
-                sizes="92vw"
-                className="object-contain max-h-[90vh] max-w-[92vw] w-auto h-auto cursor-zoom-in"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setZoomed(true);
-                }}
-                priority
-              />
+            <div className="absolute inset-0" onClick={close}>
+              {/* Fill the viewport edge-to-edge; object-contain letterboxes
+                  only as much as the aspect ratio demands. */}
+              <div className="absolute inset-x-2 top-10 bottom-8 md:inset-x-4">
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  sizes="100vw"
+                  className="object-contain cursor-zoom-in"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setZoomed(true);
+                  }}
+                  priority
+                />
+              </div>
             </div>
           )}
-        </div>
-      )}
+        </div>,
+          document.body
+        )}
     </>
   );
 }
