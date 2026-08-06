@@ -16,6 +16,7 @@ import {
 } from "@/lib/content";
 import { getImageDims } from "@/lib/imageDims";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
+import { heroComponents } from "@/components/heroes/registry";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -111,6 +112,13 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </div>
         {(() => {
+          // Component heroes (e.g. the King's Bluff floating hand) bring
+          // their own frame and animation; they win over any image.
+          const Hero = meta.heroComponent
+            ? heroComponents[meta.heroComponent]
+            : undefined;
+          if (Hero) return <Hero />;
+
           const heroSrc = meta.heroImage || meta.coverImage;
           if (heroSrc) {
             const dims = getImageDims(heroSrc);
