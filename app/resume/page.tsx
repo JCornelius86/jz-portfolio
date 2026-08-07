@@ -135,7 +135,7 @@ const experience: Job[] = [
         { text: "20M+ managed devices", highlight: true },
         { text: " globally" },
       ],
-      "Led OvrC Home, a residential consumer app enabling homeowners to monitor and control smart home devices",
+      "Led OvrC Connect, a residential consumer app enabling homeowners to monitor and control smart home devices",
       [
         { text: "Strategic design support for the " },
         { text: "$150M+ Connected Device category", highlight: true },
