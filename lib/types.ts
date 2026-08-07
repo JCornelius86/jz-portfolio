@@ -5,6 +5,10 @@ export interface CaseStudy {
   description: string;
   tags: string[];
   coverImage: string;
+  /** Image shown in the hero of the detail page. Falls back to coverImage.
+   * Lets the card carry a tight mark (e.g. an app icon) while the page
+   * still leads with product imagery. */
+  heroImage?: string;
   date: string;
   featured: boolean;
   /** Optional label rendered as a pill near the title, e.g. "Private Preview". */

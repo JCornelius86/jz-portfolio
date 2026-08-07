@@ -137,9 +137,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
             const Hero = heroComponents[meta.heroComponent];
             return <Hero />;
           })()
-        ) : meta.coverImage && imageExists(meta.coverImage) ? (
+        ) : (meta.heroImage || meta.coverImage) &&
+          imageExists(meta.heroImage || meta.coverImage) ? (
           (() => {
-            const dims = getImageDims(meta.coverImage);
+            const heroSrc = meta.heroImage || meta.coverImage;
+            const dims = getImageDims(heroSrc);
             const isPortrait = dims ? dims.height > dims.width : false;
             const frameClass = isPortrait
               ? "relative w-full max-w-[360px] mx-auto overflow-hidden rounded-[22px] border border-rule bg-card"
@@ -151,7 +153,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             return (
               <div className={frameClass} style={aspectStyle}>
                 <Image
-                  src={meta.coverImage}
+                  src={heroSrc}
                   alt={`${meta.title} cover`}
                   fill={!isPortrait || !dims}
                   width={isPortrait && dims ? dims.width : undefined}
