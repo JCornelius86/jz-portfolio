@@ -10,60 +10,36 @@ featured: true
 order: 1
 ---
 
-## Overview
+## It started with a draft order
 
-The idea arrived in the shower, which is a terrible place to take notes. Chess is a game
-of perfect information, where nobody can lie to you. Poker is a game of imperfect
-information, where lying is the entire point. What happens if you put them on the same
-table?
+I run my fantasy football league, and part of the job is deciding how we set the draft
+order. Rolling dice is boring. I have put people through some strange contests over the
+years, and every August the question comes back around.
 
-King's Bluff is the answer. Two players, a 5 by 6 board with one king each, and a
-standard 52-card deck. You can move a piece like you would in chess. Or you can place
-cards face down, announce a poker hand, and claim the effect that hand earns you on the
-board. Your opponent then has one decision: believe you, or commit their own cards to
-prove you wrong. The claim does not have to be true. The card count is public. The faces
-are not.
+This year the answer showed up in the shower. What if the draft order came out of a game
+the league actually had to play? Not a coin flip with extra steps, but something with real
+decisions in it, where whoever reads the table best picks first.
 
-It is in active development, headed for the App Store, Google Play, and Steam from a
-single codebase. This page is a snapshot of a game being built in the open, not a
-finished product.
+That is King's Bluff. Two players, a small chess board, and a deck of cards. You can move
+a piece, or you can put cards face down and announce a poker hand to trigger an effect on
+the board. The catch is that you do not have to be telling the truth. Your opponent gets
+one decision: believe you, or call it and commit their own cards to prove you wrong.
 
-## The rules are the product
+Chess is a game where nobody can lie to you. Poker is a game where lying is the point.
 
-Most of my side projects start with a screen. This one started with a document, because
-in a game the rules *are* the interface. Everything downstream, the engine, the bots, the
-animation timings, is a rendering of a decision made in the spec.
+## Playable by people who are not experts
 
-So `GAME-SPEC.md` is the source of truth, and the working agreement is blunt: if the code
-and the spec disagree, the code is wrong. When a rule turns out to be ambiguous mid-build,
-it does not get quietly decided in an implementation. It goes into an open-questions log,
-gets the most conservative reading with a TODO on it, and waits for an actual ruling. Ten
-of those questions have been logged so far. Things like whether a chained piece can still
-be rescued by an effect, or what a fortune-telling effect does when the deck has two cards
-left in it.
+The whole thing falls apart if you have to be good at chess *and* good at poker to sit
+down. Most of my league is neither. So much of the design work went into removing the
+parts of both games that punish newcomers.
 
-The one rule that never bends is the Golden Rule: no card effect may ever target, move,
-remove, or protect either king. That constraint is why the game can drop check and
-checkmate entirely and still work. You win by capturing the enemy king, full stop, and
-moving your own king into danger is perfectly legal and usually fatal. It also rules out a
-whole category of feel-bad design, because "your king cannot be captured this turn"
-suspends the win condition instead of protecting a piece. Saving your king has to be
-positional. Chain the attacker, or guard the defender.
+Chess lost check and checkmate. You win by capturing the enemy king, and that is the only
+rule about kings you need to learn. Move yours somewhere dangerous and you will probably
+lose it, which is a lesson people pick up in about one turn.
 
-Seven claims map to seven effects, weakest to strongest:
-
-- **Pair** fires FORTUNE. Look at the top three cards of the deck and put them back in
-  any order you like.
-- **Two Pair** fires GUARD. One of your pieces cannot be captured until your next turn.
-- **Three of a Kind** fires CHAIN. An enemy piece cannot move for two turns. It can still
-  be captured.
-- **Straight** fires ESCAPE. Teleport one of your pieces to any empty square on your half.
-- **Flush** fires ASSASSINATE. Remove an enemy piece from the board outright.
-- **Full House** fires RESURRECT. Bring one of your lost pieces back onto your half.
-- **Four of a Kind** fires CORONATION. One of your pawns becomes a queen where it stands.
-
-The effect fires at the tier you *claimed*, not the tier you actually hold. That is the
-whole game in one sentence.
+Poker lost the memorization. Better hands trigger better effects, and the whole ladder
+lives on one screen you can pull up any time. The game names each effect in plain words
+before you commit, and warns you when a play would accomplish nothing.
 
 <Figure
   src="/images/kings-bluff/the-ladder.png"
@@ -71,129 +47,76 @@ whole game in one sentence.
   portraitMax="460"
 />
 
-## Balancing with math instead of table hours
+A decade of playing tabletop games and teaching them to my kids turned out to be the real
+advantage here. Once you have walked a nine year old through a rulebook, you develop an
+ear for which rules are genuinely hard and which ones are just badly explained.
 
-Here is the problem with a bluffing game: you cannot playtest your way to an answer fast
-enough. Every rule you touch invalidates the sessions you already ran, and the questions
-that matter, does lying actually pay, is one effect a kill button, does the first player
-win too often, need thousands of games to answer, not six.
+## Dusting off the Monte Carlo
 
-So before any UI existed, I built two things. First a pure TypeScript rules engine with
-zero runtime dependencies, every random draw flowing through a seeded generator held in
-game state, so any game replays exactly from a seed and a list of actions. Then a Monte
-Carlo simulator on top of it, running batches of 2,000 games per configuration between
-scripted bots with personalities: Honest never bluffs, MadKing bluffs constantly and
-rarely calls, Inquisitor contests everything, Turtle hoards cards to the hand limit,
-AllInTroll deliberately stays card-poor.
+A bluffing game has questions you cannot answer by playing it a few times. Does lying
+actually pay? Is one effect strong enough to decide the game? Does going first win too
+often? You need thousands of games, changing one rule at a time.
 
-Every tunable number in the spec is a config dial the simulator can sweep. Ten experiments
-map to ten open design questions. A few of the answers changed the rules:
+That is a simulation problem, which sent me back to my industrial engineering degrees.
+Monte Carlo was a tool I learned for throughput and queueing problems and had not touched
+in years. A board game turns out to be a perfectly good system to model. So before I built
+any screens, I wrote the rules as code and then wrote a simulator that plays the game
+against itself thousands of times per configuration, using bots with different
+personalities: one that never bluffs, one that bluffs constantly, one that calls
+everything, one that hoards.
 
-**The poverty exploit was real, and the fix works.** If contesting a claim requires
-matching the claimant's card count, a player who deliberately stays card-poor can never
-contest anything, which sounds like their problem until you realize it makes them
-impossible to lie to profitably. Or the opposite. The rule that lets a short-handed
-defender contest by shoving their entire hand in is what closes it. Run the AllInTroll
-against a habitual liar with that right switched off and 17,316 lies go uncontested across
-2,000 games. Switch it on and that falls to 4,599, with the liar caught more than twice as
-often. The rule stays, and the "off" setting survives only so the simulator can keep
-measuring what it prevents.
+Two things it caught that I would never have found at a table:
 
-**Income moved to the end of the turn.** Players draw a card automatically each turn, and
-it originally landed at the start. Simulating the alternative showed why that was wrong: a
-player who spends their whole hand on a claim crosses into the opponent's turn holding
-nothing, and a defender with nothing cannot contest. That makes some lies literally
-uncontestable. Moving the draw to the end of the turn guarantees every player enters their
-opponent's turn holding at least one card. No lie is ever free.
+**A way to be un-lie-to-able.** Calling a bluff costs you as many cards as the liar
+played, so a player who stays deliberately low on cards can never call anything. I had a
+rule letting a short-handed player call by shoving their whole hand in, and the simulator
+showed how much work it was doing: with that rule off, more than 17,000 lies went
+unchallenged across 2,000 games. With it on, about 4,600, and the liar got caught more
+than twice as often.
 
-**Hoarding got a price.** Sitting at the hand limit used to just skip the income draw,
-which quietly froze the reshuffle clock and made turtling cost nothing. Now the card is
-still drawn and burns face down to the discard. The deck ticks down whether you can hold
-the card or not.
+**A dead turn.** Players draw a card each turn, and it originally arrived at the start.
+Spend your whole hand on a big claim and you crossed into your opponent's turn holding
+nothing, which let them lie to you for free. Moving the draw to the end of the turn means
+everyone always has at least one card to fight with.
 
-**First-player advantage came in clean.** Mirror matches put the first seat at 50.2%,
-which is inside the noise and needs no correction.
+It also settled the question that matters most for a draft order: the first player wins
+50.2% of mirror matches, close enough to a coin flip to leave alone. The caveat I wrote
+down early is that bots bluff much worse than people, so the simulator tells me whether
+lying is mathematically worth it, not whether it is fun. Only playing answers that.
 
-The guardrail I wrote for myself, in the plan document, is that bots are dumber than
-humans and much worse at bluffing. The simulator answers whether lying has positive
-expected value under the rules as written. It does not predict psychology. When a result
-looks strange, the rule is to replay the outlier game and read the log before touching
-anything.
+## Playing it before my friends do
 
-## Gilt & Ink
+The version my league eventually sees should not be the rough one, so everything gets
+played at home with family first, well before it reaches a group of people who will never
+let me forget a bad rule.
 
-The visual direction went through three rounds before it landed. Candle & Ash was
-restrained and typographic. Velvet Theatre was candlelight and crimson. Gilt & Ink won:
-heavy ink outlines, stamped plates, hard drop shadows with no blur, gold on deep ground,
-the punch of a physical card game rather than the polish of a digital one.
+Playing it surfaced things that reading it never would. The first time I drew a card, the
+panel asking which one to keep slid up and covered the hand I was choosing for. Obvious in
+hindsight, invisible on paper. And a called bluff originally resolved in about a second
+and a half, which read as "something happened and I missed it." That moment is the entire
+reason the game exists, so it now stops the table and holds both hands face up until you
+decide to move on.
 
 <Figure
   src="/images/kings-bluff/gilt-and-ink.png"
   alt="The Gilt and Ink title plate: heavy gold stamp, hard drop shadows, and three playing cards in the system's resting, selected, and face-down states."
 />
 
-Rather than jump to components, I built the system as sixteen self-contained preview
-cards, one per surface or flow: the board state catalog, the card states from resting to
-sunk to floating, the hand tray, the claim picker, the five beats of a contest, effect
-targeting, the draw flow, the ladder cheat sheet, the rooms flow, the endings, the
-graveyard. Tokens and component classes live in two stylesheets, and a small build script
-inlines them so every preview opens standalone in a browser. The React app wraps those
-classes rather than reinventing them.
+The look serves the same goal. It is built to feel like physical objects on a table, with
+heavy outlines and hard shadows, everything stamped down rather than faded in. Hidden
+information stays something you can see and count: your opponent's cards hang there face
+down, so their hand size is a fact on the table instead of a number in a status bar.
 
-The grammar is strict, because a game screen has to teach a player what is clickable while
-they are also trying to lie convincingly. Gold brackets mean your pieces. Red means a
-victim. Dots mean a landing square. One green in the entire system, reserved for the
-outcome ledger. Unresolved things hover, resolved things sit.
+## Getting it to the league
 
-## What playing it taught me
+What is left is multiplayer, and this is where building
+[CharTaker](/projects/chartaker) pays off. I have already put a real backend behind a
+game, synced state between players in a live session, and shipped the result to the App
+Store. Doing that once makes the second time a known problem instead of a research
+project.
 
-The playable table exists now: a local session against a bot, running on the real engine,
-where the session object is the referee and holds the full game state, exactly the role a
-multiplayer server will take later. Every component renders from a filtered player view
-rather than the true state, so swapping the local session for a networked one changes no
-UI code. The bot consumes the same view a human does.
+The deadline is real and it is the start of the season. After that, the App Store.
 
-Three things only showed up once it was actually playable:
-
-**The tray is sacred.** The first time I took a draw action, the decision sheet slid up
-and covered the hand it was drawing for. Now every hand-dependent sheet stops above the
-tray, and the tray stays fully lit.
-
-**The turn is held, not flashed.** A contest originally resolved with a 1.4 second stamp.
-It read as "something happened without showing me." The reveal now pauses the table and
-holds both hands face up, what each one makes, the verdict, and the aftermath, until the
-player chooses to continue. It is the centerpiece moment of the game and it needed room to
-breathe.
-
-**Compression beats truncation.** Hands past five cards now overlap so every card's corner
-strip stays readable inside a phone width.
-
-There is also an analytics layer, and it is designed around the engine's determinism: since
-a whole game reproduces from a seed and an ordered action list, the record *is* the action
-list. Tiny, lossless, and future-proof, because any metric can be recomputed later by
-replaying it, including metrics I have not thought of yet. On top of that it captures only
-what replay cannot recover, like how long a decision took, or the times a player opened the
-claim picker and backed out. The bluff not sold is design data. All of it sits behind a
-plain-language consent card, stays on the device until exported, and can be turned off or
-deleted from the menu.
-
-## Where it is going
-
-The build order is deliberately platform-free for as long as possible. The engine, the
-simulator, and the balance data came first with no UI at all. The web app is next as the
-playtest instrument, because a URL and a room code let me test with real people without
-waiting on a store review. Then a real AI opponent, so solo play exists. Only after that
-does any platform-specific work start, and when it does it wraps a finished game:
-Capacitor for iOS and Android, Electron or Tauri for Steam. One React app, one responsive
-breakpoint between a portrait phone table and a landscape desktop window, no forked code
-paths.
-
-Still open: the court card art is placeholder hatching, and multiplayer rooms are specced
-but not built.
-
-## My role
-
-All of it. The game design and the rules spec, the engine and its test suite, the
-simulator and the experiments that reshaped the rules, the Gilt & Ink design system, and
-the app. Balancing a game I invented against 2,000-game batches instead of arguing about
-it is the part I did not expect to enjoy this much.
+Mostly I am doing this because it is fun. I am using things I have not touched since grad
+school, building it with my kids as the first audience, and if it works my league gets a
+draft order nobody can argue with.

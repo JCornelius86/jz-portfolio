@@ -27,6 +27,8 @@ const css = `
 .kbh-card--selected { border: 3px solid var(--kbh-gold); box-shadow: 0 4px 0 #000, 0 0 30px rgba(242, 181, 46, 0.35); }
 .kbh-card--back { background: var(--kbh-back); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; box-sizing: border-box; height: 98px; }
 .kbh-diamond { width: 16px; height: 16px; transform: rotate(45deg); background: var(--kbh-gold); opacity: 0.8; }
+.kbh-theirs { width: 46px; height: 66px; background: var(--kbh-back); border: 2px solid #000; border-radius: 6px; box-shadow: 0 3px 0 #000; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; box-sizing: border-box; }
+.kbh-diamond--sm { width: 11px; height: 11px; transform: rotate(45deg); background: var(--kbh-gold); opacity: 0.8; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes kbhFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
   .kbh-float { animation: kbhFloat 3.4s ease-in-out infinite; }
@@ -35,47 +37,62 @@ const css = `
 
 export default function KingsBluffHero() {
   return (
-    <div className="kbh-stage relative w-full max-w-[360px] mx-auto md:ml-auto md:mr-0 overflow-hidden rounded-[22px] border border-rule bg-[#1a1418] pt-4 px-4 pb-24">
+    <div className="kbh-stage relative w-full max-w-[360px] aspect-[1/2] mx-auto md:ml-auto md:mr-0 flex items-center overflow-hidden rounded-[22px] border border-rule bg-[#1a1418] px-4">
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      <Image
-        src="/images/kings-bluff/board-states.png"
-        alt="A 5 by 6 King's Bluff board showing the game's state languages at once: a marked king in red brackets, a chained knight counting down its frozen turns, a guarded knight behind a gold shield, and the selected queen lit in a gold frame."
-        width={620}
-        height={800}
-        priority
-        className="block w-full h-auto rounded-[12px]"
-      />
-
-      {/* The hand, held over the near edge of the table. */}
+      {/* Their hand, hanging face-down from the top edge. The count is a
+          physical fact you can see, not a stat, so it stays in frame. */}
       <div
         aria-hidden="true"
-        className="absolute left-0 right-0 bottom-3 flex justify-center items-end gap-2"
+        className="absolute left-0 right-0 -top-7 flex justify-center gap-1.5"
       >
-        <div className="kbh-float" style={{ animationDelay: "0s" }}>
-          <div className="kbh-card" style={{ transform: "rotate(-8deg)" }}>
-            <div className="kbh-corner">
-              K<br />♠
-            </div>
-            <div className="kbh-art kbh-art--spade" />
+        {[-9, -3, 3, 9].map((deg) => (
+          <div key={deg} className="kbh-theirs" style={{ transform: `rotate(${deg}deg)` }}>
+            <i className="kbh-diamond--sm" />
           </div>
-        </div>
+        ))}
+      </div>
 
+      {/* Board plus the hand held over its near edge. Grouped and centred
+          so the table breathes above and below, the way the portrait phone
+          layout actually sits. */}
+      <div className="relative w-full -translate-y-8">
+        <Image
+          src="/images/kings-bluff/board-states.png"
+          alt="A 5 by 6 King's Bluff board showing the game's state languages at once: a marked king in red brackets, a chained knight counting down its frozen turns, a guarded knight behind a gold shield, and the selected queen lit in a gold frame."
+          width={620}
+          height={800}
+          priority
+          className="block w-full h-auto rounded-[12px]"
+        />
+
+        {/* Your hand, held over the near edge of the board. */}
         <div
-          className="kbh-float mb-2"
-          style={{ animationDelay: "-1.1s" }}
+          aria-hidden="true"
+          className="absolute left-0 right-0 -bottom-20 flex justify-center items-end gap-2"
         >
-          <div className="kbh-card kbh-card--selected" style={{ transform: "rotate(1deg)" }}>
-            <div className="kbh-corner kbh-corner--red">
-              K<br />♥
+          <div className="kbh-float" style={{ animationDelay: "0s" }}>
+            <div className="kbh-card" style={{ transform: "rotate(-8deg)" }}>
+              <div className="kbh-corner">
+                K<br />♠
+              </div>
+              <div className="kbh-art kbh-art--spade" />
             </div>
-            <div className="kbh-art kbh-art--heart" />
           </div>
-        </div>
 
-        <div className="kbh-float" style={{ animationDelay: "-2.2s" }}>
-          <div className="kbh-card kbh-card--back" style={{ transform: "rotate(8deg)" }}>
-            <i className="kbh-diamond" />
+          <div className="kbh-float mb-2" style={{ animationDelay: "-1.1s" }}>
+            <div className="kbh-card kbh-card--selected" style={{ transform: "rotate(1deg)" }}>
+              <div className="kbh-corner kbh-corner--red">
+                K<br />♥
+              </div>
+              <div className="kbh-art kbh-art--heart" />
+            </div>
+          </div>
+
+          <div className="kbh-float" style={{ animationDelay: "-2.2s" }}>
+            <div className="kbh-card kbh-card--back" style={{ transform: "rotate(8deg)" }}>
+              <i className="kbh-diamond" />
+            </div>
           </div>
         </div>
       </div>
