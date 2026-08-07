@@ -23,11 +23,11 @@ const timeline: {
 }[] = [
   {
     period: "2022 – Present",
-    role: "Senior Product Designer, Microsoft Azure",
+    role: "Senior UX Designer → Senior Design Manager → Senior Product Designer, Microsoft Azure",
     company: "Microsoft",
     description: (
       <>
-        AI-native designer building <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that help enterprise customers cut cost and reduce risk. Earlier led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor and CX Observe and was recognized as <span className="text-accent">Manager of the Year</span>. Now back to shipping the product directly.
+        AI-native designer building <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that help enterprise customers cut cost and reduce risk. Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor and CX Observe, and was recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership.
       </>
     ),
   },
