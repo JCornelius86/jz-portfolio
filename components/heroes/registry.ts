@@ -1,6 +1,5 @@
 import type { ComponentType } from "react";
 import AdvisorHeroPoster from "./AdvisorHeroPoster";
-import KingsBluffHero from "./KingsBluffHero";
 
 /**
  * Case studies and projects opt into a component hero via `heroComponent`
@@ -9,5 +8,4 @@ import KingsBluffHero from "./KingsBluffHero";
  */
 export const heroComponents: Record<string, ComponentType> = {
   "advisor-poster": AdvisorHeroPoster,
-  "kings-bluff-cards": KingsBluffHero,
 };
