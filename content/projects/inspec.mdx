@@ -1,7 +1,7 @@
 ---
 title: "Inspec"
-description: "A franchise management application for streamlining inspections and operations."
-tags: ["TypeScript", "Franchise Management", "Side Project"]
+description: "A friend runs several Sport Clips locations and was tracking store inspections through email attachments. I built him a dashboard, then pitched it to the franchise's CTO."
+tags: ["React Native", "Expo", "TypeScript", "Multi-Location Ops"]
 coverImage: "/images/inspec/storeview.png"
 heroImage: "/images/inspec/mapview.png"
 liveUrl: "https://inspec-xi.vercel.app/"
@@ -10,16 +10,57 @@ featured: true
 order: 3
 ---
 
-## Overview
+## A process that ran on email
 
-A friend of mine owns several SportClips locations and was struggling to keep up with compliance records across all of them. Inspections, certifications, task tracking: it was all scattered and manual. I built Inspec to give him a single dashboard to manage it all.
+A friend of mine owns several Sport Clips locations. Every store has to be inspected on a
+schedule, and the whole thing ran on email. Photos attached to threads. Replies confirming
+which stores had actually been marked complete. Somebody keeping track of which location
+was due when, across all of them, mostly in their head.
 
-This was also my first vibe coding project, back in February 2025. It helped me get comfortable with React Native and Expo while solving a real problem for someone I know.
+None of that is a technology problem in the exciting sense. It is a coordination problem,
+and coordination problems are where the time actually goes. The corporate side had been
+running this way for years and was curious whether anything better existed.
 
-## Tech Stack
+It also felt familiar. Managing many locations from one screen, knowing what is healthy and
+what needs attention, is the exact shape of the problem I spent years on with
+[OvrC](/work/ovrc). Different industry, same job: give one person a view across sites and
+make the exceptions obvious.
 
-- **Framework**: React Native with Expo
-- **Navigation**: Expo Router
-- **Styling**: React Native StyleSheet with theme support
-- **Icons**: Expo Vector Icons
-- **Maps**: Google Maps integration
+## What it does
+
+Inspec puts every location on a map and in a list, each with its status and its next due
+date. Open a store and you get its inspection history, its outstanding items, and the
+photos attached where they belong instead of buried in a mail thread. The person running
+the franchise sees the whole portfolio at once and can tell in a glance which store needs
+them this week.
+
+## Taking it to the CTO
+
+We presented it up to the franchise's CTO, and it was well received. It also did not get
+adopted, for a reason that had nothing to do with the work: they were already partway into
+implementing an off-the-shelf system, one considerably more expensive than a dashboard
+their operator's friend built on nights and weekends.
+
+That is a normal outcome and worth saying plainly. Procurement had moved before the demo
+happened. The door is not closed, and if the other system does not land the way they hope,
+this is still sitting here.
+
+## What I actually learned
+
+This was my first real attempt at building with AI, in March 2025, when the tooling was
+much rougher than it is now. The lessons were mostly about me rather than the model.
+
+**Requirements are the whole job.** The quality of what came back tracked almost exactly
+with how clearly I had described what I wanted. Vague ask, vague result, then twenty
+minutes of correction. Time spent writing a precise description up front paid for itself
+several times over, which is a lesson that transfers directly to writing a good spec for
+any team.
+
+**Troubleshooting one thing at a time was more painful than it needed to be.** I would
+change several things at once, or point at the wrong layer, and then spend the next pass
+undoing my own misdirection. Learning to isolate a single problem and describe only that
+problem is the skill that separated a frustrating session from a productive one.
+
+Both of those are things I now do reflexively, and both of them made every project after
+this one faster. Inspec is the least polished thing I have built, and it is the one that
+taught me how to build the rest.

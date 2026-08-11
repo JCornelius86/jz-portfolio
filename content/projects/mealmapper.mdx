@@ -12,11 +12,14 @@ order: 2
 
 ## Overview
 
-MealMapper came out of a chore my wife and I repeat every single week: decide what
-we're eating, then turn those decisions into a grocery order. The deciding is the
-fun part. The translation is pure friction: cross-referencing recipes, consolidating
-ingredients, remembering we're already out of garlic, retyping the whole thing into a
-store app.
+We have three young kids who are picky eaters, and a standing goal of not serving chicken
+nuggets every night. So every Sunday morning my wife and I sit down and plan the week: what
+the family is eating, all seven days.
+
+That part is fine. It is the next part that is miserable. You take those seven recipes,
+cross-reference every ingredient, consolidate the duplicates, remember you are already out
+of garlic, and then retype the entire thing into a store app that was not designed by
+anyone who enjoys using it. It is an hour of pure translation, every single week, forever.
 
 So MealMapper follows one straight line and removes the friction at every step:
 
@@ -89,6 +92,33 @@ talk to the outside world run as Supabase Edge Functions: a recipe importer that
 parses structured recipe markup from arbitrary URLs, and the Kroger OAuth, product
 search, and cart endpoints (plus Instacart link generation) that make the one-tap
 order possible.
+
+## Where it stalled, and why
+
+I am going to be straight about this one, because the honest version is more useful than a
+tidy ending.
+
+**The store integration is the whole product, and only one store cooperated.** Getting the
+Kroger connection working was the moment the thing felt real: a planned week turning into a
+matched cart with live prices. Then I went looking for the next store and found that most
+of them have no usable public API at all. Instacart has effectively cornered that ground by
+building an enormous front end to paper over exactly this gap, which is a lot of moat for a
+side project to argue with. We order from Harris Teeter, whose own app is unfriendly enough
+to have started this in the first place, so I was well aware of what limited reach would
+mean.
+
+**Then life did what life does.** Work hit a busy patch, and three young kids plus a
+demanding job during a genuinely tough stretch does not leave much for a fifth project. I
+also spent an afternoon looking at how crowded meal planning is on the App Store and got
+discouraged. Standing out there was going to take far more time and energy than I had.
+
+So it sits. I would like to come back to it, even if the audience is only friends and
+family, because the core loop works and we are a Kroger family, so the version that exists
+already does the job for us.
+
+If there is a lesson, it is that I picked the feature that depended on someone else's
+platform and made it the centerpiece. That is a fine bet when the platform wants you there,
+and a hard ceiling when it does not.
 
 ## My role
 
