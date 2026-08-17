@@ -3,6 +3,7 @@ import { Children, isValidElement, type ReactNode } from "react";
 import MdxFigure from "./MdxFigure";
 import MdxImageRow from "./MdxImageRow";
 import MdxRow from "./MdxRow";
+import MdxThenNow from "./MdxThenNow";
 import D20 from "./D20";
 import ContextGapDiagram from "./ContextGapDiagram";
 import TwoTrackDiagram from "./TwoTrackDiagram";
@@ -110,6 +111,8 @@ export const mdxComponents: MDXComponents = {
   Figure: MdxFigure as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Row: MdxRow as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ThenNow: MdxThenNow as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   D20: D20 as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
