@@ -16,20 +16,20 @@ import { heroComponents } from "@/components/heroes/registry";
 // visual treatment stays uniform.
 const principles = [
   {
-    title: "Grow the people",
-    body: "The best design orgs are built on trust and growth. I invest in 1:1s, design crits, and stretch assignments because a team that's learning is a team that delivers.",
+    title: "Hand over whole workstreams",
+    body: "Give people the whole problem, not a slice of mine, then get out of the way. It's the only way a small team covers several products without every decision routing through one person.",
   },
   {
-    title: "Ship over perfection",
-    body: "I run my teams on speed and iteration first. We ship working increments fast, then polish what matters. Momentum beats perfection.",
+    title: "Build what they need",
+    body: "No more, no less. There's a big difference between what someone wants and what they need, and a lot of the job is deciding what not to build so the product keeps the simplicity that made it work.",
   },
   {
-    title: "Design the system",
-    body: "I think in systems, not screens. Scalable patterns, shared tokens, and reusable components mean the team moves faster and the product stays coherent as it grows.",
+    title: "Ship the honest version",
+    body: "Real dates rarely wait for the ideal foundation. Scope the first release so it delivers value now, say plainly what it doesn't do yet, and keep building the durable answer behind it.",
   },
   {
-    title: "Test what you don't know",
-    body: "We build confidently on what we know and test what we don't. Get it in front of users early, validate fast, and iterate. Assumptions are risks; feedback is fuel.",
+    title: "Watch someone else use it",
+    body: "I can't see what's wrong with something I already know how to use. A handful of real people using it for a week will tell me more than months of my own judgment.",
   },
 ];
 

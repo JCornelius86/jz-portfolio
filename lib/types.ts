@@ -35,6 +35,8 @@ export interface Project {
   featured: boolean;
   /** Manual sort position within the featured group (lower = earlier). Falls back to date. */
   order?: number;
+  /** Hidden from listings, but the detail page still renders when linked directly. */
+  archived?: boolean;
   /** Optional key into the hero component registry. When set, the named
    * component renders as the detail-page hero instead of heroImage. */
   heroComponent?: string;

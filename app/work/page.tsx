@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies from 15+ years of UX leadership spanning green tech, defense, IoT platforms, and enterprise software.",
+    "Case studies from 15+ years of product design and design leadership, from AI-powered guidance in Azure to an IoT platform built from the first screen to 20M+ devices.",
 };
 
 export default function WorkPage() {
@@ -22,9 +22,9 @@ export default function WorkPage() {
           Work
         </Heading>
         <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[640px]">
-          Case studies from 15+ years of UX leadership, from building an IoT
-          platform from scratch to designing consumer apps used by hundreds of
-          thousands.
+          Case studies from 15+ years of product design. AI-powered guidance in
+          Azure today, and before that, an IoT platform I helped build from the
+          first screen to more than 20M devices.
         </p>
       </section>
 

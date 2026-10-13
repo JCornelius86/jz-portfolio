@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Side projects and vibe coding experiments. A growing collection of things I build for fun.",
+    "Apps and games I design, build, and ship myself, most of them to fix a problem at my own table.",
 };
 
 export default function ProjectsPage() {
@@ -23,9 +23,10 @@ export default function ProjectsPage() {
           Projects
         </Heading>
         <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[640px]">
-          Side projects and vibe coding experiments. This section grows over
-          time as I build new things. The best way to understand engineering
-          constraints is to ship code yourself.
+          Things I build on nights and weekends, usually because something at
+          my own table was annoying enough to fix. I design them, build them,
+          and ship them myself, which is the fastest way I know to stay honest
+          about what engineering actually costs.
         </p>
       </section>
 
@@ -43,8 +44,7 @@ export default function ProjectsPage() {
               Loading
             </p>
             <p className="text-ink-soft text-[15px] leading-[1.55] max-w-md mx-auto">
-              Vibe coding projects are in the works. This section will grow as
-              new experiments ship. Check back soon.
+              New projects are in the works. Check back soon.
             </p>
           </Card>
         )}

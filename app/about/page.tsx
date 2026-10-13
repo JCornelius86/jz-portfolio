@@ -22,12 +22,22 @@ const timeline: {
   description: ReactNode;
 }[] = [
   {
-    period: "2022 – Present",
-    role: "Senior UX Designer → Senior Design Manager → Senior Product Designer, Microsoft Azure",
+    period: "2026 – Present",
+    role: "Senior Product Designer, Azure Advisor",
     company: "Microsoft",
     description: (
       <>
-        AI-native designer building <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that help enterprise customers cut cost and reduce risk. Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor and CX Observe, and was recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership.
+        Designing <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that turn long lists of generic recommendations into the handful of decisions an enterprise customer actually needs to make, so they cut cost and reduce risk where it counts.
+      </>
+    ),
+  },
+  {
+    period: "2022 – 2026",
+    role: "Senior UX Designer → Senior Design Manager",
+    company: "Microsoft",
+    description: (
+      <>
+        Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor, CX Observe, and customer-health products, and was recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership. Before that, led UX for internal Azure field platforms used by <span className="text-accent">4,000+ people</span> across 10+ Microsoft organizations.
       </>
     ),
   },
@@ -37,7 +47,7 @@ const timeline: {
     company: "SnapAV / SnapOne",
     description: (
       <>
-        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the <span className="text-accent">industry-leading integrator management platform</span> supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne's <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
+        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the <span className="text-accent">industry-leading integrator management platform</span> supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
       </>
     ),
   },
@@ -94,21 +104,24 @@ export default function AboutPage() {
                 <strong className="text-ink font-semibold">
                   James (JC) Zabel
                 </strong>
-                , a UX professional based in Charlotte, NC. I hold a BS in
-                Industrial Engineering and an MS in Human Factors Psychology,
-                both from Clemson University{" "}
-                <span className="text-accent">(Go Tigers)</span>.
+                , a product designer in Charlotte, NC. I studied Industrial
+                Engineering at Clemson, a BS and then an MS with a focus on
+                Human Factors Psychology{" "}
+                <span className="text-accent">(Go Tigers)</span>. That&apos;s
+                a long way of saying I learned to design around how people
+                actually behave, not how the spec says they will.
               </p>
               <p>
-                With 15+ years of experience spanning corporate giants and
-                scrappy startups, I&apos;ve had the chance to work on
-                everything from factory automation to green energy to defense
-                contracting to IoT cloud platforms and consumer electronics.
+                Fifteen years in, I&apos;ve worked on wind energy at GE, Navy
+                combat systems at Lockheed Martin, an IoT platform that grew
+                past 20M devices at SnapAV, and AI-powered guidance in Azure at
+                Microsoft. Different industries, mostly the same job: take
+                something complicated and make the next decision obvious.
               </p>
               <p>
-                I&apos;m always looking for a challenge and looking to make a
-                difference, building products that real people actually want
-                to use.
+                Outside of work I have three young kids, a weekly Starfinder
+                group, and a fantasy football league I run. Most of my side
+                projects start at one of those tables.
               </p>
             </div>
           </div>

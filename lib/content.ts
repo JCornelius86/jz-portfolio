@@ -67,6 +67,9 @@ export function getProjects(): Project[] {
         ...data,
       } as Project;
     })
+    // Archived projects keep their page (old links still resolve) but drop
+    // out of the grid, the home page, prev/next, and the sitemap.
+    .filter((p) => !p.archived)
     .sort((a, b) => {
       // Featured first, then manual `order`, then newest date as a fallback.
       if (a.featured !== b.featured) return a.featured ? -1 : 1;

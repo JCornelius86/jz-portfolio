@@ -38,6 +38,7 @@ export async function generateMetadata({
   return {
     title: data.meta.title,
     description: data.meta.description,
+    ...(data.meta.archived ? { robots: { index: false } } : {}),
   };
 }
 
