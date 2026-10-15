@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { serifFont, sansFont, monoFont } from "@/lib/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Header />
         <div className="flex-1 pt-16">{children}</div>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
