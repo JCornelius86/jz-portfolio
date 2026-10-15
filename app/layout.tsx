@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { serifFont, sansFont, monoFont } from "@/lib/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeScript from "@/components/layout/ThemeScript";
+import SiteAnalytics from "@/components/layout/SiteAnalytics";
 import "./globals.css";
 
 const SHARED_DESCRIPTION =
@@ -46,7 +46,7 @@ export default function RootLayout({
         <Header />
         <div className="flex-1 pt-16">{children}</div>
         <Footer />
-        <Analytics />
+        <SiteAnalytics />
       </body>
     </html>
   );
