@@ -72,9 +72,12 @@ export default async function ProjectPage({ params }: PageProps) {
         </Eyebrow>
       </nav>
 
-      {/* Hero */}
-      <header className="pb-12 md:pb-16 grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-12 md:items-start">
-        <div>
+      {/* Title, hero image, and body share one grid: the image sits in a
+          sticky right column beside the article instead of above it, so a
+          tall phone screenshot never pushes the writing down the page.
+          Mobile order stays title, image, body. */}
+      <div className="grid gap-10 pb-12 md:grid-cols-[minmax(0,1fr)_240px] lg:grid-cols-[minmax(0,680px)_340px] md:gap-x-12 lg:justify-between">
+      <header className="md:col-start-1 md:row-start-1">
           <Heading as="h1" variant="hero" className="mb-4">
             {meta.title}
           </Heading>
@@ -111,7 +114,10 @@ export default async function ProjectPage({ params }: PageProps) {
               </Button>
             ) : null}
           </div>
-        </div>
+      </header>
+
+      <aside className="md:col-start-2 md:row-start-1 md:row-span-2">
+        <div className="md:sticky md:top-24">
         {(() => {
           // Component heroes (e.g. the King's Bluff floating hand) bring
           // their own frame and animation; they win over any image.
@@ -123,12 +129,17 @@ export default async function ProjectPage({ params }: PageProps) {
           const heroSrc = meta.heroImage || meta.coverImage;
           if (heroSrc) {
             const dims = getImageDims(heroSrc);
+            // Cap the width so a portrait shot never runs taller than the
+            // viewport while it's stuck in place.
             const aspectStyle = dims
-              ? { aspectRatio: `${dims.width} / ${dims.height}` }
+              ? {
+                  aspectRatio: `${dims.width} / ${dims.height}`,
+                  maxWidth: `min(340px, calc((100vh - 8rem) * ${(dims.width / dims.height).toFixed(3)}))`,
+                }
               : undefined;
             return (
               <div
-                className="relative w-full max-w-[360px] mx-auto md:ml-auto md:mr-0 overflow-hidden rounded-[22px] border border-rule bg-bg"
+                className="relative w-full mx-auto md:mr-0 overflow-hidden rounded-[22px] border border-rule bg-bg"
                 style={aspectStyle}
               >
                 <Image
@@ -141,7 +152,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   className={
                     dims ? "block w-full h-auto" : "object-contain"
                   }
-                  sizes="(max-width: 768px) 100vw, 360px"
+                  sizes="(max-width: 768px) 100vw, 340px"
                 />
               </div>
             );
@@ -153,14 +164,14 @@ export default async function ProjectPage({ params }: PageProps) {
             />
           );
         })()}
-      </header>
+        </div>
+      </aside>
 
       {/* MDX body */}
-      <article className="pb-12">
-        <div className="max-w-[680px] mx-auto md:mx-0">
-          <MDXRemote source={content} components={mdxComponents} />
-        </div>
+      <article className="md:col-start-1 md:row-start-2 min-w-0">
+        <MDXRemote source={content} components={mdxComponents} />
       </article>
+      </div>
 
       {/* Live demo */}
       {meta.liveUrl ? (
