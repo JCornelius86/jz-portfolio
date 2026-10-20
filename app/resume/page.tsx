@@ -24,7 +24,10 @@ const skills = [
   "IoT / Connected Devices",
   "Mobile Design",
   "Data Visualization",
-  "AI-Assisted Design",
+  "Agentic UX",
+  "Human-in-the-Loop Design",
+  "Responsible AI",
+  "AI-Assisted Prototyping",
   "Competitive Analysis",
   "Product Analytics",
   "Information Architecture",
@@ -207,17 +210,16 @@ export default function ResumePage() {
             James C. E. Zabel
           </p>
           <p className="text-ink-soft text-[16px] mb-4">
-            Senior Product Designer · UX & Design Leader · 15+ Years Experience
+            Senior Product Designer · UX Leader · 15+ Years
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px] text-muted">
-            <span>Fort Mill, SC</span>
+            <span>Fort Mill, SC (Charlotte area)</span>
             <a
               href="mailto:jc.zabel@gmail.com"
               className="hover:text-accent transition-colors"
             >
               jc.zabel@gmail.com
             </a>
-            <span>(803) 984-5744</span>
             <a
               href="https://www.jczabel.com"
               className="hover:text-accent transition-colors"

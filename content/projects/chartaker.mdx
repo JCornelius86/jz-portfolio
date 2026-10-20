@@ -1,7 +1,7 @@
 ---
 title: "CharTaker"
 description: "A Starfinder character manager that carries a player from a guided build through live play, starships, and shared campaigns. Built solo and shipped to the App Store."
-tags: ["React", "Vite", "Capacitor", "Supabase", "TTRPG", "iOS", "Android"]
+tags: ["Mobile App", "React", "Capacitor", "Supabase", "TTRPG", "iOS", "Android"]
 coverImage: "/images/chartaker/character-sheet.png"
 heroImage: "/images/chartaker/critical.png"
 liveUrl: "https://chartaker.vercel.app/"
@@ -23,7 +23,7 @@ enough that a veteran can run their whole table from a phone.
 What started as "a cleaner character sheet" grew into the thing I have spent the most
 time on. It now covers the full arc of a campaign, from rolling up a character to
 running live combat, flying starships, and sharing a session with the rest of the
-table in real time. It is on the App Store, and it is the project I am proudest of.
+table in real time. It is on the App Store and Google Play.
 
 ## Build a character without reading the rulebook
 
@@ -94,13 +94,9 @@ Tailwind, wrapped by **Capacitor** into the native iOS and Android builds that p
 on the App Store and Google Play from the same codebase as the web build linked above. **Supabase**
 provides auth, the Postgres database, and the realtime layer behind shared sessions.
 
-The interesting engineering is in the data. The full equipment, spell, feat, class,
-and ancestry rules are modeled as structured data the app reasons over, and the big
-browsers (the shop and the spell list) are virtualized with TanStack Virtual so
-thousands of items scroll smoothly on a phone. Character, campaign, and ship state
-each run through reducers covered by a Vitest suite, and product analytics run through
-PostHog behind a proper consent banner. It is at version 1.3.x because it is a real
-app with real users, and it keeps shipping.
+The hard part is the data. The full equipment, spell, feat, class, and ancestry rules
+are modeled as structured data the app reasons over, so the wizard can show only the
+choices that apply. It is on version 1.3.x and still shipping.
 
 ## A free usability lab, every week
 
@@ -110,13 +106,11 @@ reason whatsoever to be polite to me.
 
 The feedback was brutal in the way only good friends manage, and it is the single reason
 the app is any good. Things that read fine on my laptop fell apart at a real table, where
-someone is mid-turn, everyone is talking, and nobody wants to hunt for a button. You cannot
-get that from a spec.
+someone is mid-turn, everyone is talking, and nobody wants to hunt for a button.
 
-If I am honest about my own failure mode: I did not say no often enough. When four people
-you like are handing you ideas every week, the pull to build all of them is strong, and
-some of what went in was there because a friend asked rather than because the app needed
-it. Knowing the difference is a skill I am still working on.
+I also did not say no often enough. When four people you like are handing you ideas every
+week, the pull to build all of them is strong, and some of what went in was there because a
+friend asked rather than because the app needed it.
 
 ## What I got wrong going in
 
@@ -131,13 +125,11 @@ burden. Starfinder 2 has since arrived, the first edition audience is smaller th
 counted on, and the community tooling I hoped to lean on was thinner than advertised. I
 knew the risk going in and took it anyway.
 
-In hindsight it was a poor choice for the app I wanted to put on the App Store, and it was
-an excellent choice for the app I wanted to build, because I actually play it. If the goal
-had been downloads I picked wrong. If the goal was shipping something real to a store and
-learning every part of that pipeline, it worked exactly as intended.
+If I had wanted downloads, I picked the wrong edition. I wanted to ship something real to a
+store and learn every part of that pipeline, and to use it at my own table every week. It
+did both.
 
 ## My role
 
-Everything. Concept, product and UX design, the data modeling of the game rules, the
-full-stack build on Supabase, and the release to the App Store. CharTaker is the
-clearest single answer to "still shipping the software myself."
+Concept, product and UX design, the data modeling of the game rules, the full-stack build
+on Supabase, and the release to both app stores.

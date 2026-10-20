@@ -1,7 +1,7 @@
 ---
 title: "Sealed Bid"
 description: "Fourteen managers secretly split 1,000 points across the draft slots, and one night in front of a TV decides who picks first."
-tags: ["TypeScript", "Next.js", "Postgres", "Motion", "Data Viz", "Transactional Email", "Game Design"]
+tags: ["Game Design", "Next.js", "Postgres", "Data Viz", "Motion", "Monte Carlo Simulation"]
 coverImage: "/images/sealed-bid/bid-builder.png"
 heroImage: "/images/sealed-bid/reveal.png"
 liveUrl: "https://sealedbid.live"
@@ -10,16 +10,37 @@ featured: true
 order: 3
 ---
 
-## The tournament I talked myself out of
+## First attempt: a game that needed a bracket
 
-I built [King's Bluff](/projects/kings-bluff) to settle my fantasy football draft order, and
-then I sat down with a calendar and did the math on running it for fourteen people. A
-bracket is thirteen matches. Even at fifteen minutes each that is most of an evening, and
-whoever loses in round one spends the rest of it watching.
+I run my fantasy football league, and part of the job is deciding how we set the draft order.
+Rolling dice is boring, so every August I put people through some new contest.
 
-The bigger problem was the shape of it. Head to head elimination means somebody knocks you
-out, and that somebody has a name and sits across from you at the draft. My league is
-friends and family. I wanted the draft order to be a good story, not a grudge.
+My first answer was [King's Bluff](https://kings-bluff-game.vercel.app/), a two-player game
+of chess and poker. You can move a piece, or put cards face down and announce a poker hand to
+fire an effect on the board. You do not have to be telling the truth. Your opponent can
+believe you, or call it and commit their own cards to prove you wrong. Chess is a game where
+nobody can lie to you. Poker is a game where lying is the point.
+
+<Figure
+  src="/images/kings-bluff/the-ladder.png"
+  alt="The King's Bluff ladder: seven poker claims from Pair to Four of a Kind, each paired with the board effect it fires, escalating from steel chips to gold."
+  portraitMax="460"
+/>
+
+A bluffing game has questions you cannot answer by playing it a few times, so before building
+any screens I went back to my industrial engineering degrees and wrote a Monte Carlo
+simulator. It played the game against itself thousands of times per rule change, with bots
+that never bluff, always bluff, call everything, or hoard cards. It caught a loophole I
+would never have found at a table: a player who stays low on cards can never be called, and
+with my fix turned off, more than 17,000 lies went unchallenged across 2,000 games. It also
+showed the first player wins 50.2% of mirror matches, close enough to a coin flip to leave
+alone.
+
+Then I did the math on running it for fourteen people. A bracket is thirteen matches, most of
+an evening, and whoever loses in round one spends the rest of it watching. Worse, head to head
+elimination means somebody specific knocks you out, and that somebody sits across from you at
+the draft. My league is friends and family. I wanted the draft order to be a good story, not a
+grudge.
 
 So a different question: what could fourteen people play at the same time, in about five
 minutes each, where nobody plays against anyone in particular, and there is still a real
@@ -54,15 +75,15 @@ think to build after watching somebody fill in a form wrong.
 
 ## Making a spreadsheet feel like a game show
 
-The bidding is a quiet week on your phone. The reveal is the whole point, and a table of
-numbers appearing on a television is not an event.
+The bidding is a quiet week on your phone. The reveal is what people show up for, and a
+table of numbers appearing on a television is not an event.
 
 So slots resolve one at a time on the TV, cheapest bid first. Cards sit face down, the low
 ones flip and dim, and the last two shake under a pulsing glow before anyone knows which way
 it went. The winner's bid lands, then their trash talk goes up underneath it, then the slot
 drops onto the board and that manager is out of everything below.
 
-The part I am happiest with is how it stays in sync. Nobody streams anything. The
+Nobody streams anything. The
 commissioner's tap writes exactly two things to the server, which slot is on stage and when
 it started, and every screen computes the same milestones from that one timestamp. A phone
 that joins halfway through a slot lands exactly where the room is, because it is doing the
@@ -75,8 +96,7 @@ somebody says just show us the rest.
 
 ## Getting fourteen people to actually bid
 
-The design work nobody writes about is the part where fourteen adults with jobs have to do
-something by a deadline.
+Fourteen adults with jobs have to do something by a deadline, which is its own design problem.
 
 There are no accounts. A link is your identity, which means nothing to set up and nothing to
 forget, and it means the commissioner's job is handing out fourteen links. So the app sends
@@ -92,13 +112,7 @@ the rules on it, and a tracker showing who has opened theirs and who has not.
 Then the first batch went out and people told me it looked like spam. They were right. It
 arrived from an address at a domain none of them had heard of, with a subject line that never
 said which league it was about. Two changes fixed it. The mail now signs itself with the
-league's name in front of the address, and the league leads the subject line. It is a small
-thing that decides whether any of the rest of this gets used.
-
-The same problem in a different coat: the commissioner's link is the only way back into a
-league, and there is no password reset that is not also a way to steal somebody's draft. So
-the first card a new commissioner sees is one that mails the link to them, and it now leads
-with the email field rather than hiding it behind a button.
+league's name in front of the address, and the league leads the subject line.
 
 ## The morning after
 
@@ -117,11 +131,6 @@ separate bid sheets never would be. One manager bid 71 on all fourteen slots and
 tiebreaker sort it out. Another put their entire budget on the last slot and nothing anywhere
 else. A third tapered from the top and ran out by slot eight.
 
-The shading scales to the ninetieth percentile of bids rather than to the largest one.
-Scaling to the largest means a single person going all in flattens everybody else into the
-same shade of nothing, and the outlier is already obvious from the number printed in the
-cell.
-
 The second page is the argument.
 
 <Figure
@@ -135,9 +144,8 @@ story: a room can throw two thousand points at slot 1 and watch it go for a few 
 
 Hovering a column breaks it down by person, biggest bid first, with anybody who had already
 won a slot dimmed and tagged. That list is the second version. The first was a number labelled
-"still live," which I could not explain without first teaching the rule it encoded, and a label
-you have to teach is not a label. Showing who was actually in the running says the same thing
-and teaches the rule on the way past.
+"still live," which I could not explain without first teaching the rule behind it. Showing who
+was actually in the running says the same thing without the lesson.
 
 My favorite number on the page is the one I did not plan. Winning ends your night, so every
 point you bid below your own slot is sealed, counted, and never spoken out loud. In a test
@@ -145,21 +153,10 @@ league it came to more than three times what the draft order actually cost.
 
 ## Cheap enough to leave running
 
-This runs for one weekend a year, so the whole build is bent toward costing nothing the rest
-of the time.
-
-[CharTaker](/projects/chartaker) and [MealMapper](/projects/mealmapper) both sit on a vendor
-SDK, which is fine until the free tier changes shape. This one talks to plain Postgres over a
-connection string and nothing else, so the database is a swappable part rather than a
-dependency. Local development runs against a JSON file behind the same interface, which also
-means the tests need no database at all. State is a single document per league, the schema
-migrates itself on first use, and screens poll rather than hold sockets open, at 700ms while
-the reveal is live and four seconds when nothing is happening.
-
-There is a small daily cron whose only job is to touch the database so the free tier does not
-put it to sleep between August and September. Free hosting, free database, a domain, and the
-transactional email is inside its free tier at fourteen sends. The reused part is judgment
-about which corners are safe to cut, not the stack.
+This runs for one weekend a year, so it is built to cost nothing the rest of the time: plain
+Postgres over a connection string, screens that poll instead of holding sockets open, and a
+small daily cron whose only job is to keep the free database from falling asleep between
+August and September.
 
 ## How it went
 
@@ -169,8 +166,4 @@ The part I was hoping for started well before that, in the group chat. The bid s
 field for a statement that gets read out if you win your slot, so people wrote them for an
 audience, and the rest of it turned into announcements about what everyone was supposedly
 putting on slot 1. Some of that was true. None of it was checkable. Everything stayed sealed
-until the room was together, including from me, which is the one rule that makes the rest
-of it work.
-
-That was always the point. Not a fair draft order, a fair draft order that gives everybody
-something to accuse each other of.
+until the room was together, including from me.

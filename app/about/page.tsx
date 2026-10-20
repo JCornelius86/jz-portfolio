@@ -12,7 +12,7 @@ import type { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "UX leader based in Charlotte, NC with degrees from Clemson University and 15+ years building products at companies like Microsoft, SnapAV, Lockheed Martin, and GE.",
+    "Product designer and design leader in the Charlotte area, with 15+ years at Microsoft, SnapAV, Lockheed Martin, and GE.",
 };
 
 const timeline: {
@@ -47,7 +47,7 @@ const timeline: {
     company: "SnapAV / SnapOne",
     description: (
       <>
-        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the <span className="text-accent">industry-leading integrator management platform</span> supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
+        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the remote management platform integrators across the industry run on, now supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
       </>
     ),
   },
@@ -74,18 +74,20 @@ const timeline: {
 ];
 
 const skills = [
-  "UX Leadership",
+  "Design Management",
+  "Agentic UX",
+  "Human-in-the-Loop Design",
+  "Responsible AI",
   "Product Strategy",
   "Design Systems",
-  "User Research",
+  "UX Research",
   "Usability Testing",
   "Prototyping",
-  "IoT / Connected Devices",
+  "Information Architecture",
+  "Data Visualization",
   "Enterprise SaaS",
   "Mobile Design",
-  "Data Visualization",
-  "Design Thinking",
-  "Team Building",
+  "IoT / Connected Devices",
 ];
 
 export default function AboutPage() {
@@ -104,12 +106,10 @@ export default function AboutPage() {
                 <strong className="text-ink font-semibold">
                   James (JC) Zabel
                 </strong>
-                , a product designer in Charlotte, NC. I studied Industrial
-                Engineering at Clemson, a BS and then an MS with a focus on
-                Human Factors Psychology{" "}
-                <span className="text-accent">(Go Tigers)</span>. That&apos;s
-                a long way of saying I learned to design around how people
-                actually behave, not how the spec says they will.
+                , a product designer in the Charlotte area. I studied
+                Industrial Engineering at Clemson, a BS and then an MS with a
+                focus on Human Factors Psychology{" "}
+                <span className="text-accent">(Go Tigers)</span>.
               </p>
               <p>
                 Fifteen years in, I&apos;ve worked on wind energy at GE, Navy

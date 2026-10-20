@@ -25,8 +25,7 @@ export default function ProjectsPage() {
         <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[640px]">
           Things I build on nights and weekends, usually because something at
           my own table was annoying enough to fix. I design them, build them,
-          and ship them myself, which is the fastest way I know to stay honest
-          about what engineering actually costs.
+          and ship them myself.
         </p>
       </section>
 

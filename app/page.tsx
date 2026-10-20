@@ -17,25 +17,29 @@ import { heroComponents } from "@/components/heroes/registry";
 const principles = [
   {
     title: "Hand over whole workstreams",
-    body: "Give people the whole problem, not a slice of mine, then get out of the way. It's the only way a small team covers several products without every decision routing through one person.",
+    body: "On Azure, six designers and researchers covered three products because each person owned a whole problem end to end.",
+    proof: { label: "Azure Advisor", href: "/work/azure-advisor" },
   },
   {
-    title: "Build what they need",
-    body: "No more, no less. There's a big difference between what someone wants and what they need, and a lot of the job is deciding what not to build so the product keeps the simplicity that made it work.",
+    title: "Decide what not to build",
+    body: "OvrC went from 3 device models to 200+ and stayed usable by people who weren't network engineers. Most of that was saying no.",
+    proof: { label: "OvrC", href: "/work/ovrc" },
   },
   {
-    title: "Ship the honest version",
-    body: "Real dates rarely wait for the ideal foundation. Scope the first release so it delivers value now, say plainly what it doesn't do yet, and keep building the durable answer behind it.",
+    title: "Argue on the customer's terms",
+    body: "I got a hardware requirement dropped from OvrC Connect because integrators couldn't sell it. Attachment climbed once it was gone.",
+    proof: { label: "OvrC Connect", href: "/work/ovrc" },
   },
   {
     title: "Watch someone else use it",
-    body: "I can't see what's wrong with something I already know how to use. A handful of real people using it for a week will tell me more than months of my own judgment.",
+    body: "MealMapper's worst problems were invisible to me until friends and family used it for a week.",
+    proof: { label: "MealMapper", href: "/projects/mealmapper" },
   },
 ];
 
 export default function Home() {
   const caseStudies = getCaseStudies();
-  const projects = getProjects().filter((p) => p.featured).slice(0, 3);
+  const projects = getProjects().filter((p) => p.featured).slice(0, 2);
   const flagship = caseStudies.find((s) => s.featured) ?? caseStudies[0];
 
   return (
@@ -161,26 +165,6 @@ export default function Home() {
         </section>
       ) : null}
 
-      {/* RECENT PROJECTS ------------------------------------------------ */}
-      {projects.length > 0 ? (
-        <section className="py-10 md:py-12">
-          <SectionHead
-            label="Recent projects"
-            count={String(projects.length).padStart(2, "0")}
-          />
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-          <div className="mt-8">
-            <Button href="/projects" variant="ghost" size="sm">
-              All projects →
-            </Button>
-          </div>
-        </section>
-      ) : null}
-
       {/* HOW I LEAD ----------------------------------------------------- */}
       <section className="py-10 md:py-12">
         <SectionHead label="How I lead" />
@@ -193,13 +177,39 @@ export default function Home() {
               >
                 {p.title}
               </h3>
-              <p className="text-muted text-[13.5px] leading-[1.55]">
+              <p className="text-muted text-[13.5px] leading-[1.55] mb-3">
                 {p.body}
               </p>
+              <Link
+                href={p.proof.href}
+                className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent hover:underline underline-offset-4"
+              >
+                {p.proof.label} →
+              </Link>
             </Card>
           ))}
         </div>
       </section>
+
+      {/* RECENT PROJECTS ------------------------------------------------ */}
+      {projects.length > 0 ? (
+        <section className="py-10 md:py-12">
+          <SectionHead
+            label="Recent projects"
+            count={String(projects.length).padStart(2, "0")}
+          />
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 max-w-[720px]">
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+          <div className="mt-8">
+            <Button href="/projects" variant="ghost" size="sm">
+              All projects →
+            </Button>
+          </div>
+        </section>
+      ) : null}
 
       {/* INVERTED FOOTER CTA -------------------------------------------- */}
       <section className="pt-8 pb-16">
