@@ -49,8 +49,8 @@ From there, the experience returns a curated list: the top five recommendations 
 
 <Figure
   src="/images/azure-advisor/advisor-02-scoping-conversation.png"
-  alt="The experience starts by asking, not telling: pick up to 10 subscriptions and 10 resource groups where your mission-critical workloads live."
-  aspect="16/9"
+  alt="The conversation starts with a question: which subscriptions matter. Then it shows its five steps of work before it says anything about what to fix."
+  aspect="1297/662"
 />
 
 ### The two decisions I drove
@@ -61,14 +61,14 @@ From there, the experience returns a curated list: the top five recommendations 
 
 <Figure
   src="/images/azure-advisor/advisor-03-curated-five.png"
-  alt="Five recommendations, not five hundred. Each shows the minimum information that tips a decision: impact, benefit, and why it's prioritized."
-  aspect="4/3"
+  alt="Five recommendations matched to the chosen scope, each with its impact, affected resources, progress, benefit, and the reason it ranks where it does."
+  aspect="1297/662"
 />
 
 <Figure
   src="/images/azure-advisor/advisor-04-action-plan.png"
-  alt="From list to plan: recommendations sequenced into short, mid, and long-term action."
-  aspect="21/9"
+  alt="The action plan: next 30 days, one to three months, and three months out, with Word and PDF export, feedback, and suggested follow-up prompts."
+  aspect="1297/662"
 />
 
 ### Showing the work
@@ -79,6 +79,18 @@ An AI system that tells an enterprise what to fix first has to earn that. A few 
 - **Every row says why.** The recommendation table carries a *Prioritization reason* column, such as "30-day deadline on production storage accounts still running legacy tiers." A customer who disagrees with the ranking can see exactly what to push back on.
 - **It summarizes, then hands over.** A short paragraph says what to do first and why. The detail exports to CSV, because the people who act on this work in their own tools, not in a chat window.
 - **It says what it is.** Responses are labeled as AI-generated with a prompt to verify, and every answer takes a thumbs up or down.
+
+<Figure
+  src="/images/azure-advisor/advisor-05-recommendation-detail.png"
+  alt="One recommendation opened up: why these resources were prioritized, the retirement date, remediation guidance, and every impacted storage account."
+  aspect="1297/662"
+/>
+
+<Figure
+  src="/images/azure-advisor/advisor-06-exported-plan.png"
+  alt="The whole conversation exported to PDF, with the insights and the five recommendations in a table someone can forward."
+  aspect="1297/662"
+/>
 
 ### What we shipped without
 
