@@ -6,6 +6,7 @@ import SectionHead from "@/components/ui/SectionHead";
 import Button from "@/components/ui/Button";
 import Tag from "@/components/ui/Tag";
 import CompanyMark from "@/components/ui/CompanyMark";
+import { careerStints, type CareerStintId } from "@/lib/career";
 
 export const metadata: Metadata = {
   // Layout sets template "%s | JC Zabel" — just pass the page name here.
@@ -44,6 +45,8 @@ type Segment = { text: string; highlight?: boolean };
 type BulletLine = string | Segment[];
 
 interface Job {
+  /** Which About-page stint this role is grouped under. */
+  stint: CareerStintId;
   company: string;
   title: string;
   dates: string;
@@ -52,6 +55,7 @@ interface Job {
 
 const experience: Job[] = [
   {
+    stint: "microsoft-current",
     company: "Microsoft",
     title: "Senior Product Designer",
     dates: "May 2026 – Present",
@@ -74,6 +78,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "microsoft",
     company: "Microsoft",
     title: "Senior Design Manager",
     dates: "Apr 2023 – May 2026",
@@ -89,6 +94,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "microsoft",
     company: "Microsoft",
     title: "Senior UX Designer",
     dates: "Feb 2022 – Apr 2023",
@@ -109,6 +115,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "snap",
     company: "SnapOne (formerly SnapAV)",
     title: "Lead Data Analyst",
     dates: "2020 – Feb 2022",
@@ -128,6 +135,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "snap",
     company: "SnapOne (formerly SnapAV)",
     title: "UX Manager",
     dates: "Feb 2015 – 2020",
@@ -152,6 +160,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "snap",
     company: "SnapOne (formerly SnapAV)",
     title: "User Experience Engineer",
     dates: "Aug 2013 – Feb 2015",
@@ -162,6 +171,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "lockheed",
     company: "Lockheed Martin",
     title: "Human Systems Integration Engineer",
     dates: "Nov 2011 – Aug 2013",
@@ -172,6 +182,7 @@ const experience: Job[] = [
     ],
   },
   {
+    stint: "ge",
     company: "General Electric (Axiem Engineering)",
     title: "Human Factors Engineer",
     dates: "2011",
@@ -180,6 +191,12 @@ const experience: Job[] = [
     ],
   },
 ];
+
+// Same grouping and headings as the About page career section.
+const careerGroups = careerStints.map((stint) => ({
+  ...stint,
+  jobs: experience.filter((job) => job.stint === stint.id),
+}));
 
 function BulletContent({ line }: { line: BulletLine }) {
   if (typeof line === "string") return <span>{line}</span>;
@@ -320,41 +337,64 @@ export default function ResumePage() {
 
         {/* Experience */}
         <div>
-          <SectionHead label="Experience" count={String(experience.length).padStart(2, "0")} />
+          <SectionHead
+            label="Experience"
+            count={String(careerGroups.length).padStart(2, "0")}
+          />
           <div className="mt-6 space-y-4">
-            {experience.map((job, i) => (
-              <Card key={i} padding="md" hover={false}>
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                  <CompanyMark company={job.company} size="sm" className="mt-0.5" />
-                  <div className="flex-1">
-                    <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-                      <h3
-                        data-ff="serif"
-                        className="text-ink text-[20px] leading-tight tracking-[-0.01em] font-[450] m-0"
-                      >
-                        {job.company}
-                      </h3>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
-                        {job.dates}
-                      </span>
+            {careerGroups.map((group) => (
+              <Card key={group.id} padding="md" hover={false}>
+                <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+                  <div className="flex items-center gap-3 md:flex-col md:items-center md:gap-3 md:w-[120px] shrink-0 md:pt-1">
+                    <CompanyMark company={group.company} />
+                    <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted whitespace-nowrap">
+                      {group.period}
                     </div>
-                    <p className="text-accent text-[14px] mb-3">
-                      {job.title}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      data-ff="serif"
+                      className="text-ink text-[20px] md:text-[22px] leading-[1.25] tracking-[-0.01em] font-[450] mb-1"
+                    >
+                      {group.role}
+                    </h3>
+                    <p className="text-accent text-[14px] mb-4">
+                      {group.company}
                     </p>
-                    <ul className="space-y-2">
-                      {job.bullets.map((bullet, j) => (
-                        <li
-                          key={j}
-                          className="flex items-start gap-2.5 text-ink-soft text-[14.5px] leading-[1.55]"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-2 w-1 h-1 rounded-full bg-muted shrink-0"
-                          />
-                          <BulletContent line={bullet} />
-                        </li>
+                    <div className="space-y-5">
+                      {group.jobs.map((job) => (
+                        <div key={job.title}>
+                          <div className="flex flex-wrap justify-between items-baseline gap-x-3 gap-y-1 mb-2 pt-4 border-t border-rule">
+                            {group.jobs.length > 1 ? (
+                              <p className="text-ink text-[15px] font-medium">
+                                {job.title}
+                              </p>
+                            ) : (
+                              <p className="text-muted text-[13px]">
+                                {job.company !== group.company ? job.company : ""}
+                              </p>
+                            )}
+                            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
+                              {job.dates}
+                            </span>
+                          </div>
+                          <ul className="space-y-2">
+                            {job.bullets.map((bullet, j) => (
+                              <li
+                                key={j}
+                                className="flex items-start gap-2.5 text-ink-soft text-[14.5px] leading-[1.55]"
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className="mt-2 w-1 h-1 rounded-full bg-muted shrink-0"
+                                />
+                                <BulletContent line={bullet} />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </div>
               </Card>

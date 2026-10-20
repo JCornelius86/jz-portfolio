@@ -8,6 +8,7 @@ import Tag from "@/components/ui/Tag";
 import CompanyMark from "@/components/ui/CompanyMark";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { careerStints, type CareerStintId } from "@/lib/career";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,63 +16,38 @@ export const metadata: Metadata = {
     "Product designer and design leader in the Charlotte area, with 15+ years at Microsoft, SnapAV, Lockheed Martin, and GE.",
 };
 
-const timeline: {
-  period: string;
-  role: string;
-  company: string;
-  description: ReactNode;
-}[] = [
-  {
-    period: "2026 – Present",
-    role: "Senior Product Designer, Azure Advisor",
-    company: "Microsoft",
-    description: (
+const descriptions: Record<CareerStintId, ReactNode> = {
+  "microsoft-current": (
       <>
         Designing <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that turn long lists of generic recommendations into the handful of decisions an enterprise customer actually needs to make, so they cut cost and reduce risk where it counts.
       </>
-    ),
-  },
-  {
-    period: "2022 – 2026",
-    role: "Senior UX Designer → Senior Design Manager",
-    company: "Microsoft",
-    description: (
+  ),
+  "microsoft": (
       <>
         Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor, CX Observe, and customer-health products, and was recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership. Before that, led UX for internal Azure field platforms used by <span className="text-accent">4,000+ people</span> across 10+ Microsoft organizations.
       </>
-    ),
-  },
-  {
-    period: "2013 – 2022",
-    role: "UX Engineer → UX Manager → Lead Data Analyst",
-    company: "SnapAV / SnapOne",
-    description: (
+  ),
+  "snap": (
       <>
         Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Grew into UX Manager, leading a team of about <span className="text-accent">6 across two time zones</span> through acquisitions including Control4. Helped take OvrC from an idea to the industry-leading remote management platform for integrators, now supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
       </>
-    ),
-  },
-  {
-    period: "2011 – 2013",
-    role: "Human Systems Integration Engineer",
-    company: "Lockheed Martin",
-    description: (
+  ),
+  "lockheed": (
       <>
         Modernized combat system interfaces for the <span className="text-accent">Aegis BMD 5.1</span> program, updating legacy systems to a more modern architecture. Cut my teeth on rapid prototyping, user testing with active duty sailors, and iterating based on direct operator feedback.
       </>
-    ),
-  },
-  {
-    period: "2011",
-    role: "Human Factors Engineer",
-    company: "General Electric",
-    description: (
+  ),
+  "ge": (
       <>
         Worked in <span className="text-accent">green energy</span>, focused on the wind sector. Led risk assessments and built mitigation programs to reduce issues across <span className="text-accent">multiple sectors nationwide</span>.
       </>
-    ),
-  },
-];
+  ),
+};
+
+const timeline = careerStints.map((stint) => ({
+  ...stint,
+  description: descriptions[stint.id],
+}));
 
 const skills = [
   "Design Management",
