@@ -85,6 +85,10 @@ Each of these currently ends on a neutral line. One real detail would replace it
       A short essay or a section on About.
 - [ ] **CharTaker screenshots and demo GIF.** Still pending. See
       `docs/chartaker-shots.md`.
+      Once they exist, give CharTaker a `rail:` in its frontmatter (like
+      MealMapper's) so its side screenshot swaps by section. Only use screens
+      the article doesn't already show inline. Without a rail the hero
+      doesn't stick.
 
 ---
 

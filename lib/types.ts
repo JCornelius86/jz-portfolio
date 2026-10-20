@@ -37,6 +37,10 @@ export interface Project {
   order?: number;
   /** Hidden from listings, but the detail page still renders when linked directly. */
   archived?: boolean;
+  /** Extra screens for the pinned side column, each shown once its section's
+   * h2 scrolls up. The hero image stays first. Use screens the article doesn't
+   * already show inline. Without a rail the hero doesn't stick. */
+  rail?: { section: string; src: string; alt: string }[];
   /** Optional key into the hero component registry. When set, the named
    * component renders as the detail-page hero instead of heroImage. */
   heroComponent?: string;

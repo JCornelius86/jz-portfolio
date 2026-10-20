@@ -9,6 +9,7 @@ import Tag from "@/components/ui/Tag";
 import Button from "@/components/ui/Button";
 import StripeImage from "@/components/ui/StripeImage";
 import SectionHead from "@/components/ui/SectionHead";
+import StickyRail, { type RailItem } from "@/components/ui/StickyRail";
 import {
   getProject,
   getProjectSlugs,
@@ -117,7 +118,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </header>
 
       <aside className="md:col-start-2 md:row-start-1 md:row-span-2">
-        <div className="md:sticky md:top-24">
+        <div className={meta.rail?.length ? "md:sticky md:top-24" : undefined}>
         {(() => {
           // Component heroes (e.g. the King's Bluff floating hand) bring
           // their own frame and animation; they win over any image.
@@ -134,9 +135,21 @@ export default async function ProjectPage({ params }: PageProps) {
             const aspectStyle = dims
               ? {
                   aspectRatio: `${dims.width} / ${dims.height}`,
-                  maxWidth: `min(340px, calc((100vh - 8rem) * ${(dims.width / dims.height).toFixed(3)}))`,
+                  maxWidth: `min(340px, calc((100vh - 10rem) * ${(dims.width / dims.height).toFixed(3)}))`,
                 }
               : undefined;
+
+            if (dims && meta.rail?.length) {
+              const items: RailItem[] = [
+                { src: heroSrc, alt: `${meta.title} screenshot`, ...dims },
+                ...meta.rail.flatMap((r) => {
+                  const d = getImageDims(r.src);
+                  return d ? [{ ...r, ...d }] : [];
+                }),
+              ];
+              return <StickyRail items={items} frameStyle={aspectStyle} />;
+            }
+
             return (
               <div
                 className="relative w-full mx-auto md:mr-0 overflow-hidden rounded-[22px] border border-rule bg-bg"
