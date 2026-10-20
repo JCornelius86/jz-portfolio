@@ -55,7 +55,7 @@ interface Job {
 
 const experience: Job[] = [
   {
-    stint: "microsoft-current",
+    stint: "microsoft",
     company: "Microsoft",
     title: "Senior Product Designer",
     dates: "May 2026 – Present",

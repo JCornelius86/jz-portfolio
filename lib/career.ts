@@ -3,20 +3,15 @@
  * same roles under the same headings. About adds a narrative paragraph per
  * stint; the resume nests each role's dates and bullets underneath.
  *
- * Microsoft is two stints on purpose: the current IC role stands alone rather
- * than as the last step of an arrow chain (see CLAUDE.md voice rules).
+ * Microsoft is one stint with a neutral heading rather than an arrow chain of
+ * titles, so the order of roles doesn't narrate the manager-to-IC move (see
+ * CLAUDE.md voice rules). The resume lists the individual roles underneath.
  */
 export const careerStints = [
   {
-    id: "microsoft-current",
-    period: "2026 – Present",
-    role: "Senior Product Designer, Azure Advisor",
-    company: "Microsoft",
-  },
-  {
     id: "microsoft",
-    period: "2022 – 2026",
-    role: "Senior UX Designer → Senior Design Manager",
+    period: "2022 – Present",
+    role: "Product design & design leadership, Azure",
     company: "Microsoft",
   },
   {

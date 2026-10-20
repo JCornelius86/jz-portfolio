@@ -17,14 +17,9 @@ export const metadata: Metadata = {
 };
 
 const descriptions: Record<CareerStintId, ReactNode> = {
-  "microsoft-current": (
-      <>
-        Designing <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that turn long lists of generic recommendations into the handful of decisions an enterprise customer actually needs to make, so they cut cost and reduce risk where it counts.
-      </>
-  ),
   "microsoft": (
       <>
-        Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor, CX Observe, and customer-health products, and was recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership. Before that, led UX for internal Azure field platforms used by <span className="text-accent">4,000+ people</span> across 10+ Microsoft organizations.
+        Designing <span className="text-accent">agentic experiences</span> in <span className="text-accent">Azure Advisor</span> that turn long lists of generic recommendations into the handful of decisions an enterprise customer actually needs to make. Led a UX team of <span className="text-accent">6 designers and researchers</span> across Azure Advisor, CX Observe, and customer-health products, recognized as <span className="text-accent">Azure X Manager of the Year</span> for delivery results and people leadership. Earlier, led UX for internal Azure field platforms used by <span className="text-accent">4,000+ people</span> across 10+ Microsoft organizations.
       </>
   ),
   "snap": (
