@@ -68,6 +68,7 @@
     margin-top: 9px;
   }
   .contacts { text-align: right; font-size: 9pt; color: var(--ink-soft); line-height: 1.55; }
+  .contacts a, .footer a, .proj-note a { color: inherit; text-decoration: none; }
   .contacts .dim { color: var(--gray-light); padding: 0 4px; }
   .rule-top { border-bottom: 1.2px solid var(--rule); margin-top: 13px; }
 
@@ -213,9 +214,9 @@
       <div class="tagline">Senior Product Designer &middot; UX Leader &middot; 15+ Years</div>
     </div>
     <div class="contacts">
-      <div>Fort Mill, SC<span class="dim">&middot;</span>(803) 984-5744</div>
-      <div>jc.zabel@gmail.com</div>
-      <div>jczabel.com<span class="dim">&middot;</span>linkedin.com/in/james-zabel</div>
+      <div>Fort Mill, SC<span class="dim">&middot;</span><a href="tel:+18039845744">(803) 984-5744</a></div>
+      <div><a href="mailto:jc.zabel@gmail.com">jc.zabel@gmail.com</a><span class="dim">&middot;</span><a href="https://jczabel.com">jczabel.com</a></div>
+      <div><a href="https://www.linkedin.com/in/james-zabel-31860816/">linkedin.com/in/james-zabel-31860816</a></div>
     </div>
   </div>
   <div class="rule-top"></div>
@@ -268,14 +269,6 @@
           <div class="edu-deg">B.S. Industrial Engineering</div>
           <div class="edu-meta">Clemson University &middot; 2009</div>
         </div>
-      </div>
-
-      <div class="block">
-        <div class="sec-label">Honors</div>
-        <ul class="honors">
-          <li>Azure X Manager of the Year</li>
-          <li>AWS Certified Cloud Practitioner</li>
-        </ul>
       </div>
     </aside>
 
@@ -346,7 +339,7 @@
 <div class="page">
   <div class="mini-head">
     <h1 class="name">James C. E. Zabel</h1>
-    <div class="cont">Experience, continued</div>
+    <div class="cont">Senior Product Designer</div>
   </div>
 
   <div class="section-spacer">
@@ -403,32 +396,47 @@
 
   <div class="section-spacer">
     <div class="sec-label">Personal Projects</div>
-    <div class="proj-note">Products I designed and shipped solo, built fast with AI-assisted development.</div>
+    <div class="proj-note">Products I designed, built, and shipped myself. Full write-ups at <a href="https://jczabel.com/projects">jczabel.com/projects</a>.</div>
     <div class="proj">
       <div class="job-head">
-        <div class="job-title"><span class="co">CharTaker</span> <span class="sub">/ JavaScript &middot; iOS</span></div>
+        <div class="job-title"><span class="co">CharTaker</span> <span class="sub">/ React &middot; Capacitor &middot; Supabase</span></div>
         <div class="job-date">2024 &ndash; Present</div>
       </div>
-      <div class="proj-line">TTRPG character manager for creating, organizing, and tracking tabletop RPG characters. Designed, built, and <strong>shipped to the App Store</strong>.</div>
-    </div>
-    <div class="proj">
-      <div class="job-head">
-        <div class="job-title"><span class="co">Inspec</span> <span class="sub">/ TypeScript</span></div>
-        <div class="job-date">2024</div>
-      </div>
-      <div class="proj-line">Franchise management application for streamlining inspections and operations across distributed teams.</div>
+      <div class="proj-line">Starfinder character manager covering guided character creation, live combat, starships, and real-time shared sessions. Designed, built, and <strong>shipped to the App Store and Google Play</strong>.</div>
     </div>
     <div class="proj">
       <div class="job-head">
         <div class="job-title"><span class="co">MealMapper</span> <span class="sub">/ React Native &middot; Supabase</span></div>
-        <div class="job-date">2024</div>
+        <div class="job-date">2024 &ndash; Present</div>
       </div>
-      <div class="proj-line">Cross-platform mobile app for meal planning, grocery list generation, and real-time household sync.</div>
+      <div class="proj-line">Household meal planner that turns a week of meals into a sorted grocery list and a matched Kroger cart, synced live between family members. Rebuilt after testing with friends and family.</div>
+    </div>
+    <div class="proj">
+      <div class="job-head">
+        <div class="job-title"><span class="co">Sealed Bid</span> <span class="sub">/ Next.js &middot; Postgres</span></div>
+        <div class="job-date">2026</div>
+      </div>
+      <div class="proj-line">Sealed-bid game that set the draft order for a 14-person fantasy league: secret bids on phones, then a synchronized reveal on the TV. <strong>Ran live on draft night.</strong></div>
+    </div>
+    <div class="proj">
+      <div class="job-head">
+        <div class="job-title"><span class="co">King&rsquo;s Bluff</span> <span class="sub">/ TypeScript &middot; React</span></div>
+        <div class="job-date">2026</div>
+      </div>
+      <div class="proj-line">Chess and poker bluffing game, balanced with a Monte Carlo simulator that plays thousands of bot games per rule change.</div>
     </div>
   </div>
 
+  <div class="section-spacer">
+    <div class="sec-label">Honors &amp; Certifications</div>
+    <ul class="honors">
+      <li>Azure X Manager of the Year</li>
+      <li>AWS Certified Cloud Practitioner</li>
+    </ul>
+  </div>
+
   <div class="footer">
-    <span>jc.zabel@gmail.com &middot; jczabel.com</span>
+    <span><a href="mailto:jc.zabel@gmail.com">jc.zabel@gmail.com</a> &middot; <a href="https://jczabel.com">jczabel.com</a></span>
     <span>Page 2 of 2</span>
   </div>
 </div>

@@ -4,7 +4,6 @@ import Heading from "@/components/ui/Heading";
 import Card from "@/components/ui/Card";
 import SectionHead from "@/components/ui/SectionHead";
 import Button from "@/components/ui/Button";
-import PrintButton from "@/components/ui/PrintButton";
 import Tag from "@/components/ui/Tag";
 import CompanyMark from "@/components/ui/CompanyMark";
 
@@ -210,18 +209,18 @@ export default function ResumePage() {
           <p className="text-ink-soft text-[16px] mb-4">
             Senior Product Designer · UX & Design Leader · 15+ Years Experience
           </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[12px] uppercase tracking-[0.08em] text-muted">
+          <div className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px] text-muted">
             <span>Fort Mill, SC</span>
             <a
               href="mailto:jc.zabel@gmail.com"
-              className="hover:text-accent transition-colors normal-case tracking-normal text-[13px]"
+              className="hover:text-accent transition-colors"
             >
               jc.zabel@gmail.com
             </a>
             <span>(803) 984-5744</span>
             <a
               href="https://www.jczabel.com"
-              className="hover:text-accent transition-colors normal-case tracking-normal text-[13px]"
+              className="hover:text-accent transition-colors"
             >
               jczabel.com
             </a>
@@ -233,6 +232,19 @@ export default function ResumePage() {
             >
               LinkedIn
             </a>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button
+              href="/JC_Zabel_Resume.pdf"
+              download="JC_Zabel_Resume.pdf"
+              variant="primary"
+              size="sm"
+            >
+              Download PDF ↓
+            </Button>
+            <Button href="/JC_Zabel_Resume.pdf" external variant="ghost" size="sm">
+              Open in browser →
+            </Button>
           </div>
         </div>
       </section>
@@ -298,12 +310,6 @@ export default function ResumePage() {
             </ul>
           </section>
 
-          <section className="no-print flex flex-col gap-2 items-start">
-            <PrintButton>Save as PDF</PrintButton>
-            <Button href="/JC_Zabel_Resume.pdf" variant="ghost" size="sm">
-              Download PDF
-            </Button>
-          </section>
         </aside>
 
         {/* Experience */}

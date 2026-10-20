@@ -21,6 +21,8 @@ interface ButtonAsButton extends CommonProps {
 interface ButtonAsLink extends CommonProps {
   href: string;
   external?: boolean;
+  /** Ask the browser to save the file instead of opening it. Value is the filename. */
+  download?: string;
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
@@ -56,6 +58,13 @@ export default function Button(props: ButtonProps) {
   const classes = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
 
   if ("href" in props && props.href) {
+    if (props.download) {
+      return (
+        <a href={props.href} download={props.download} className={classes}>
+          {children}
+        </a>
+      );
+    }
     if (props.external) {
       return (
         <a
