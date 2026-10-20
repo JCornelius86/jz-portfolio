@@ -27,7 +27,8 @@
 - **WCAG AA contrast** minimum on all text, in both modes.
 
 ## Motion
-- The H1 underscore cursor blink (`.cursor-blink`) is the only system animation.
+- The H1 underscore cursor blink (`.cursor-blink`) is the only looping system animation.
+- Explanatory diagrams may play a one-shot build on scroll-in (e.g. the Azure Advisor poster). It must explain the idea, end on the static diagram, and be skipped under reduced motion.
 - Subtle fade-ins on scroll at most. No parallax, scroll-jacking, custom cursors, carousels, or heavy load animations.
 - Hover states stay subtle: a hairline shift, never a glow.
 - Respect `prefers-reduced-motion` everywhere.

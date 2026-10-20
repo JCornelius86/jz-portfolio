@@ -88,6 +88,38 @@ Each of these currently ends on a neutral line. One real detail would replace it
 
 ---
 
+## 4b. Making it stand out (from the jessa.art discussion)
+
+The test for any of these: does it say something true about JC that a
+recruiter should remember? A gimmick works when it is the thesis, not
+decoration.
+
+- [x] **Motion that explains.** The Azure Advisor poster now plays once when it
+      scrolls into view: the wall builds, lines gather into the ask, five cards
+      land. It resolves to the static diagram and is skipped for reduced motion.
+- [ ] **"Show my notes" margin layer.** A toggle that reveals short italic
+      Fraunces asides in the margins of case studies ("this is the screen I
+      argued for"). It's where JC's dry, specific voice lives. The component
+      is medium effort; the real work is JC writing the notes.
+- [ ] **This site as a case study.** A short "How this site was built" page:
+      editorial direction, tokens and motion rules, the AI-voice audit and
+      what got cut, analytics, and how JC builds with AI. It also closes "How
+      I build with AI" in section 4.
+- [ ] **Character sheet view of the resume.** An opt-in "View as character
+      sheet" link on `/resume`: Senior Product Designer, Level 15,
+      multiclass Design Manager, with skills as feats and career as
+      background. Printable. A fun side build, not the main experience.
+- [ ] **One or two real photos.** For example the Starfinder table or the
+      draft-night TV. Check with the people in them first.
+- [ ] **Smaller motion options.** A drag slider on MealMapper's before and
+      after comparisons, and a short loop of the Sealed Bid card-flip reveal.
+
+Skip: custom cursors, a canvas or OS-desktop metaphor (it would read as
+borrowed from jessa.art), and anything that hides content behind an
+interaction.
+
+---
+
 ## 5. Small decisions
 
 - [ ] The home status pill ("Always up for an interesting problem"): make it

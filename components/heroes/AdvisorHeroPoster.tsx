@@ -1,3 +1,10 @@
+"use client";
+
+import { useLayoutEffect, useRef, type CSSProperties } from "react";
+
+/** Animation delay for one poster element, read by the .ap-* rules in globals.css. */
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
 /**
  * Poster hero for the Azure Advisor case study: a wall of context-free
  * recommendations funnels through the ask (scope + intent) into five
@@ -6,8 +13,35 @@
  * Inline SVG on theme tokens (var(--c-*)) so it adapts to light/dark.
  * Decorative at small sizes: the many-to-few shape reads even where the
  * mono labels get small.
+ *
+ * Plays once when scrolled into view: the wall builds, the lines gather into
+ * the ask, then the five cards land. It ends on the static diagram, and is
+ * skipped entirely under prefers-reduced-motion.
  */
 export default function AdvisorHeroPoster() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Arm before first paint so the finished diagram never flashes, then play
+  // once the poster is meaningfully on screen.
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    el.classList.add("ap-armed");
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          el.classList.add("ap-play");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const wallCols = [0, 1, 2, 3, 4, 5, 6];
   const wallRows = [0, 1, 2, 3, 4, 5, 6, 7];
 
@@ -42,7 +76,10 @@ export default function AdvisorHeroPoster() {
   );
 
   return (
-    <div className="relative w-full overflow-hidden rounded-[20px] border border-rule bg-card">
+    <div
+      ref={ref}
+      className="relative w-full overflow-hidden rounded-[20px] border border-rule bg-card"
+    >
       <svg
         viewBox="0 0 1200 600"
         role="img"
@@ -64,6 +101,8 @@ export default function AdvisorHeroPoster() {
           wallCols.map((c) => (
             <rect
               key={`w-${r}-${c}`}
+              className="ap-chip"
+              style={delay((r + c) * 22)}
               x={wallX(c)}
               y={wallY(r)}
               width={50}
@@ -79,9 +118,12 @@ export default function AdvisorHeroPoster() {
         )}
 
         {/* ---- Streamlines: many gather into the ask ---- */}
-        {gatherPaths.map((d) => (
+        {gatherPaths.map((d, i) => (
           <path
             key={d}
+            className="ap-line"
+            style={delay(450 + i * 60)}
+            pathLength={1}
             d={d}
             fill="none"
             stroke="var(--c-muted)"
@@ -91,6 +133,7 @@ export default function AdvisorHeroPoster() {
         ))}
 
         {/* ---- Middle: the ask, as a speech bubble ---- */}
+        <g className="ap-ask" style={delay(800)}>
         <rect
           x={598}
           y={252}
@@ -123,11 +166,15 @@ export default function AdvisorHeroPoster() {
         >
           SCOPE + INTENT
         </text>
+        </g>
 
         {/* ---- Fan: one line per decision ---- */}
-        {fanPaths.map((d) => (
+        {fanPaths.map((d, i) => (
           <path
             key={d}
+            className="ap-line"
+            style={delay(1050 + i * 60)}
+            pathLength={1}
             d={d}
             fill="none"
             stroke="var(--c-muted)"
@@ -151,6 +198,7 @@ export default function AdvisorHeroPoster() {
           const pw = pillWidth(p.label);
           return (
             <g key={`card-${i}`} opacity={p.opacity}>
+              <g className="ap-card" style={delay(1250 + i * 110)}>
               <rect
                 x={852}
                 y={cardY(i)}
@@ -217,6 +265,7 @@ export default function AdvisorHeroPoster() {
               >
                 {p.label}
               </text>
+              </g>
             </g>
           );
         })}

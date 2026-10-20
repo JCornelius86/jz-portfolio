@@ -89,7 +89,8 @@ Never italic for full sentences of body copy.
 
 ## 5. Motion
 
-- The H1 underscore cursor blink (`.cursor-blink`, 1.1s steps(2)) is the only system animation.
+- The H1 underscore cursor blink (`.cursor-blink`, 1.1s steps(2)) is the only looping system animation.
+- Explanatory diagrams may play a one-shot build when scrolled into view (the Azure Advisor poster, `.ap-*` in `globals.css`): about 2s, never loops, ends on the static diagram, and does not run under `prefers-reduced-motion`. Motion has to explain the idea, not decorate it.
 - Hover: a 1–2px translate or hairline shadow shift. Never a glow.
 - Theme toggle: instant, no transition.
 - All motion respects `prefers-reduced-motion`.

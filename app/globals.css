@@ -131,6 +131,38 @@ html {
   }
 }
 
+/* Azure Advisor poster: a one-shot build that explains the diagram (wall,
+   gather into the ask, five cards). JS adds .ap-armed before paint and .ap-play
+   on scroll-in, and never arms under reduced motion, so the static diagram is
+   always the fallback. Delays come from --d on each element. */
+@keyframes ap-pop {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes ap-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes ap-rise {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+.ap-armed .ap-chip,
+.ap-armed .ap-ask,
+.ap-armed .ap-card {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ap-armed .ap-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.ap-play .ap-chip { animation: ap-pop 380ms ease-out var(--d) both; }
+.ap-play .ap-line { animation: ap-draw 600ms ease-in-out var(--d) both; }
+.ap-play .ap-ask  { animation: ap-pop 420ms cubic-bezier(0.2, 0.9, 0.3, 1.2) var(--d) both; }
+.ap-play .ap-card { animation: ap-rise 480ms ease-out var(--d) both; }
+
 /* ----------------------------------------------------------------
    Print — force the light palette and strip nav/footer/CTAs so the
    resume page (or any page) prints clean to PDF via the browser.
