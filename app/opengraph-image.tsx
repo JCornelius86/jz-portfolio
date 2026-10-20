@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "JC Zabel: Senior designer, design leader, always building";
+export const alt = "JC Zabel: Senior product designer, building in the AI age";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -75,15 +75,10 @@ export default async function OgImage() {
             flexDirection: "column",
           }}
         >
+          <div style={{ display: "flex" }}>Building in</div>
           <div style={{ display: "flex" }}>
-            <span>Senior&nbsp;</span>
-            <span style={{ color: ACCENT }}>designer</span>
-            <span>,</span>
-          </div>
-          <div style={{ display: "flex" }}>design leader,</div>
-          <div style={{ display: "flex" }}>
-            <span>always&nbsp;</span>
-            <span style={{ color: ACCENT }}>building</span>
+            <span>the&nbsp;</span>
+            <span style={{ color: ACCENT }}>AI age</span>
             <span style={{ color: ACCENT }}>_</span>
           </div>
         </div>

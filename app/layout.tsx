@@ -7,17 +7,17 @@ import SiteAnalytics from "@/components/layout/SiteAnalytics";
 import "./globals.css";
 
 const SHARED_DESCRIPTION =
-  "Currently at Microsoft, where I've led design across Azure CXS, Resiliency, and Customer Health. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.";
+  "Currently at Microsoft, where I've led design across Azure Advisor, Resiliency, and Customer Health. Before that, founding designer on an enterprise platform now past 20M devices. AI-native, drawn to mission work, still shipping the software myself.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jczabel.com"),
   title: {
-    default: "JC Zabel: Senior designer, design leader, always building",
+    default: "JC Zabel: Senior product designer, building in the AI age",
     template: "%s | JC Zabel",
   },
   description: SHARED_DESCRIPTION,
   openGraph: {
-    title: "JC Zabel: Senior designer, design leader, always building",
+    title: "JC Zabel: Senior product designer, building in the AI age",
     description: SHARED_DESCRIPTION,
     siteName: "JC Zabel",
     type: "website",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JC Zabel: Senior designer, design leader, always building",
+    title: "JC Zabel: Senior product designer, building in the AI age",
     description: SHARED_DESCRIPTION,
   },
 };

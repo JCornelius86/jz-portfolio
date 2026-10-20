@@ -143,7 +143,11 @@ const experience: Job[] = [
         { text: "$150M+ Connected Device category", highlight: true },
         { text: ", driving double-digit growth annually" },
       ],
-      "Managed onshore and offshore design teams; created standardized design system across all software interfaces",
+      [
+        { text: "Grew UX from one designer to a team of about " },
+        { text: "6 across two time zones", highlight: true },
+        { text: ", through acquisitions including Control4; built a standardized design system across all software interfaces" },
+      ],
       "Planned and facilitated regular usability sessions with customers across both platforms",
     ],
   },

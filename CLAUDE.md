@@ -40,7 +40,7 @@
 
 ## Voice — non-negotiable
 - Bio language (use this or a near-paraphrase wherever a bio appears):
-  > Currently at Microsoft, where I've led design across Azure CXS, Resiliency, and Customer Health. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.
+  > Currently at Microsoft, where I've led design across Azure Advisor, Resiliency, and Customer Health. Before that, founding designer on an enterprise platform now past 20M devices. AI-native, drawn to mission work, still shipping the software myself.
 - **Never narrate the IC/manager transition on the site.** Don't say "former manager," "previously managed," "stepped back from management." Don't water down leadership verbs in past-tense content.
 - Avoid: "passionate," "thought leader," "leveraged," "synergy," "ecosystem."
 

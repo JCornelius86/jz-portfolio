@@ -47,14 +47,17 @@ export default function Home() {
       {/* HERO ------------------------------------------------------------ */}
       <section className="pt-12 pb-10 md:pt-20 md:pb-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16 md:items-end">
-          <Heading as="h1" variant="display">
-            Senior <Accent>designer</Accent>,
-            <br />
-            design leader,
-            <br />
-            always <span className="text-accent">building</span>
-            <Cursor />
-          </Heading>
+          <div>
+            <Eyebrow tone="accent" className="mb-5">
+              Senior product designer &amp; design leader
+            </Eyebrow>
+            <Heading as="h1" variant="display">
+              Building in
+              <br />
+              the <Accent>AI age</Accent>
+              <Cursor />
+            </Heading>
+          </div>
           <div>
             {/* Status pill — toggle the boolean or remove when not actively open. */}
             <div className="inline-flex items-center gap-2 mb-6">
@@ -64,7 +67,7 @@ export default function Home() {
               </span>
             </div>
             <p className="text-ink-soft text-[17px] md:text-[19px] leading-[1.55] max-w-[520px] mb-7">
-              I&apos;m <strong className="text-ink font-semibold">JC Zabel</strong>. Currently at Microsoft, designing AI-powered guidance across Azure, from Portal patterns to Advisor recommendations to the tools our field teams use to support customers. Before that, scaled an enterprise platform past 20M devices as the founding designer. AI-native, drawn to mission work, still shipping the software myself.
+              I&apos;m <strong className="text-ink font-semibold">JC Zabel</strong>. Currently at Microsoft, where I&apos;ve led design across Azure Advisor, Resiliency, and Customer Health. Before that, founding designer on an enterprise platform now past 20M devices. AI-native, drawn to mission work, still shipping the software myself.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button href="/work" variant="primary">
@@ -222,7 +225,7 @@ export default function Home() {
           </p>
           <div>
             <p className="text-invert-fg/70 text-[15px] md:text-[16px] leading-[1.6] mb-6">
-              I&apos;d like to hear about it. Climate, energy, healthcare, public good. Those are the ones I lean toward, but if it&apos;s real work on a hard problem, drop me a line.
+              I&apos;d like to hear about it. I lean toward places where AI meets climate, energy, healthcare, or public service, but if it&apos;s real work on a hard problem, drop me a line.
             </p>
             <a
               href="mailto:jc.zabel@gmail.com"

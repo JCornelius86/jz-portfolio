@@ -47,7 +47,7 @@ const timeline: {
     company: "SnapAV / SnapOne",
     description: (
       <>
-        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Helped take it from an idea to the remote management platform integrators across the industry run on, now supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
+        Founding member of the OvrC team, starting as the lone designer and wearing every hat: design, user testing, front-end, back-end, QA, and feature development. Grew into UX Manager, leading a team of about <span className="text-accent">6 across two time zones</span> through acquisitions including Control4. Helped take OvrC from an idea to the industry-leading remote management platform for integrators, now supporting <span className="text-accent">20M+ managed devices</span> globally. Built the design system across all product lines and provided strategic design support for the <span className="text-accent">$150M+ Connected Device category</span>. Later founded SnapOne&apos;s <span className="text-accent">data team</span> as Lead Data Analyst, turning insights from its connected platforms into product strategy and quarterly direction for executives.
       </>
     ),
   },
