@@ -39,7 +39,7 @@ const principles = [
 
 export default function Home() {
   const caseStudies = getCaseStudies();
-  const projects = getProjects().filter((p) => p.featured).slice(0, 2);
+  const projects = getProjects().filter((p) => p.featured).slice(0, 3);
   const flagship = caseStudies.find((s) => s.featured) ?? caseStudies[0];
 
   return (
@@ -201,7 +201,7 @@ export default function Home() {
             label="Recent projects"
             count={String(projects.length).padStart(2, "0")}
           />
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 max-w-[720px]">
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
             {projects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
