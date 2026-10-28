@@ -32,6 +32,9 @@ Faced with a wall of context-free advice, customers made a rational choice: they
 
 ## Approach: ask before you rank
 
+<RailShot desktopOnly src="/images/azure-advisor/detail-activity.png" alt="Close-up: before it recommends anything, the agent lists the five steps it worked through." />
+
+
 The tempting fix is a smarter ranking algorithm. But no model can rank its way out of missing information. The criticality of a workload lives in the customer's head, not in the resource metadata. The only way to get it is to ask.
 
 So we inverted the problem. Instead of Advisor broadcasting everything it knows, the new experience, an AI-powered chat unveiled at Microsoft Build 2026, starts by asking the customer what matters:
@@ -55,6 +58,9 @@ From there, the experience returns a curated list: the top five recommendations 
 
 ### The two decisions I drove
 
+<RailShot desktopOnly src="/images/azure-advisor/detail-prioritization-reason.png" alt="Close-up: the benefit and the reason it ranks where it does, on every row." />
+
+
 **Capping recommendations at five per category.** The wall of recommendations was the original sin of the old experience. Every additional item past a handful reduces the odds that any get acted on. Five is enough to matter and few enough to finish.
 
 **Designing what each recommendation shows.** The old model was a dense table where most columns were noise most of the time. I reframed the question: what is the minimum information that tips someone into a decision? For retirements, it's two things: when the retirement happens and how many resources are affected. For resiliency, it's the number of resources involved and cost impact, deliberately abstracted to high, medium, or low. Showing false precision the underlying estimate can't support would manufacture confidence we hadn't earned. Everything else is available on demand, not by default.
@@ -72,6 +78,9 @@ From there, the experience returns a curated list: the top five recommendations 
 />
 
 ### Showing the work
+
+<RailShot desktopOnly src="/images/azure-advisor/detail-why-prioritized.png" alt="Close-up: one recommendation opened up, with why these resources were prioritized." />
+
 
 An AI system that tells an enterprise what to fix first has to earn that. A few things in the preview exist for that reason, and they're visible in the public Build demo:
 
@@ -107,6 +116,9 @@ The chat experience and Service Groups are two halves of one strategy. The conve
 <TwoTrackDiagram />
 
 ## Impact
+
+<RailShot desktopOnly src="/images/azure-advisor/detail-short-term-plan.png" alt="Close-up: the next 30 days of the action plan, in the customer's own resources." />
+
 
 - **Shipped to private preview at Microsoft Build 2026**, with scope and intent as the entry point instead of the full recommendation list.
 - **Five recommendations per category instead of hundreds**, each with the minimum information needed to decide and a stated reason for its rank.
