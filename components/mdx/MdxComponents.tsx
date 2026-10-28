@@ -5,6 +5,7 @@ import MdxImageRow from "./MdxImageRow";
 import MdxRow from "./MdxRow";
 import MdxThenNow from "./MdxThenNow";
 import MdxRailShot from "./MdxRailShot";
+import MdxRailDiagram from "./MdxRailDiagram";
 import D20 from "./D20";
 import ContextGapDiagram from "./ContextGapDiagram";
 import TwoTrackDiagram from "./TwoTrackDiagram";
@@ -116,6 +117,8 @@ export const mdxComponents: MDXComponents = {
   ThenNow: MdxThenNow as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RailShot: MdxRailShot as unknown as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  RailDiagram: MdxRailDiagram as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   D20: D20 as unknown as any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

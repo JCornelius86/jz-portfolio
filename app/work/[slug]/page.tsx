@@ -11,6 +11,7 @@ import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
 import { getImageDims, imageExists } from "@/lib/imageDims";
 import StickyRail from "@/components/ui/StickyRail";
 import { getRailShots } from "@/lib/railShots";
+import { railDiagrams } from "@/components/rail/AdvisorRailDiagrams";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import { heroComponents } from "@/components/heroes/registry";
 import type { Metadata } from "next";
@@ -184,7 +185,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
           as <RailShot>, they move into a sticky column on the right on
           desktop and swap as the reader reaches each one. */}
       {(() => {
-        const shots = getRailShots(content);
+        const shots = getRailShots(content).map((shot) => {
+          const Diagram = shot.diagram ? railDiagrams[shot.diagram] : null;
+          return Diagram ? { ...shot, node: <Diagram /> } : shot;
+        });
         const body = <MDXRemote source={content} components={mdxComponents} />;
         if (shots.length === 0) {
           return (

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
 export interface RailItem {
   /** h2/h3 text in the article that switches the rail to this screen. Without
@@ -11,6 +11,8 @@ export interface RailItem {
   alt: string;
   width: number;
   height: number;
+  /** Render this instead of an image (e.g. a portrait diagram). */
+  node?: ReactNode;
 }
 
 interface StickyRailProps {
@@ -76,6 +78,19 @@ export default function StickyRail({ items, frameStyle }: StickyRailProps) {
           // Past screens exit upward, upcoming ones wait below, so the swap
           // direction matches the scroll direction for free.
           const state = i === active ? "rail-current" : i < active ? "rail-past" : "rail-next";
+          if (item.node) {
+            return (
+              <div
+                key={item.src}
+                role={i === active ? "img" : undefined}
+                aria-label={i === active ? item.alt : undefined}
+                aria-hidden={i === active ? undefined : true}
+                className={`rail-shot ${state} absolute inset-0`}
+              >
+                {item.node}
+              </div>
+            );
+          }
           return (
             <Image
               key={item.src}
