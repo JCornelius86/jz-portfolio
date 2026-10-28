@@ -22,18 +22,17 @@ Remote management had been the "holy grail" of the CEDIA industry. Integrators s
 
 We drew on SnapAV's customer relationships. We traveled to conferences, showed off prototypes, tested, listened, and iterated. Integrators needed outlet on/off, reboot, and configuration, but the conversations went much deeper. Most of them were not very tech savvy, and they were struggling to hire people who could configure networking equipment. We had a choice: teach someone to be a network engineer, or make it easy enough that anyone can learn. We chose the latter.
 
+<RailShot src="/images/ovrc/ovrc-app-customers.png" alt="The integrator app's customer list: every location and its health at a glance." />
+
 > Make our customers successful by building what they need. No more, no less.
 
 Not everything was serious. Every team member went through the rite of passage of accidentally turning off a router instead of rebooting it, creating a truck roll for ourselves. Even that led to a "Network Device" outlet category that prevents accidental shutoffs.
 
-<ImageRow images={[
-  { src: "/images/ovrc/ovrc-app-customers.png", alt: "Customer list showing every location and its health" },
-  { src: "/images/ovrc/ovrc-home-view.png", alt: "Drilling into one location for network health and speed history" }
-]} />
-
 ### Four jobs, then two hundred models
 
 We settled on four things integrators had to be able to do: **monitor, control, configure**, and be **notified** when something went wrong. We launched in 2014 with three power conditioner models that differed only in outlet count. Once product managers saw the attachment rates, every category wanted in: networking, surveillance, media. The platform grew to more than 200 native models, and the job became adding all of that without losing the simplicity that made it work.
+
+<RailShot src="/images/ovrc/ovrc-home-view.png" alt="One location opened up: network health and speed history, the monitor job in practice." />
 
 ![Platform sitemap showing the full information architecture across product lines](/images/ovrc/ovrc-sitemap.png)
 
@@ -49,16 +48,13 @@ Almost immediately, integrators asked for something they could give their custom
 
 So we started by making it really easy to reboot stuff. Integrators could define **macros**: a single button like "Reboot AppleTV" that tells the WattBox to cycle the right outlet and the Araknis switch to reset the right port. The homeowner never needs to know any of that. They just have a button that fixes the problem. We gave the app a name of our own and let each dealer put their logo and contact info on top of it, so it felt like **their** app.
 
-<ImageRow images={[
-  { src: "/images/ovrc-home/ovrc-home-commands.png", alt: "Macro grid: tap to run a multi-device fix" },
-  { src: "/images/ovrc-home/ovrc-home-app-fix.png", alt: "Quick-fix confirmation with a single-tap reboot" }
-]} />
-
-![Add-command setup in the integrator web app, for building the macros that ship to the homeowner](/images/ovrc/ovrc-add-command.png)
+<RailShot src="/images/ovrc-home/ovrc-home-commands.png" alt="OvrC Connect's macro grid: one tap runs a multi-device fix the integrator set up." />
 
 ### The requirement we had to break
 
 Another initiative inside SnapAV required OvrC Connect to ship paired with **OvrC Pro**, a piece of hardware that carried the service model and gave integrators something to charge for on an ongoing basis. On paper the two reinforced each other. In the field they didn't.
+
+<RailShot src="/images/ovrc-home/ovrc-home-app-fix.png" alt="The quick-fix confirmation: the homeowner's whole job is one tap." />
 
 My team tested it with customers and then watched it sit. Integrators could not sell the Pro device to homeowners. Not because it was a bad product, but because nearly all of its value went to the dealer rather than the person being asked to pay for it. There was also confusion about whether Connect required the Pro at all, so some integrators never pitched either one. Underneath the slow numbers, integrators clearly wanted Connect, with the hardware or without it.
 
@@ -71,6 +67,8 @@ Later, integrators asked for help competing with DIY networking products, so Con
 ![Parental-controls exploration spanning profiles, schedules, and filtering](/images/ovrc-home/ovrc-home-parental-controls-wireframes.png)
 
 ## Impact
+
+<RailShot src="/images/ovrc/ovrc-add-command.png" alt="The integrator's macro builder in the OvrC web app. Integrators made more than 100,000 of these." />
 
 - Became the leading remote management platform in CEDIA within months of launch, and was still the industry leader when I left
 - Grew past **5M devices** at **200,000+ locations** during my time on the team, and past **20M** since

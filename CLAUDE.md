@@ -29,7 +29,7 @@
 ## Motion
 - The H1 underscore cursor blink (`.cursor-blink`) is the only looping system animation.
 - Explanatory diagrams may play a one-shot build on scroll-in (e.g. the Azure Advisor poster). It must explain the idea, end on the static diagram, and be skipped under reduced motion.
-- The project side rail may swap screenshots with a short lift-and-rise as sections scroll past. It follows the reader, never drives the scroll.
+- The side rail (projects via `rail:` frontmatter, case studies via `<RailShot>` in MDX) may swap screenshots with a short lift-and-rise as the reader reaches them. It follows the reader, never drives the scroll. Phone and portrait screens go in the rail; wide artifacts (sitemaps, wireframe boards, maps) stay inline where they are readable.
 - Subtle fade-ins on scroll at most. No parallax, scroll-jacking, custom cursors, carousels, or heavy load animations.
 - Hover states stay subtle: a hairline shift, never a glow.
 - Respect `prefers-reduced-motion` everywhere.

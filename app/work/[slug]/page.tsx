@@ -9,6 +9,8 @@ import Tag from "@/components/ui/Tag";
 import StripeImage from "@/components/ui/StripeImage";
 import { getCaseStudy, getCaseStudies, getCaseStudySlugs } from "@/lib/content";
 import { getImageDims, imageExists } from "@/lib/imageDims";
+import StickyRail from "@/components/ui/StickyRail";
+import { getRailShots } from "@/lib/railShots";
 import { mdxComponents } from "@/components/mdx/MdxComponents";
 import { heroComponents } from "@/components/heroes/registry";
 import type { Metadata } from "next";
@@ -178,12 +180,36 @@ export default async function CaseStudyPage({ params }: PageProps) {
         )}
       </div>
 
-      {/* MDX body — constrained measure */}
-      <article className="pb-16">
-        <div className="max-w-[680px] mx-auto md:mx-0">
-          <MDXRemote source={content} components={mdxComponents} />
-        </div>
-      </article>
+      {/* MDX body, constrained measure. When the case study marks screenshots
+          as <RailShot>, they move into a sticky column on the right on
+          desktop and swap as the reader reaches each one. */}
+      {(() => {
+        const shots = getRailShots(content);
+        const body = <MDXRemote source={content} components={mdxComponents} />;
+        if (shots.length === 0) {
+          return (
+            <article className="pb-16">
+              <div className="max-w-[680px] mx-auto md:mx-0">{body}</div>
+            </article>
+          );
+        }
+        // Frame fits the tallest shot; shorter ones letterbox inside it.
+        const ratio = Math.min(...shots.map((r) => r.width / r.height));
+        const frameStyle = {
+          aspectRatio: `${ratio}`,
+          maxWidth: `min(320px, calc((100vh - 10rem) * ${ratio.toFixed(3)}))`,
+        };
+        return (
+          <div className="pb-16 grid gap-12 md:grid-cols-[minmax(0,1fr)_240px] lg:grid-cols-[minmax(0,680px)_320px] lg:justify-between">
+            <article className="min-w-0">{body}</article>
+            <aside className="hidden md:block">
+              <div className="sticky top-24">
+                <StickyRail items={shots} frameStyle={frameStyle} />
+              </div>
+            </aside>
+          </div>
+        );
+      })()}
 
       {/* Next / Prev — inverted card */}
       {(nextStudy || prevStudy) ? (

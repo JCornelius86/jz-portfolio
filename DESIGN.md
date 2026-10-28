@@ -91,7 +91,7 @@ Never italic for full sentences of body copy.
 
 - The H1 underscore cursor blink (`.cursor-blink`, 1.1s steps(2)) is the only looping system animation.
 - Explanatory diagrams may play a one-shot build when scrolled into view (the Azure Advisor poster, `.ap-*` in `globals.css`): about 2s, never loops, ends on the static diagram, and does not run under `prefers-reduced-motion`. Motion has to explain the idea, not decorate it.
-- The project side rail (`StickyRail`, `.rail-*`) swaps to each section's screen with a short lift-and-rise as its heading scrolls past. It follows reading position and never drives or hijacks the scroll; reduced motion swaps instantly.
+- The side rail (`StickyRail`, `.rail-*`; `rail:` frontmatter on projects, `<RailShot>` in case-study MDX) swaps to each section's screen with a short lift-and-rise as its heading scrolls past. It follows reading position and never drives or hijacks the scroll; reduced motion swaps instantly.
 - Hover: a 1–2px translate or hairline shadow shift. Never a glow.
 - Theme toggle: instant, no transition.
 - All motion respects `prefers-reduced-motion`.

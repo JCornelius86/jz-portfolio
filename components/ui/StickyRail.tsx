@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useState, type CSSProperties } from "react";
 
 export interface RailItem {
-  /** h2 text in the article that switches the rail to this screen. Omit for the opening shot. */
+  /** h2/h3 text in the article that switches the rail to this screen. Without
+   * it, the trigger is a <RailShot> marker for this src, if one exists. */
   section?: string;
   src: string;
   alt: string;
@@ -31,12 +32,15 @@ export default function StickyRail({ items, frameStyle }: StickyRailProps) {
 
   useEffect(() => {
     const headings = Array.from(
-      document.querySelectorAll<HTMLHeadingElement>("article h2"),
+      document.querySelectorAll<HTMLHeadingElement>("article h2, article h3"),
+    );
+    const markers = Array.from(
+      document.querySelectorAll<HTMLElement>("article [data-rail-src]"),
     );
     const targets = items.map((item) =>
       item.section
         ? headings.find((h) => h.textContent?.trim() === item.section) ?? null
-        : null,
+        : markers.find((m) => m.dataset.railSrc === item.src) ?? null,
     );
 
     // A handful of getBoundingClientRect reads per scroll event is cheap, so
@@ -82,7 +86,7 @@ export default function StickyRail({ items, frameStyle }: StickyRailProps) {
               height={item.height}
               priority={i === 0}
               sizes="(max-width: 768px) 100vw, 340px"
-              className={`rail-shot ${state} absolute inset-0 block w-full h-auto`}
+              className={`rail-shot ${state} absolute inset-0 block w-full h-full object-contain`}
             />
           );
         })}
